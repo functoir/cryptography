@@ -1,0 +1,75 @@
+
+\begin{problem}
+In one of Dorothy Sayers' mysteries, Lord Peter is confronted with the following message:
+
+\vspace{1ex}
+
+\begin{verbatim}
+I thought to see the fairies in the fields, but I saw only the evil
+elephants with their black backs.  Woe! how that sight awed me!  The
+elves danced all around and about while I heard voices calling clearly.
+Ah! how I tried to see--throw off the ugly cloud--but no blind eye of a
+mortal was permitted to spy them.  So then came minstrels, having gold
+trumpets, harps and drums.  These played very loudly beside me,
+breaking that spell.  So the dream vanished, whereat I thanked Heaven.  I
+shed many tears before the thin moon rose up, frail and faint as a sickle of
+straw.  Now though the Enchanter gnash his teeth vainly, yet shall he
+return as the spring returns.  Oh, wretched man!  Hell gapes, Erebus now
+lies open.  The mouths of Death wait on thy end.
+\end{verbatim}
+\vspace{1ex}
+
+He also discovers the key to the message, which is a sequence of integers:
+\[ 
+\texttt{7876565434321123434565678788787656543432112343456567878878765654433211234}
+\]
+
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Decrypt the message. \emph{Hint. What is the largest integer value?}
+
+\begin{Answer}
+The largest integer value is $8$, and there are no $0$ values,
+suggesting that the scheme runs from $1$ to $8$.
+Using this strategy, I wrote a program that split the message
+into 8 lists of letters.
+Here is the resultant matrix:
+{
+\color{blue}%
+\begin{verbatim}
+ITFNDWEHHAWAWECOBEOLRISOLUDOPDECTIRAREEYEGLRSEKNNETRAICRONGTNAUSTRAPSOOEO
+TOATSOVATCOTELEUOIIILTEFYTERETMARNURUPRBBTLEHAEIYFHOINKAUCNELLRPUENENPUAN
+HSIHBNINHKESDVDNUHCNYREFCNYTROSMEGMPMLYERHSAETDSTOISLTLWGHAEYLNRRTHSOETTT
+OEREULLTEBHIMEADTEEGAITTLOEAMSOELGPSSALSEAOMDIHHERNEAAENHASTYHAINCEEWNHHH
+UEIFTYESIAOGESLAWASCHEHHOBOLIPTMSOEATYOIATTVWTEEAEMUNSOOTNHHEESNSHLRLTSWY
+GTEIITLWRCWHTDLNHRCLHDREULFWTYHIHLTNHEUDKSHAHHADRTOPDAFWHTHVTRTGOELEIHOAE
+HHSESHEIBKTTHAADIDAEOTOUDIAATTENADSDEDDEIPENEAVMSHOFFSSTEEIASEHRHDGBEEFIN
+TEILAEPTLSHAENRALVLAWOWGBNMSEHNSVTHDSVLMNEDIRNEABENRAITHERSIHTEEWMAUSMDTD
+\end{verbatim}
+}
+\noindent
+Using the key to pick out rows for each letter position,
+I picked out the following letters:
+
+{\color{crimson}
+\begin{verbatim}
+  hesittethbetweenthecherubimstheisles
+  maybegladthereofastheriversinthesouth
+\end{verbatim}
+}
+\noindent
+When spaced out properly, the above reads:
+{\color{crimson}
+\begin{verbatim}
+  He sitteth between the cherubims the isles
+  may be glad thereof as the rivers in the south
+\end{verbatim}
+}
+
+\end{Answer}
+\item If the algorithm is known, but not the key, how secure is this
+encryption scheme?
+
+\item If the key is known, but not the algorithm, how secure is this
+encryption scheme?
+\end{enumerate}
+\end{problem}

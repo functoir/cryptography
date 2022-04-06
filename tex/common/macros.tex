@@ -1,0 +1,146 @@
+% Sets
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\renewcommand{\b}{\{0,1\}}
+
+% Functions
+\DeclareMathOperator{\cost}{cost}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\wt}{wt}
+
+% Combinatorics
+
+% Probability
+\newcommand{\Hd}{\texttt{\color{BrickRed}H}}
+\newcommand{\Tl}{\texttt{T}}
+\newcommand{\EE}{\mathop{\mathbb{E}}}
+\newcommand{\PP}{\mathop{\mathbb{P}}}
+\newcommand{\indic}{\mathbb{1}}
+\DeclareMathOperator{\Var}{Var}
+
+% End of proof marker
+\newcommand{\qedblack}{\hfill\ensuremath{\blacksquare}}
+\newcommand{\qedwhite}{\hfill\ensuremath{\square}}
+
+% Caligraphic caps
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+% Boldface letters
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\tbp}{\mathbf{\widetilde{p}}}
+
+% Special math symbols
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ceq}{\subseteq}
+\newcommand{\ang}[1]{\langle #1 \rangle}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+% Problem names and other small-caps constants
+\newcommand{\inv}{\textsc{inv}\xspace}
+
+% Useful for marking steps of a derivation to explain later
+\newcommand{\circled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.1pt}{\scriptsize #1}}}}
+
+% My Problem set macros
+
+% Answer BOX
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{mdframed}
+\newmdenv[%
+  leftmargin=-5pt,
+  rightmargin=-5pt, 
+  innerleftmargin=5pt,
+  innerrightmargin=5pt,
+  backgroundcolor=black!10
+]{Answer}%
+
+
+% Header BOX
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \setlength{\fboxrule}{1.2pt}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { \textbf{MATH 75: Cryptography} \hfill {\bf #2} }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill {\textbf{ #5 }}  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\textit{\textbf{#3 \hfill #4}}} }
+    }
+  }
+  \setlength{\fboxrule}{0.2pt}
+  \end{center}
+  \vspace*{4mm}
+}
+
+% Header BOX
+\newcommand{\PSET}[4]{\handout{#1}{#2}{Prof.\ #3}{Student: #4}{PSET #1}}
+
+% Credit Statement
+\newcommand{\CreditStatement}[1]{
+  \noindent
+  \begin{center} {
+    \bf Credit Statement
+  }
+  \end{center}
+  { #1 }
+}
+
+% Problem counter
+\newenvironment{problem}[1][]%
+{%
+\stepcounter{problem} \vspace{.2cm} \noindent {\bf \arabic{problem}.} {\textit{#1}}~%
+}{%
+\vspace{.2cm}%
+}
+
+% Package Imports
+\usepackage{amssymb,amsthm,amsmath,amstext}
+\usepackage{mathdots} % for \dots
+  % \dotsc -- dots with commas.
+  % \dotsb -- dots with binary operators.
+  % \dotsm -- multiplication dots.
+  % \dotsi -- dots with integrals.
+  % \dotso -- "other dots".
+
+% Page size and margins
+\usepackage[left=1in,right=1in,top=1.3in,bottom=1.3in,nofoot]{geometry}
+\usepackage{fancyhdr} % for fancy header
+\usepackage{fancyvrb} % for fancy verbatim
+\usepackage{graphicx} % for including images
+
+% Custom colors
+\definecolor{crimson}{rgb}{0.86, 0.08, 0.24}
+\definecolor{teal}{rgb}{0.0, 0.5, 0.5}
+\definecolor{zaffre}{rgb}{0.0, 0.08, 0.66}
