@@ -28,11 +28,11 @@ He also discovers the key to the message, which is a sequence of integers:
 \item Decrypt the message. \emph{Hint. What is the largest integer value?}
 
 \begin{Answer}
-The largest integer value is $8$, and there are no $0$ values,
-suggesting that the scheme runs from $1$ to $8$.
-Using this strategy, I wrote a program that split the message
-into 8 lists of letters.
-Here is the resultant matrix:
+The largest integer value is $8$.
+All integer values in the key are non-zero, so it's unlikely that the mapping field includes 0.
+Using this strategy, I wrote a simple program that split the message into 8 lists of letters
+resulting in a matrix with $73$ columns and $8$ rows: 
+
 {
 \color{blue}%
 \begin{verbatim}
@@ -46,9 +46,10 @@ HHSESHEIBKTTHAADIDAEOTOUDIAATTENADSDEDDEIPENEAVMSHOFFSSTEEIASEHRHDGBEEFIN
 TEILAEPTLSHAENRALVLAWOWGBNMSEHNSVTHDSVLMNEDIRNEABENRAITHERSIHTEEWMAUSMDTD
 \end{verbatim}
 }
+
 \noindent
-Using the key to pick out rows for each letter position,
-I picked out the following letters:
+Using the key to pick out rows for each column --- or word position in the sentence ---
+I picked out the following message:
 
 {\color{crimson}
 \begin{verbatim}
@@ -69,7 +70,32 @@ When spaced out properly, the above reads:
 \item If the algorithm is known, but not the key, how secure is this
 encryption scheme?
 
+\begin{Answer}
+This scheme employs arbitrary substitutions to encrypt the message.
+This is more secure than other methods such as standard substitution ciphers.
+
+\noindent
+Even if the algorithm is known, but not the key, then there are at least $8^{n}$ possibilities
+(assuming the interceptor knows enough to map the letters over $8$-space), or $26^{n}$
+if the interceptor does not know enough information to map the letters over the reduced space.
+
+\noindent
+These are both negligible possibilities --- it would take immense computational power to
+decrypt such a message.
+However, that's perhaps \textit{still} not as secure as modern methods 
+including \textbf{RSA} and \textbf{AES}.
+\end{Answer}
+
 \item If the key is known, but not the algorithm, how secure is this
 encryption scheme?
+
+\begin{Answer}
+  A problem with this method is that the key, if known, gives away important information about how
+  the message was encrypted. For instance, we were able to reduce the complexity from $26^{n}$ to $8^{n}$
+  just by exploiting a single fact about the encryption key.
+
+\noindent
+Knowing the full key made decrypting the entire message a trivial problem.
+\end{Answer}
 \end{enumerate}
 \end{problem}

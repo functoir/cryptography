@@ -7,13 +7,52 @@ was encrypted using a shift cipher.  Decrypt the message.
 \end{problem}
 
 \begin{Answer}
-  I wrote a program implementing the basic mechanics of shift ciphers.
 
-  Running the text through the program,
-  I got the following message (added spaces to make it easier to read):
+Decrypting shift ciphers is trivial, since there is only a small set of possible actions
+that apply to every letter in the text.
 
-  \begin{center}
-    \textcolor{red}{even though i walk through the valley of the
-    shadow of death i fear no evil}
-  \end{center}
+\noindent
+I wrote a program implementing the basic mechanics of shift ciphers.
+
+\noindent
+Running the text through the program,
+  I got the following message with a shift of $10$:
+
+\color{crimson}
+\begin{verbatim}
+even though i walk through the valley of the
+shadow of death i fear no evil
+\end{verbatim}
+
+\color{black}
+Full output
+
+\begin{Verbatim}[commandchars=\\\{\}]
+  0: ofoxdryeqrsgkvudrbyeqrdrofkvvoiypdrocrknygypnokdrspokbxyofsv
+  1: nenwcqxdpqrfjutcqaxdpqcqnejuunhxocqnbqjmxfxomnjcqronjawxneru
+  2: mdmvbpwcopqeitsbpzwcopbpmdittmgwnbpmapilwewnlmibpqnmizvwmdqt
+  3: lcluaovbnopdhsraoyvbnoaolchsslfvmaolzohkvdvmklhaopmlhyuvlcps
+  4: kbktznuamnocgrqznxuamnznkbgrrkeulznkyngjuculjkgznolkgxtukbor
+  5: jajsymtzlmnbfqpymwtzlmymjafqqjdtkymjxmfitbtkijfymnkjfwstjanq
+  6: izirxlsyklmaepoxlvsyklxlizeppicsjxliwlehsasjhiexlmjievrsizmp
+  7: hyhqwkrxjklzdonwkurxjkwkhydoohbriwkhvkdgrzrighdwklihduqrhylo
+  8: gxgpvjqwijkycnmvjtqwijvjgxcnngaqhvjgujcfqyqhfgcvjkhgctpqgxkn
+  9: fwfouipvhijxbmluispvhiuifwbmmfzpguiftibepxpgefbuijgfbsopfwjm
+  \textcolor{crimson}{10: eventhoughiwalkthroughthevalleyoftheshadowofdeathifearnoevil}
+  11: dudmsgntfghvzkjsgqntfgsgduzkkdxnesgdrgzcnvnecdzsghedzqmnduhk
+  12: ctclrfmsefguyjirfpmsefrfctyjjcwmdrfcqfybmumdbcyrfgdcyplmctgj
+  13: bsbkqelrdeftxihqeolrdeqebsxiibvlcqebpexaltlcabxqefcbxoklbsfi
+  14: arajpdkqcdeswhgpdnkqcdpdarwhhaukbpdaodwzkskbzawpdebawnjkareh
+  15: zqziocjpbcdrvgfocmjpbcoczqvggztjaoczncvyjrjayzvocdazvmijzqdg
+  16: ypyhnbioabcqufenblioabnbypuffysiznbymbuxiqizxyunbczyulhiypcf
+  17: xoxgmahnzabptedmakhnzamaxoteexrhymaxlatwhphywxtmabyxtkghxobe
+  18: wnwflzgmyzaosdclzjgmyzlzwnsddwqgxlzwkzsvgogxvwslzaxwsjfgwnad
+  19: vmvekyflxyznrcbkyiflxykyvmrccvpfwkyvjyrufnfwuvrkyzwvriefvmzc
+  20: uludjxekwxymqbajxhekwxjxulqbbuoevjxuixqtemevtuqjxyvuqhdeulyb
+  21: tktciwdjvwxlpaziwgdjvwiwtkpaatnduiwthwpsdldustpiwxutpgcdtkxa
+  22: sjsbhvciuvwkozyhvfciuvhvsjozzsmcthvsgvorckctrsohvwtsofbcsjwz
+  23: riragubhtuvjnyxguebhtugurinyyrlbsgurfunqbjbsqrnguvsrneabrivy
+  24: qhqzftagstuimxwftdagstftqhmxxqkarftqetmpaiarpqmfturqmdzaqhux
+  25: pgpyeszfrsthlwvesczfrsespglwwpjzqespdslozhzqoplestqplcyzpgtw
+\end{Verbatim}
 \end{Answer}

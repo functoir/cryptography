@@ -6,27 +6,27 @@ What is the message embedded in the following?
 \begin{sffamily}
 \hspace{2.5ex}Dear George,
 
-Greetings to all at Oxford.  Many thanks for your
+Greetings to all at Oxford.  Many thanks for \textcolor{crimson}{your}
 
-letter and for the Summer examination package.
+letter and for the Summer examination \textcolor{crimson}{package}.
 
-All Entry Forms and Fees Forms should be ready
+All Entry Forms and Fees Forms should be \textcolor{crimson}{ready}
 
-for final despatch to the syndicate by Friday
+for final despatch to the syndicate by \textcolor{crimson}{Friday}
 
-20th or at the very latest, I'm told, by the 21st.
+20th or at the very latest, I'm told, by the \textcolor{crimson}{21st}.
 
-Admin has improved here, though there's room
+Admin has improved here, though there's \textcolor{crimson}{room}
 
-for improvement still; just give us all two or three
+for improvement still; just give us all two or \textcolor{crimson}{three}
 
-more years and we'll really show you!  Please
+more years and we'll really show you! \textcolor{crimson}{Please}
 
-don't let these wretched 16+ proposals destroy
+don't let these wretched 16+ proposals \textcolor{crimson}{destroy}
 
-your basic O and A pattern.  Certainly this
+your basic O and A pattern.  Certainly \textcolor{crimson}{this}
 
-sort of change, if implemented immediately,
+sort of change, if implemented \textcolor{crimson}{immediately},
 
 would bring chaos.
 \end{sffamily}
@@ -35,13 +35,17 @@ would bring chaos.
 
 \begin{Answer}
   
-Since \textbf{all} it was unlikely that the message was encrypted
-since every word in the message is correct.
-I next looked at the words at corresponding positions in each sentence,
-and discovered:
-
-
-  \textcolor{red}{your package ready Friday 21st.\ room three. Please destroy this immediately.}
-
+I thought it was unlikely that the text was actually encrypted 
+(a strategy that did not work that well on problem 2).
+On this problem, I tried to look at the words in different positions in the text 
+-- every first word in a sentence, every last word, every $n$th word, in sentence $n$, etc.
+\newline
+\noindent
+Using this strategy, I deciphered this message (highlighted in red above):
+\vspace{10pt}
+\color{crimson}
+\begin{verbatim}
+Your package ready Friday 21st, room three. Please destroy this immediately.
+\end{verbatim}
 \end{Answer}
 

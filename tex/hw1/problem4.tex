@@ -1,10 +1,126 @@
+
 \begin{problem}
-The following message was encrypted using a simple substitution cipher:\\[2ex]
 \noindent
-\texttt{53ddc305))6*;4826)4d.)4d);806*;48c8p60))85;;]8*;:d*8c83}\\
-\texttt{(88)5*c;46(;88*96*?;8)*d(;485);5*c2:*d(;4956*2(5*-4)8p8*}\\
-\texttt{;4069285);)6c8)4dd;1(d9;48081;8:8d1;48c85;4)485c528806*81}\\
-\texttt{(d9;48;(88;4(d?34;48)4d;161;:188;d?;}\\[2ex]
+The following message was encrypted using a simple substitution cipher:
+\begin{verbatim}
+53ddc305))6*;4826)4d.)4d);806*;48c8p60))85;;]8*;:d*8c83
+(88)5*c;46(;88*96*?;8)*d(;485);5*c2:*d(;4956*2(5*-4)8p8*
+;4069285);)6c8)4dd;1(d9;48081;8:8d1;48c85;4)485c528806*81
+(d9;48;(88;4(d?34;48)4d;161;:188;d?;
+\end{verbatim}
 Decrypt the message.  \emph{Hint. Use frequency analysis: consider e,
-ee, the, ...}
+ee, the, \ldots}
 \end{problem}
+
+\begin{Answer}
+For fun, I tried to solve this problem using a brute-force algorithm --- turns out,
+even when I limit branching to a factor of $2$, for a search depth of $20$ letters the search tree
+grows to an order of $2^{20} = 1048576$.
+\noindent
+I soon resolved to frequency analysis and more informed substitutions.
+To be able to use the tool shared in class, I substituted the symbols
+in the ciphertext for English letters, starting from `A' and matching
+all the symbols and letters as they are encountered:
+\newline
+\noindent
+
+\color{blue}
+\begin{verbatim}
+ABCCDBEAFFGHIJKSGFJCLFJCFIKEGHIJKDKMGEFFKAINCKHOCPIOCHKDKBPKKF
+AHDIJGPIKKHRGHQIKFHCPIJKAFIAHDSOHCPIJRAGHSPAHTJFKMKHIJEGRSKAFI
+FGDKFJCCINPCRIJKEKNIKOKCNIJKDKAIJFJKADASKKEGHKNPCRIJKIPKKIJPCQ
+BJIJKFJCINGNIONKKICQI
+\end{verbatim}
+\color{black}
+Looking at the frequency analysis
+\color{black}
+- The most common 3-letter sequence is ``IJK''. In English, this is
+usually ``the''. Substitute in the three letters.
+\color{blue}
+\begin{Verbatim}[commandchars=\\\{\}]
+ABCCDBEAFFGH\textcolor{crimson}{the}SGFhCLFhCFteEGH\textcolor{crimson}{the}DeMGEFFeAtNCPtOCHeDeBPeeF
+AHDthGPteeHRGHQteFHCP\textcolor{crimson}{the}AFtAHDSOHCPthRAGHSPAHThFeMeHthEGRSeAFt
+FGDeFhCCtNPCR\textcolor{crimson}{the}EeNteOeCN\textcolor{crimson}{the}DeAthFheADASeeEGHeNPCR\textcolor{crimson}{the}tPeethPCQ
+Bh\textcolor{crimson}{the}FhCtNGNtONeetCQt
+\end{Verbatim}
+\color{black}
+
+\noindent
+The most common letter in the ciphertext is ``K''. In English, this usually corresponds
+to the letter `e'. This further validates the above exchange.
+\newline
+- The $4$th, $5$th, and $6$th most common letters in the ciphertext are
+`C', `F', and `H'. In English, the next $3$ unused letters are
+`a', `i', and `o'.
+   Comparing these options: (a) `C' appears in a pair, so it is more likely to be `o'
+   since English does not have many occurrences of ``ii'' or ``aa''. (b) `F' appears
+   before `t' on numerous occassions, so it might be either `s' or `n'.
+   Let's pick `s', since it is more common.
+
+\color{blue}
+\begin{Verbatim}[commandchars=\\\{\}]
+AB\textcolor{crimson}{oo}DBEA\crim{ss}GHtheSG\crim{s}h\crim{o}L\crim{s}h\crim{os}teEGHtheDeMGE\crim{ss}eAtN\crim{o}PtO\crim{o}HeDeBPees
+AHDthGPteeHRGHQtesH\crim{o}PtheA\crim{s}tAHDSOH\crim{o}PthRAGHSPAHTh\crim{s}eMeHthEGRSeA\crim{s}t
+\crim{s}GDe\crim{s}h\crim{oo}tNP\crim{o}RtheEeNteOe\crim{o}NtheDeAth\crim{s}heADASeeEGHeNP\crim{o}RthetPeethP\crim{o}Q
+Bhthe\crim{s}h\crim{o}tNGNtONeet\crim{o}Qt
+\end{Verbatim}
+\color{black}
+`E' completes the word ``hosteE'' --- it is most likely `l'.
+Another common two-letter pair is ``GH''. In English, this could be ``to'' or ``in''.
+However, it seems to appear frequently inside other words so it most likely is ``in''.
+\color{blue}
+\begin{Verbatim}[commandchars=\\\{\}]
+ABooDBlAss\crim{in}theS\crim{i}shoLshoste\crim{lin}theDeM\crim{il}sseAtNoPtOo\crim{n}eDeBPees
+AnDth\crim{i}Ptee\crim{n}R\crim{in}Qtes\crim{n}oPtheAstA\crim{n}DSO\crim{n}oPthRA\crim{in}SPA\crim{n}ThseMe\crim{n}th\crim{li}RSeAst
+s\crim{i}DeshootNPoRthe\crim{l}eNteOeoNtheDeAthsheADASee\crim{lin}eNPoRthetPeethPoQ
+BhtheshotN\crim{i}NtONeetoQt
+\end{Verbatim}
+\color{black}
+
+\noindent
+Next, `D' and `M' appear to complete the word ``DeMil'', which can be ``devil''.
+\newline
+Next, `B' and `A' complete ``BlAss'', and `B' also completes `Bood'.
+This combo is most likely `g' and `a'.
+\color{blue}
+\begin{Verbatim}[commandchars=\\\{\}]
+\crim{ag}ood\crim{g}l\crim{a}ssintheSishoLshostelinthe\crim{d}e\crim{v}ilsse\crim{a}tNoPtOone\crim{d}e\crim{g}Pees
+\crim{a}n\crim{d}thiPteenRinQtesnoPthe\crim{a}st\crim{a}n\crim{d}SOnoPthR\crim{a}inSP\crim{a}nThse\crim{v}enthliRSe\crim{a}st
+si\crim{d}eshootNPoRtheleNteOeoNthede\crim{a}thshe\crim{a}d\crim{a}SeelineNPoRthetPeethPoQ
+\crim{g}htheshotNiNtONeetoQt
+\end{Verbatim}
+\color{black}
+\noindent
+`P' completes ``degPees'' --- it is most likely `r'.
+\newline
+`S' and `L' complete ``SishoLs' --- they're most-likely `b' and `p', respectively.
+\newline
+`Q' completes ``throQgh'' --- it is most likely `u'.
+\newline
+`R' completes ``Rinutes'' --- it is most likely `m'.
+\newline
+`O' and `T' complete ``bOnorthmainbranTh'' --- they're clearly
+`y' and `c'.
+\newline
+`N' completes ``Nrom the'' --- it is most likely `f'.
+\newline
+\newpage
+The decoded message becomes:
+\color{crimson}
+\begin{verbatim}
+agoodglassinthebishopshostelinthedevilsseatfortyonedegrees
+andthirteenminutesnortheastandbynorthmainbranchseventhlimbeast
+sideshootfromthelefteyeofthedeathsheadabeelinefromthetree
+throughtheshotfiftyfeetout
+\end{verbatim}
+\color{black}
+When spaced out:
+\color{crimson}
+\begin{verbatim}
+  A good glass in the bishop's hostel in the devil's seat
+  forty-onedegrees and thirteen minutes northeast and by
+  north main branchseventh limb east side, shoot from the
+  left eye of the death's heada bee-line from the tree
+  through the shot fifty feet out.
+  \end{verbatim}
+\end{Answer}
