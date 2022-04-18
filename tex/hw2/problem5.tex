@@ -1,0 +1,120 @@
+\begin{problem}
+Let $f_0=f_1=1$ and $f_{i+1}=f_i+f_{i-1}$ for $i \geq 1$ denote the Fibonacci numbers.  
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Use the Euclidean algorithm to show that $\gcd(f_i,f_{i-1})=1$
+for all $i \geq 1$. (Again, we did this quickly in lecture, but now do
+it carefully!)
+
+\begin{Answer}
+\setcounter{equation}{0}
+For arbitrary $i\,\in\,\ZZ^+$,
+
+\begin{equation}
+  f_{i+1} = f_{i} + f_{i-1} \; \text{(by definition of the Fibonacci numbers)}
+\end{equation}
+
+Let $g$ be the greatest common divisor of $f_{i}+1$ and $f_{i}$.,
+
+\begin{equation}
+  g\, |\, f_{i}\, \land\, g\, |\, f_{i+1} \Rightarrow g\, |\, (f_{i+1} - f_{i}) = f_{i-1}
+\end{equation}
+
+\begin{equation}
+  g\, |\, f_{i-1}\, \land\, g\, |\, f_{i} \Rightarrow g\, |\, (f_{i} - f_{i-1}) = f_{i-2}
+\end{equation}
+
+\begin{equation}
+  g\, |\, f_{i-2}\, \land\, g\, |\, f_{i-1} \Rightarrow g\, |\, (f_{i-1} - f_{i-2}) = f_{i-3}
+\end{equation}
+
+\begin{equation*}
+\vdots
+\end{equation*}
+
+\begin{equation}
+  g\, |\, f_{3}\, \land\, g\, |\, f_{2} \Rightarrow g\, |\, (f_{3} - f_{2}) = f_{1}
+\end{equation}
+
+\begin{equation}
+  g\, |\, f_{2}\, \land\, g\, |\, f_{1} \Rightarrow g\, |\, (f_{2} - f_{1}) = f_{0} = 1
+\end{equation}
+
+\begin{equation}
+  g \, |\, 1 \Rightarrow g = 1
+\end{equation}
+
+\end{Answer}
+
+\item Find $\gcd(11111111,11111)$.
+
+\begin{Answer}
+\setcounter{equation}{0}
+
+Using the Euclidean algorithm:
+
+\begin{equation}
+  \gcd(11111111,11111) = \gcd(11111, 111)
+\end{equation}
+
+\begin{equation}
+  \gcd(11111, 111) = \gcd(111, 11)
+\end{equation}
+
+\begin{equation}
+  \gcd(111, 11) = \gcd(11, 1)
+\end{equation}
+
+\begin{equation}
+  \gcd(11, 1) = \gcd(1, 0) = 1
+\end{equation}
+\end{Answer}
+
+\newpage
+\item Let $a=111\cdots 11$ be formed with $f_i$ repeated $1$s and let $b=111\cdots 11$ be formed with $f_{i-1}$ repeated $1$s.
+Find $\gcd(a,b)$.  \\\emph{[Hint: Compare your computations in parts (a) and (b).]}
+
+\begin{Answer}
+\setcounter{equation}{0}
+
+Let $S = \{s_{1}, s_{2}, s_{3}, \dots\} \subset \ZZ$ be the set of all integers formed by some $i$ repeated $1$s.
+
+\noindent
+For arbitrary $i$ and $j\, \in \ZZ^+$ such that $i \ge j$, $s_{i} \mod s_{j} = s_{i \mod j}$
+
+\begin{proof}
+\vspace{3pt}
+\indent
+In $S$, multiplying elements by positive integer powers of $10$ is equivalent to a shift of the 1s in the number.
+For instance $11 \cdot 10 = 110$. This does not map elements in $S$ into $S$,
+but it allows us to deduct deduct these new shifted values from elements in $S$ and
+get rid of leading $1$s. For two powers $i$ and $j$ such that $i \ge j$,
+we can repeatedly erase the first $j$ $1$s in $s_{i}$ by deducting a shifter version of $s_{j}$,
+until we are no longer able to (at which point the remaining value has less $1$s than $s_{j}$.)
+This is analogous to taking the $\mod$ of $i$ by $j$ and defining the remainder, $i \mod j$,
+to be the number of $1$s that we get after fully erasing occurrences of $s_{j}$ in $s_{i}$.
+
+\noindent
+A good example can be seen in (b) above.
+Here is another example:
+
+\begin{equation}
+  11111111 \equiv 11  \pmod{111}
+\end{equation}
+
+\noindent
+Or, generally:
+
+\begin{equation}
+  s_{8} \mod s_{3} \equiv s_{(8\pmod{3})} = s_{2} \pmod{s_{3}}
+\end{equation}
+\end{proof}
+
+Thus, following from part (a) above:
+
+\begin{equation}
+  \gcd(s_{f_{i+1}}, s_{f_{i}}) = \gcd(s_{f_{i}}, s_{f_{i-1}}) = \cdots = \gcd(s_{f_{1}}, s_{f_{0}}) = \gcd(1, 1) = 1
+\end{equation}
+
+\end{Answer}
+\end{enumerate}
+\end{problem}

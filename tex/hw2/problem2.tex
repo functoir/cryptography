@@ -1,0 +1,79 @@
+
+\begin{problem}
+Let $n \geq 3$ and $S_n$ be the symmetric group on $\{1,\dotsc,n\}$.
+We say that $\sigma \in S_n$ \emph{has a fixed point} if there exists
+$k \in \{1,\dotsc,n\}$ such that $\sigma(k)=k$.  Prove that the
+probability that a random $\sigma \in S_n$ has a fixed point is $\geq
+5/8$ and $\leq 2/3$.  Here, ``probability'' means that the number of
+those permutations with a fixed point divided by the number of all
+permutations.  (Conclude that a random substitution cipher, realized
+as a random permutation in $S_n$, is likely to fix at least one
+symbol.)
+\end{problem}
+  
+
+\begin{Answer}
+
+Let $p(n)$ define the probability that a random $\sigma \in S_n$ has some fixed point.
+Then:
+
+\begin{equation}
+p(n) = p(\text{single fixed point}) + p(\text{$2$ fixed points}) + \cdots + p(\text{$n$ fixed points})
+\end{equation}
+
+\noindent
+We also have to account for permutations that have multiple fixed points.
+
+\noindent
+While isolating repeated points, some are deducted twice and have to be re-added into the sum.
+
+\begin{equation}
+p(n) = {n \choose 1} \cdot (n - 1)! - {n \choose 2} \cdot (n - 2)! + {n \choose 3} (n - 3)! -\cdots \pm {n \choose n} \cdot (n - n)!
+\end{equation}
+
+\noindent
+We can expand this sequence into an alternating series.
+
+\noindent
+We also have to remember to divide by the numner of all possible permutations because we want the probability and not the counts.
+
+\begin{equation}
+p(n) = \frac{\overset{n}{\underset{k=1}{\sum}} {(-1)}^{k + 1} \frac{n!}{k!(n-k)!}\cdot(n-k)!}{n!} = \overset{n}{\underset{k=1}{\sum}} \frac{(-1)^{k + 1}}{k!}
+\end{equation}
+
+\begin{equation}
+p(3) = 1 - \frac{1}{2!} + \frac{1}{3!} = \frac{2}{3} \approx 0.6666
+\end{equation}
+
+\begin{equation}
+p(4) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4} = \frac{5}{8} = 0.625
+\end{equation}
+
+\begin{equation}
+p(5) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4} + \frac{1}{5!} = \frac{19}{30} \approx 0.6333
+\end{equation}
+
+\begin{equation}
+p(6) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4} + \frac{1}{5!} - \frac{1}{6!} = \frac{91}{144} \approx 0.6319
+\end{equation}
+
+\begin{equation}
+p(7) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4} + \frac{1}{5!} - \frac{1}{6!} + \frac{1}{7!} = \frac{177}{280} \approx 0.6321
+\end{equation}
+
+\begin{equation}
+p(8) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4} + \frac{1}{5!} - \frac{1}{6!} + \frac{1}{7!} - \frac{1}{8!} = \frac{3641}{5760} \approx 0.6321
+\end{equation}
+
+\begin{equation}
+p(9) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4} + \frac{1}{5!} - \frac{1}{6!} + \frac{1}{7!} - \frac{1}{8!} + \frac{1}{9!} \approx 0.6321
+\end{equation}
+
+\begin{equation*}
+\vdots
+\end{equation*}
+
+\noindent
+\crim{After expanding a few terms of the sequence,
+we see that the series queickly converges to $p(n) \approx 0.6321$.}
+\end{Answer}

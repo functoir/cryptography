@@ -1,0 +1,110 @@
+\begin{problem}
+Let $a,b \in \Z$.
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Let $\gcd(a,b)=g \neq 0$.  Prove that $\gcd(a/g,b/g)=1$.
+
+\noindent
+\begin{Answer}
+
+By factorization let:
+
+\begin{equation}
+  a=\prod\, i^{a_{i}}, \;b =\prod\, i^{b_{i}} \;\forall i \in \ZZ^{+}
+\end{equation}
+
+\noindent
+
+Then, since the $\gcd$ of two numbers must divide both numbers:
+
+\begin{equation}
+  g=\gcd(a,b)=\prod i^{\min\{a_{i}, b_{i}\}} \;\forall i \in \ZZ^{+}
+\end{equation}
+
+And;
+
+\begin{equation}
+  \frac{a}{g}=\prod i^{a_{i}-\min\{a_{i}, b_{i}\}}, \;\frac{b}{g} =\prod i^{b_{i}-\min\{a_{i}, b_{i}\}} \;\forall i \in \ZZ^{+}
+\end{equation}
+
+However, we know that:
+
+\begin{equation}
+  \min\{a_{i}, b_{i}\} = a_{i},\, \mathbf{OR} \;\min\{a_{i}, b_{i}\} = b_{i} \;\forall i \in \ZZ^{+}
+\end{equation}
+
+The equation (4) implies that \textit{at least} one of the following is true:
+
+\begin{equation}
+  a_{i}-\min\{a_{i}, b_{i}\} = 0, \mathbf{OR} \;b_{i}-\min\{a_{i}, b_{i}\} = 0 \;\forall i \in \ZZ^{+}
+\end{equation}
+
+Thus:
+
+\begin{equation}
+  \gcd(\frac{a}{g},\frac{b}{g})=\prod \, i^{\min\{0, a_{i}, b_{i}\}} \;\forall i \in \ZZ^{+}
+\end{equation}
+
+\begin{equation}
+  \gcd(\frac{a}{g},\frac{b}{g})=\prod \, 1 \;\forall i \in \ZZ^{+}
+\end{equation}
+
+\begin{equation}
+  \gcd(\frac{a}{g},\frac{b}{g})=1
+\end{equation}
+\end{Answer}
+\newpage
+\item Prove that $\gcd(a+kb,b)=\gcd(a,b)$ for all $k \in \Z$.
+  We stated this in lecture, but now you can check it carefully
+  yourself!
+
+\noindent
+\begin{Answer}
+\setcounter{equation}{0}
+
+Let $g_{1} = \gcd(a, b)$ and $g_{2} = \gcd(a+kb, b)$
+
+By definition of $g_{1}$ as the $\gcd$ of $a$ and $b$:
+
+\begin{equation}
+g_{1}\, |\, a \;\text{and}\; g_{1}\, |\, b \Rightarrow \exists x, y \in \Z^{+} \, \backepsilon\, a = g_{1}x \;\text{and}\, b = g_{1}y
+\end{equation}
+
+Similarly, by definition of $g_{2}$ as the $\gcd$ of $a+kb$ and $b$:
+\begin{equation}
+g_{2}\, |\, (a+kb) \;\text{and}\; g_{2}\, |\, b \Rightarrow \exists m, n \in \Z^{+} \, \backepsilon\, (a+kb) = g_{2}m \;\text{and}\, b = g_{2}n
+\end{equation}
+
+We \textit{know} that $g_{2}$ divides $b$ (by definition of it being the $\gcd$ of $a+kb$ and $b$).
+
+Therefore, subtracting a multiple of $g_{2}$ (in this case, $b$), from $a + kb$ does not change the divisibility status of result.
+
+In particular,
+
+\begin{equation}
+  \zaff{g_{2}\, |\, b\, \land\, g_{2}\, |\, (a + kb)} \Rightarrow g_{2}\, |\, (a+kb-b) \Rightarrow g_{2}\, |\, (a+kb-2b) \Rightarrow \dots \Rightarrow \crim{g_{2}\,|\,(a + kb-kb) \Rightarrow g_{2}\,|\,a}
+\end{equation}
+
+Similarly, we know that $g_{1}$ divides both $a$ and $b$ (by definition of it being the $\gcd$ of the two numbers).
+Therefore, adding a multiple of $g_1$ (in this case, $b$) to $a$ does not change the divisibility status.
+
+In particular,
+
+\begin{equation}
+  \zaff{g_{1}\, |\, a\, \land\, g_{1}\, |\, b} \Rightarrow g_{1}\, |\, (a+b) \Rightarrow g_{1}\, |\, (a+2b) \Rightarrow \dots \Rightarrow \crim{g_{1}\,|\,(a + kb)}
+\end{equation}
+
+Thus, we have shown that $g_{1}\, |\, (a + kb)$ and $g_{2}\, |\, a$.
+
+\crim{However, we earlier defined $g_{1} = \gcd(a, b)$ and $g_{2} = \gcd(a+kb, b)$}.
+
+This implies:
+
+\begin{equation}
+  g_{1} \le g_{2} \land g_{2} \le g_{1} \Rightarrow g_{1} = g_{2}
+\end{equation}
+\end{Answer}
+
+\end{enumerate}
+
+\end{problem}
+

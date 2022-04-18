@@ -1,0 +1,169 @@
+\begin{problem}
+Compute some inverses!
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Use the extended Euclidean algorithm to compute $367^{-1}$ in $(\Z/1001\Z)^\times$ and $1001^{-1}$ in $(\Z/367\Z)^\times$.  [Do this by hand.]
+\begin{Answer}
+\setcounter{equation}{0}
+
+\item $367^{-1}$ in $(\ZZ/1001\ZZ)^\times$
+
+First, we can use the Euclidean algorithm to compute the $\gcd$ (and decompose the coefficients).
+\begin{equation}
+  x\,\equiv\,367^{-1} \pmod {1001}
+\end{equation}
+\begin{equation}
+  1001 = 2 \cdot 367 + 267
+\end{equation}
+\begin{equation}
+  367 = 1 \cdot 267 + 100
+\end{equation}
+\begin{equation}
+  267 = 2 \cdot 100 + 67
+\end{equation}
+\begin{equation}
+  100 = 1 \cdot 67 + 33
+\end{equation}
+\begin{equation}
+  67 = 2 \cdot 33 + 1
+\end{equation}
+
+\noindent
+We can now use the extended Euclidean algorithm to back-substitute and compute the inverse.
+\begin{equation}
+  1 = 67 - 2 \cdot 33
+\end{equation}
+\begin{equation}
+  1 = 100 - 3 \cdot 33
+\end{equation}
+\begin{equation}
+  1 = -2 \cdot 100 + 3 \cdot 67
+\end{equation}
+\begin{equation}
+  1 = -8 \cdot 100 + 3 \cdot 267
+\end{equation}
+\begin{equation}
+  1 = -8 \cdot 367 + 11 \cdot 267
+\end{equation}
+\begin{equation}
+  1 = -30 \cdot 367 + 11 \cdot 1001
+\end{equation}
+\begin{equation}
+  1 \equiv -30 \cdot 367 + 11 \cdot 1001 \pmod {1001}
+\end{equation}
+\begin{equation}
+  1 \equiv -30 \cdot 367 \pmod {1001}
+\end{equation}
+\begin{equation}
+  1 \equiv 971 \cdot 367 + 11 \cdot 1001 \pmod {1001}
+\end{equation}
+
+\noindent
+\crim{Thus: $367^{-1}$ in $(\ZZ/1001\ZZ)^\times = 971$}
+
+\newpage
+\setcounter{equation}{0}
+\item $1001^{-1}$ in $(\Z/367\Z)^\times$
+
+First, we can use the Euclidean algorithm to compute the $\gcd$ (and decompose the coefficients).
+\begin{equation}
+  x\,\equiv\,1001^{-1} \pmod{367} \equiv 267 \pmod{367}
+\end{equation}
+\begin{equation}
+  367 = 1 \cdot 267 + 100
+\end{equation}
+\begin{equation}
+  267 = 2 \cdot 100 + 67
+\end{equation}
+\begin{equation}
+  100 = 1 \cdot 67 + 33
+\end{equation}
+\begin{equation}
+  67 = 2 \cdot 33 + 1
+\end{equation}
+
+\noindent
+We can now use the extended Euclidean algorithm to back-substitute and compute the inverse.
+\begin{equation}
+  1 = 67 - 2 \cdot 33
+\end{equation}
+\begin{equation}
+  1 = 100 - 3 \cdot 33
+\end{equation}
+\begin{equation}
+  1 = -2 \cdot 100 + 3 \cdot 67
+\end{equation}
+\begin{equation}
+  1 = -8 \cdot 100 + 3 \cdot 267
+\end{equation}
+\begin{equation}
+  1 = -8 \cdot 367 + 11 \cdot 267
+\end{equation}
+\begin{equation}
+  1 \equiv -8 \cdot 367 + 11 \cdot 267 \pmod{367} \equiv 11 \pmod{367}
+\end{equation}
+
+\noindent
+\crim{Thus: $1001^{-1}$ in $(\ZZ/367\ZZ)^\times = 11$}
+
+\end{Answer}
+\newpage
+\item Compute $314159265^{-1}$ in $(\Z/2718281828\Z)^\times$.  [You may use a computer!]
+\end{enumerate}
+\end{problem}
+
+\begin{Answer}
+
+My first approach, which was really slow, was to count up from $1$ to the base,
+checking if any number multiplied by the target to give a product congruent to $1$.
+
+\color{crimson}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\teal{-- | Compute the inverse of a number modulo N}
+invN :: Integral p => p -> p -> p  \teal{-- Type must be integral (i.e. support div, mod)}
+invN _ 0 = 0
+invN _ 1 = 1
+invN base a = iter base a 1
+  where
+
+    \teal{-- | Iterate from 1 to n, checking every number.}
+    iter n a b
+    | a > n || b > n = 0
+    | a `mul` b == 1 = b
+    | otherwise = iter n a (b + 1)
+  
+    mul = mulN n
+    \teal{-- | Compute multiplication modulo N.}
+    \teal{--  The result is always in the range [0,N).}
+    mulN :: Integral a => a -> a -> a -> a
+    mulN base a b = (a * b) `mod` base
+\end{Verbatim}
+\color{black}
+
+This program was not very promising ( it was doing too much unnecessary computation).
+
+My next approach was to write a version of the euclidean algorithm that
+tracks Bezout's coefficients as it runs the Euclidean algorithm.
+\color{crimson}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\teal{-- | Run the Euclidean algorithm while tracking Bezout's coefficients}
+euclid :: Integral b => b -> b -> (b, b, b)
+euclid 0 y = (y, 0, 1)
+euclid x y =
+  let (gcd, x', y') = euclid (y `mod` x) x
+      x = y' - (y `div` x) * x'
+      y = x'
+  in (gcd, x, y)
+
+\teal{--- Results}
+\teal{number: 2718281828}
+\teal{number: 314159265}
+\teal{(1,-143182048,1238891233) --> (gcd, coefficient 1, coefficient 2)}
+
+\end{Verbatim}
+\color{black}
+
+Therefore, the inverse of $314159265$ in $(\ZZ/2718281828\ZZ)^\times$ is $1238891233$.
+
+\end{Answer}

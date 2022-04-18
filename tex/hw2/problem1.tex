@@ -1,0 +1,88 @@
+\begin{problem}
+A disadvantage of the general substitution cipher is that both sender and receiver must commit the permuted cipher sequence to memory.  A common technique for avoiding this is to use a keyword from which the cipher sequence can be generated.  For example, using the keyword \texttt{CIPHER}, write out the keyword followed by unused letters in normal order and match this against the plaintext letters:
+
+\begin{verbatim}
+  plain:   a b c d e f g h i j k l m n o p q r s t u v w x y z
+  cipher:  C I P H E R A B D F G J K L M N O Q S T U V W X Y Z
+\end{verbatim}
+
+If it is felt that this process does not produce sufficient mixing, write the remaining letters on successive lines and then generate the sequence by reading down the columns:
+
+\begin{verbatim}
+                        C I P H E R
+                        A B D F G J
+                        K L M N O Q
+                        S T U B W X
+                        Y Z
+\end{verbatim}
+
+This yields the sequence: \verb|C A K S Y I B L T Z P D M U H F N V E G O W R J Q X|.
+
+Such a system is used in the following decoded ciphertext: 
+
+\begin{verbatim}
+        UZQSOVUOHXMOPVGPOZPEVSGZWSZOPFPESXUDBMETSXAIZ
+        itwasdisclosedyesterdaythatseveralinformalbut
+
+        VUEPHZHMDZSHZOWSFPAPPDTSVPQUZWYMXUZUHSX
+        directcontactshavebeenmadewithpolitical
+
+        EPYEPOPDZSZUFPOMBZWPFUPZHMDJUDTMOHMQ
+        representativesofthevietconginmoscow
+\end{verbatim}
+
+Determine the keyword.
+
+\end{problem}
+
+\begin{Answer}
+
+First, I rearranged the plaintext letters, each with the corresponding ciphertext letter,
+to see if any keyword stands out.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+  \textcolor{crimson}{S A H V P B} J W U - - X T D M Y - E O Z I F Q - G -
+\end{Verbatim}
+
+\noindent
+No pattern is apparent in the sequence of letters.
+
+\vspace{5pt}
+\noindent
+I then wrote a program to simulate the splitting of words,
+in similar fashion as when an $n$-sized key is used but the letters are
+written on successive rows then read column-wise. 
+% \newpage
+\begin{Verbatim}[commandchars=\\\{\}]
+  n: 2  SD                -- Doesn't make sense.
+  n: 3  S-O               -- Doesn't make \textit{much} sense.
+  n: 4  SWMI              -- Doesn't make sense.
+  n: 5  SJX-F             -- Doesn't make sense. 
+  n: 6  SB-MOQ            -- Doesn't make sense.
+  n: 7  SPUT-I-           \textcolor{crimson}{-- Doesn't make sense at first, but...}
+  n: 8  SPUXMEI-          -- Doesn't make sense.
+  n: 9  SVJ-TYOFG         -- Doesn't make sense.
+  n: 10 SVJ-TYOIQG        -- Doesn't make sense.
+  n: 11 SVJ-TM-OIQG       -- Doesn't make sense.
+  n: 12 SVJU-TM-OIQG      -- Doesn't make sense.
+  n: 13 SHPJU-TM-OIQG     -- Doesn't make sense.
+\end{Verbatim}
+
+\noindent
+None of the possible keywords immediately form an English word.
+However, filling in two of the missing letters into the keyword generated with $n \, = \, 7$ gives
+\color{crimson} \verb|SPUTNIK| \color{black} a Russian satelite launched in $1957$.
+My bet is on that being the keyword.
+
+\noindent
+The full keyword - alphabet generation:
+
+\begin{Verbatim}
+  S P U T N I K
+  A B C D E F G
+  H J L M N O Q
+  V W X Y Z
+\end{Verbatim}
+\end{Answer}
+
