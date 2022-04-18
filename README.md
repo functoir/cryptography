@@ -1,3 +1,3 @@
 # cryptography
 
-Math 75 -- Mostly LaTeX
+Math 75 &mdash; Mostly LaTeX
