@@ -1,0 +1,66 @@
+
+\noindent {\bf Challenge problem:} (Try it for fun, you are not
+required to submit written-up solutions, unless you are a graduate
+student enrolled in the class.)
+
+\begin{problem}
+Let $n,k \in \Z_{>0}$ and recall the general linear group $\GL_k(\Z/n\Z)$.
+\begin{enumerate}\setlength{\itemsep}{3mm}
+\item Write down all the elements of $\GL_2(\Z/2\Z)$.  What more
+commonly known group is this isomorphic to?
+
+\item If $n=p$ is a prime number, prove that $\GL_k(\Z/p\Z)$ has
+$(p^k-1)(p^k-p)\dotsm (p^k-p^{k-1})$ elements.  \emph{[Use linear
+algebra over the field $\Z/p\Z$ and think of building your matrix one
+column at a time.]}
+
+\item Prove that if $n,m$ are relatively prime positive integers, then
+\[
+\# \GL_k(\Z/nm\Z) = \# \GL_k(\Z/n\Z) \cdot \# \GL_k(\Z/m\Z).  
+\]
+The following subparts will provide a guide to an algebraic proof of
+this fact (not all of these require a proof, they are a kind of series
+of hints to guide your work).
+
+\begin{enumerate}\setlength{\itemsep}{3mm}
+\item For $n,m$ relatively prime, the map $\phi : \Z/nm\Z \to \Z/n\Z
+\times \Z/m\Z$, defined by $a \mapsto (a \bmod n, a \bmod m)$, is an
+isomorphism of groups.  We can
+write $\phi(a) = (\phi_n(a),\phi_m(a))$ where $\phi_n : \Z/nm\Z \to
+\Z/n\Z$ is the reduction modulo $n$ homomorphism and similarly for
+$\phi_m$.  In fact, $\phi$ is an isomorphism of rings with 1, i.e.,
+respects multiplication and the multiplicative identity.
+
+\item Promote $\phi$ to an isomorphism $\Phi : M_k(\Z/nm\Z) \to
+M_k(\Z/n\Z) \times M_k(\Z/m\Z)$ of rings with 1 by sending a
+matrix $A = (a_{ij})_{1 \leq i,j \leq k}$ to the
+pair $(\Phi_n(A), \Phi_m(A))$, where $\Phi_n(A) =
+(\phi_n(a_{ij}))_{1\leq i,j\leq k}$ is the result of reducing all
+entries of $A$ modulo $n$, and similarly for $\Phi_m(A)$.  First
+you have to prove that $\Phi$ is a ring homomorphism, then that it
+is injective and surjective, which relies crucially on the
+injectivity and surjectivity of $\phi$.
+
+\item Prove that $\phi(\det(A)) = (\det(\Phi_n(A)), \det(\Phi_m(A)))$
+for all $A \in M_k(\Z/nm\Z)$. Colloquially, this says that
+$\phi$ and $\Phi$ ``respect'' the determinant.
+
+\item Prove that $A \in M_k(\Z/nm\Z)$ is invertible if and only if
+  $\Phi(A)$ is an invertible element of the ring $M_k(\Z/n\Z) \times M_k(\Z/m\Z)$ if and
+  only if both $\Phi_n(A) \in M_k(\Z/n\Z)$ and $\Phi_m(A) \in
+  M_k(\Z/m\Z)$ are invertible.  Conclude that $\Phi$ induces a group
+  isomorphism $\GL_k(\Z/nm\Z) \crim{\isom} \GL_k(\Z/n\Z) \times
+  \GL_k(\Z/m\Z)$ and as a consequence, we get the desired formula.
+\end{enumerate}
+
+\item Recall the affine cipher with $\calP = \calC = (\Z/n\Z)^k$ and
+with key $A \in \GL_k(\Z/n\Z)$.  If Eve discovers the encryption of
+$k$ plaintext elements, prove that the probability that she can solve
+for the key is $\#\GL_k(\Z/n\Z)/n^{k^2}$.  Compute this probability
+for $n=26$ and $k=2,3,4$.  \emph{[This was done a bit too quickly in
+lecture, so check it yourself.]}
+
+\item After experimenting, what can you say about this probability as $k \to \infty$ or as
+$n\to \infty$?
+\end{enumerate}
+\end{problem}

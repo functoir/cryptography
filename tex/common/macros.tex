@@ -12,6 +12,11 @@
 \newcommand{\Z}{\mathbb{Z}}
 \renewcommand{\b}{\{0,1\}}
 
+% More Math operators
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calP}{\mathcal{P}}
+
 % Functions
 \DeclareMathOperator{\cost}{cost}
 \DeclareMathOperator{\len}{len}
@@ -76,6 +81,15 @@
 % Useful for marking steps of a derivation to explain later
 \newcommand{\circled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.1pt}{\scriptsize #1}}}}
 
+
+% Page size and margins
+\usepackage[left=1in,right=1in,top=1.3in,bottom=1.3in,nofoot]{geometry}
+\usepackage{fancyhdr}   % for fancy header
+\usepackage{fancyvrb}   % for fancy verbatim
+\usepackage{graphicx}   % for including images
+\usepackage{enumerate}  % for enumerating lists
+% \usepackage{enumitem}
+
 % My Problem set macros
 
 % Answer BOX
@@ -139,13 +153,11 @@
   % \dotsm -- multiplication dots.
   % \dotsi -- dots with integrals.
   % \dotso -- "other dots".
+\usepackage{wasysym, stackengine, makebox, tikz-cd}
+\newcommand\isom{\mathrel{\stackon[-0.1ex]{\makebox*{\scalebox{1.08}{\AC}}{=\hfill\llap{=}}}{{\AC}}}}
+\newcommand\nvisom{\rotatebox[origin=cc] {-90}{$ \isom $}}
+\newcommand\visom{\rotatebox[origin=cc] {90} {$ \isom $}}
 
-% Page size and margins
-\usepackage[left=1in,right=1in,top=1.3in,bottom=1.3in,nofoot]{geometry}
-\usepackage{fancyhdr}   % for fancy header
-\usepackage{fancyvrb}   % for fancy verbatim
-\usepackage{graphicx}   % for including images
-\usepackage{enumerate}  % for enumerating lists
 
 % Custom colors
 \definecolor{crimson}{rgb}{0.86, 0.08, 0.24}

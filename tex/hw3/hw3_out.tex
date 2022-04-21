@@ -1,0 +1,160 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[left=1.2in,right=1.2in,top=1.5in,bottom=1.5in,nohead,nofoot]{geometry}
+
+\input{../common/macros.tex}
+
+\pagestyle{empty}
+
+\newcounter{problem}
+\setcounter{problem}{0}
+
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\title{} 
+
+\date{\today}
+
+\noindent{\sc
+Dartmouth College Department of Mathematics \\ \bf
+Math 75 Cryptography \\ \rm
+Spring 2022\\[2ex]
+Problem Set \# 3 (upload to Canvas by Friday, April 22, 10:10 am EDT)}
+
+\bigskip
+
+\noindent {\bf Problems:}
+
+
+\begin{problem}
+Consider the affine cipher with $\calP=\calC=\Z/n\Z$.  
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Suppose $n=541$ and we take the key $(a,b)=(34,71)$.  Encrypt the plaintext $m=204$, and decrypt the ciphertext $c=431$.
+\item Eve intercepts a ciphertext from Alice and through espionage she learns that the letter $x \in \calP$ is encrypted as $y \in \calC$ in this message.  Show that Eve can decrypt the message using $O(n)$ trials.  
+\item Now suppose that (contrary to Kerckhoffs's principle) the integer $n$ is not public knowledge.  Is the affine cipher still vulnerable if Eve manages to steal a plaintext/ciphertext pair?  How might Eve break the system?
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Encrypt the message 
+\begin{center}
+\textsf{Why is a raven like a writing desk} 
+\end{center}
+using the Vigen\`ere cipher with keyword \texttt{rabbithole}.
+\end{problem}
+
+\begin{problem}
+Decrypt the following message, which was encrypted using a Vigen\`ere cipher.
+\begin{verbatim}
+          mgodt beida psgls akowu hxukc iawlr csoyh prtrt udrqh cengx
+          uuqtu habxw dgkie ktsnp sekld zlvnh wefss glzrn peaoy lbyig
+          uaafv eqgjo ewabz saawl rzjpv feyky gylwu btlyd kroec bpfvt
+          psgki puxfb uxfuq cvymy okagl sactt uwlrx psgiy ytpsf rjfuw
+          igxhr oyazd rakce dxeyr pdobr buehr uwcue ekfic zehrq ijezr
+          xsyor tcylf egcy
+\end{verbatim}
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Use the method of displacement coincidences to guess the key length.
+\item Use the Kasiski test to give more evidence for your guess for the key length.  
+\item Use frequency analysis with the guessed key length to decrypt the message.
+\end{enumerate}
+\emph{[You are encouraged to use a computer.]}
+\end{problem}
+
+\begin{problem}
+Consider the quadratic map
+\begin{align*}
+E:\Z/n\Z &\to \Z/n\Z \\
+x &\mapsto x^2+ax+b
+\end{align*}
+with $a,b \in \Z/n\Z$.  Show that if $n \neq 2$, then $E$ is
+\emph{never} an encryption function (i.e., $E$ cannot be inverted).
+What can you say about other maps $x \mapsto f(x)$ where $f(x) \in
+\Z[x]$, in particular, are any polynomial maps of higher degree invertible?
+\end{problem}
+
+\begin{problem}
+Let $D_n = \{x \in \R^n : \sum_{i=1}^n x_i^2 = 1\}$ be the unit sphere
+in $\R^n$.  Fix $x \in D_n$ and consider the function $\psi_x : D_n
+\to \R$ defined by
+\[
+\psi_x(y) = x \cdot y = \sum_{i=1}^n x_i y_i.
+\]
+Show that the function $\psi_x$ achieves a unique maximum at $x=y$.
+How does this relate to frequency analysis?
+\end{problem}
+
+\medskip
+
+\noindent {\bf Challenge problem:} (Try it for fun, you are not
+required to submit written-up solutions, unless you are a graduate
+student enrolled in the class.)
+
+\begin{problem}
+Let $n,k \in \Z_{>0}$ and recall the general linear group $\GL_k(\Z/n\Z)$.
+\begin{enumerate}\setlength{\itemsep}{3mm}
+\item Write down all the elements of $\GL_2(\Z/2\Z)$.  What more
+commonly known group is this isomorphic to?
+
+\item If $n=p$ is a prime number, prove that $\GL_k(\Z/p\Z)$ has
+$(p^k-1)(p^k-p)\dotsm (p^k-p^{k-1})$ elements.  \emph{[Use linear
+algebra over the field $\Z/p\Z$ and think of building your matrix one
+column at a time.]}
+
+\item Prove that if $n,m$ are relatively prime positive integers, then
+\[
+\# \GL_k(\Z/nm\Z) = \# \GL_k(\Z/n\Z) \cdot \# \GL_k(\Z/m\Z).  
+\]
+The following subparts will provide a guide to an algebraic proof of
+this fact (not all of these require a proof, they are a kind of series
+of hints to guide your work).
+
+\begin{enumerate}\setlength{\itemsep}{3mm}
+\item For $n,m$ relatively prime, the map $\phi : \Z/nm\Z \to \Z/n\Z
+\times \Z/m\Z$, defined by $a \mapsto (a \bmod n, a \bmod m)$, is an isomorphism of groups.  We can
+write $\phi(a) = (\phi_n(a),\phi_m(a))$ where $\phi_n : \Z/nm\Z \to
+\Z/n\Z$ is the reduction modulo $n$ homomorphism and similarly for
+$\phi_m$.  In fact, $\phi$ is an isomorphism of rings with 1, i.e.,
+respects multiplication and the multiplicative identity.
+
+  \item Promote $\phi$ to an isomorphism $\Phi : M_k(\Z/nm\Z) \to
+    M_k(\Z/n\Z) \times M_k(\Z/m\Z)$ of rings with 1 by sending a
+    matrix $A = (a_{ij})_{1 \leq i,j \leq k}$ to the
+    pair $(\Phi_n(A), \Phi_m(A))$, where $\Phi_n(A) =
+    (\phi_n(a_{ij}))_{1\leq i,j\leq k}$ is the result of reducing all
+    entries of $A$ modulo $n$, and similarly for $\Phi_m(A)$.  First
+    you have to prove that $\Phi$ is a ring homomorphism, then that it
+    is injective and surjective, which relies crucially on the
+    injectivity and surjectivity of $\phi$.
+
+\item Prove that $\phi(\det(A)) = (\det(\Phi_n(A)), \det(\Phi_m(A)))$ for all $A \in M_k(\Z/nm\Z)$.  Colloquially, this says that
+  $\phi$ and $\Phi$ ``respect'' the determinant.
+
+\item Prove that $A \in M_k(\Z/nm\Z)$ is invertible if and only if
+  $\Phi(A)$ is an invertible element of the ring $M_k(\Z/n\Z) \times M_k(\Z/m\Z)$ if and
+  only if both $\Phi_n(A) \in M_k(\Z/n\Z)$ and $\Phi_m(A) \in
+  M_k(\Z/m\Z)$ are invertible.  Conclude that $\Phi$ induces a group
+  isomorphism $\GL_k(\Z/nm\Z) \crim{\isom} \GL_k(\Z/n\Z) \times
+  \GL_k(\Z/m\Z)$ and as a consequence, we get the desired formula.
+\end{enumerate}
+
+\item Recall the affine cipher with $\calP = \calC = (\Z/n\Z)^k$ and
+with key $A \in \GL_k(\Z/n\Z)$.  If Eve discovers the encryption of
+$k$ plaintext elements, prove that the probability that she can solve
+for the key is $\#\GL_k(\Z/n\Z)/n^{k^2}$.  Compute this probability
+for $n=26$ and $k=2,3,4$.  \emph{[This was done a bit too quickly in
+lecture, so check it yourself.]}
+
+\item After experimenting, what can you say about this probability as $k \to \infty$ or as
+$n\to \infty$?
+\end{enumerate}
+\end{problem}
+
+\vfill
+
+\end{document}
+
