@@ -16,9 +16,11 @@ Let's define:
 
 \begin{align*}
   y &\equiv x^2+ax+b \pmod n\\
-  y + kn &=  x^2+ax+b  \text{ for some $k \in \Z^+ \cup \{0\}$}\\
-  y &= x^2+ax+(b - kn)\\
-  y^{-1} &= -a \pm \frac{\sqrt{a^{2} - 4b + 4kn}}{2}
+  y - b &\equiv  x^2+ax\\
+  y - b + \frac{a^2}{4} &\equiv x^2+a + \frac{a^2}{4}\\
+  y - b + \frac{a^2}{4} &\equiv (x + \frac{a}{2})^2\\
+  \pm \sqrt{y - b + kn + \frac{a^2}{4}} &= x + \frac{a}{2}\\
+  -\frac{a}{2} \pm \sqrt{y - b + \frac{a^2}{4}} &\equiv x\\
 \end{align*}
 
 \end{Answer}
