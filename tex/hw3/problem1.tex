@@ -4,13 +4,15 @@ Consider the affine cipher with $\calP=\calC=\Z/n\Z$.
 \item Suppose $n=541$ and we take the key $(a,b)=(34,71)$.  Encrypt the plaintext $m=204$, and decrypt the ciphertext $c=431$.
 \begin{Answer}
 
+  Here is some dummy texts
+
 \noindent
 The encryption of $m=204$ is $515$
 \begin{align*}
-  c &= a \cdot p + b \crim{\pmod n}\\
-  &= 34 \cdot 204 + 71 \crim{\pmod{541}}\\
-  &= 7007 \crim{\pmod{541}}\\
-  &= 515 \crim{\pmod{541}}
+  c &= a \cdot p + b\\
+  &= 34 \cdot 204 + 71\\
+  &= 7007\\
+  &\equiv 515 \crim{\pmod{541}}
 \end{align*}
 
 \noindent
