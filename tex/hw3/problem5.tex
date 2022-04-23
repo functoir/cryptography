@@ -10,5 +10,37 @@ How does this relate to frequency analysis?
 \end{problem}
 
 \begin{Answer}
+\text{Let: }
+\begin{align*}
+  \vec{x} &= \langle x_1, x_2, \dots, x_n\rangle \backepsilon \sum_{i=1}^n x_i^2 = 1 \zaff{\Rightarrow \left | \vec{x} \right | = 1}\\
+  \vec{y} &= \langle y_1, y_2, \dots, y_n\rangle \backepsilon \sum_{i=1}^n y_i^2 = 1 \zaff{\Rightarrow \left | \vec{y} \right | = 1}\\
+  \vec{x} \cdot \vec{y} &=\left | \vec{x} \right |\left | \vec{y} \right |\cos\theta
+  \le \left | \vec{x} \right |\left | \vec{y} \right | \crim{\text{    (since $\cos \theta \le 1$)}}
+\end{align*}
+\noindent
+To achieve a maximum:
+\begin{align*}
+  \underbrace{\cos \theta \le 1}_{\text{maximize this}} &\Rightarrow \cos \theta = 1\\
+  \\
+  \angle(\vec{x}, \vec{y}) &= \arccos 1 = 0
+\end{align*}
 
+\noindent
+Thus, we \emph{know} that $\vec{x}$ and $\vec{y}$ are the same,
+since $ \angle(\vec{x}, \vec{y}) = 0$,
+and $\left | \vec{x} \right | = \left | \vec{y} \right| = 1$
+\crim{(the vectors have the same direction and the same magnitude)}.
+\newline
+\newline
+\noindent
+\color{zaffre}
+Suppose we have $\vec{f} = \langle f_1, f_2, \dots, f_n\rangle$
+corresponding to the frequencies of the
+$n$ letters in an alphabet, such that $\sum_{i=1}^n f_i = 1$.
+Then, the Cauchy-Schwartz inequality implies that $\vec{f} \cdot \vec{f}$
+gives a greater value than $\vec{f} \cdot \vec{f}_{\to k}$ where $\vec{f}_{\to k}$ is the vector
+obtained by shifting and cycling the elements in $\vec{f}$ to the right by $k$ positions.
+\newline
+On the vigen\`ere cipher, for instance, this means that the frequencies (or coincidences, an approximation for frequencies)
+will be maximized when the shift matches the key-length.
 \end{Answer}

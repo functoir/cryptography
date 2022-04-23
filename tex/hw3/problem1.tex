@@ -3,9 +3,6 @@ Consider the affine cipher with $\calP=\calC=\Z/n\Z$.
 \begin{enumerate}\renewcommand{\itemsep}{3mm}
 \item Suppose $n=541$ and we take the key $(a,b)=(34,71)$.  Encrypt the plaintext $m=204$, and decrypt the ciphertext $c=431$.
 \begin{Answer}
-
-  Here is some dummy texts
-
 \noindent
 The encryption of $m=204$ is $515$
 \begin{align*}
@@ -68,11 +65,45 @@ How might Eve break the system?
 Without knowing $n$, the problem becomes much harder to break.
 
 \noindent
-However, if Eve knows at least $3$ different plaintext/ciphertext pairs, she can use them to guess a value for $n$.
-git status
+However, if Eve knows at least $3$ different plaintext/ciphertext pairs,
+she can use them to guess a value for $n$.
+
+Say, for instance, $p_1, p_2, p_3$ are the plaintexts and $c_1, c_2, c_3$ are the ciphertexts:
+
+\begin{align*}
+  c_1 \equiv a \cdot p_1 + b \pmod n &\Rightarrow a \cdot p_1 + b - c_1 \equiv 0 \pmod n\\
+  c_2 \equiv a \cdot p_2 + b \pmod n &\Rightarrow a \cdot p_2 + b - c_2 \equiv 0 \pmod n\\
+  c_3 \equiv a \cdot p_3 + b \pmod n &\Rightarrow a \cdot p_3 + b - c_3 \equiv 0 \pmod n\\
+  \\
+  \begin{bmatrix}
+    c_1 & p_1 & 1\\
+    c_2 & p_2 & 1\\
+    c_3 & p_3 & 1
+  \end{bmatrix} \cdot \begin{bmatrix}
+    1\\
+    -a\\
+    -b
+  \end{bmatrix} &\equiv \begin{bmatrix}
+    0\\
+    0\\
+    0
+  \end{bmatrix} \pmod n\\
+  \\
+  \begin{vmatrix}
+    c_1 & p_1 & 1\\
+    c_2 & p_2 & 1\\
+    c_3 & p_3 & 1
+  \end{vmatrix} &\equiv 0 \pmod n\\
+  \\
+  \color{crimson}
+  c_1(p_2-p_3) - c_2(p_1-p_3) + c_3(p_1 - p_2) &\equiv 0 \pmod n \\
+  \color{black} \\
+\end{align*}
 
 \noindent
-A possible way would be to estimate values of $n$ using 
+Since $\{c_1, c_2, c_3\}$ and the corresponding plaintexts $\{p_1, p_2, p_3\}$ are all known,
+Eve can find a value congruent to $0 \pmod n$
+and use it to find $n$, after which she can easily crack the encryption.
 
 \end{Answer}
 \end{enumerate}
