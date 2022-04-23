@@ -9,4 +9,95 @@ using the Vigen\`ere cipher with keyword \texttt{rabbithole}.
 
 \begin{Answer}
 
+The encryption is \Verb#``NHZJATYOGIELJLMTDFTXZNHEMLR''#
+
+\bigskip
+\noindent
+\begin{center}\textbf{Algorithm}\end{center}
+
+\noindent
+I wrote a program to encrypt and decrypt per the Vigen\`ere cipher.
+
+\color{crimson}
+\begin{Verbatim}[commandchars=\\\{\}]
+  -- | Get the "vigenere complement" of a character.
+  --
+  -- The complement of 'A' is itself (shift by 0),
+  --
+  -- the complement of 'B' is 'Z' (shift by 1 and -1), etc.
+  \zaff{invChar :: Char -> Char}
+  \zaff{invChar char = chr (ord 'Z' - (charToInt char - 1))}
+\end{Verbatim}
+\color{black}
+\noindent
+For convenience, we can define a function that maps invChar over a word:
+\color{crimson}
+\begin{Verbatim}[commandchars=\\\{\}]
+  -- | Get the "vigenere complement" of a word.
+  --
+  -- maps the complement of each character in the word.
+  \zaff{invWord :: String -> String}
+  \zaff{invWord = map invChar}
+\end{Verbatim}
+\color{black}
+
+\noindent
+Also for convenience, I wrote a function that repeats any sequence
+infinitely many times. This creates an infinite sequence,
+but since Haskell is a lazy language we can ``take''
+the first $n$ elements out of such a sequence.
+
+\color{crimson}
+\begin{Verbatim}[commandchars=\\\{\}]
+  -- | Repeat a sequence infinitely many times.
+  --
+  -- This is a lazy function, so it will not evaluate the
+  -- sequence infinitely many times.
+  \zaff{repeat :: [a] -> [a]}
+  \zaff{repeat seq = seq ++ repeat seq}
+\end{Verbatim}
+
+\noindent
+\black{Finally, we can write our encryption function:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+  -- | Encrypt a word using the Vigen\`ere cipher.
+  -- NOTE: `zipWith' is a builtin function that takes a function 
+  -- and two sequences and applies the function on
+  -- corresponding elements in the sequences to generate a new sequence.
+  \zaff{encrypt :: String -> String -> String}
+  \zaff{encrypt text keyword = zipWith shiftChar cleanedText repeatedKeyword}
+    where
+      \zaff{cleanedText = clean text}                    \crim{-- drops spaces and punctuation}
+      \zaff{repeatedKeyword = take n (repeat keyword)}   \crim{-- gets first n letters in sequence}
+      \zaff{n = length cleanedText}
+\end{Verbatim}
+\color{black}
+\noindent
+And we can define decryption as encryption with the inverse of the key, i.e.
+the respective letters that undo the shifts done during encryption:
+
+\color{crimson}
+\begin{Verbatim}[commandchars=\\\{\}]
+  -- | Decrypt a word using the Vigen\`ere cipher.
+  --
+  -- We do the equivalent of encryption with the Vige\`ere `inverse' of the keyword.
+  \zaff{decrypt :: String -> String -> String}
+  \zaff{decrypt text keyword = encrypt text (invWord keyword)}
+\end{Verbatim}
+\color{black}
+
+% \newpage
+\begin{center}\textbf{Results}\end{center}
+
+\color{crimson}
+\begin{Verbatim}[commandchars=\\\{\}]
+$ encrypt \zaff{``Why is a raven like a writing desk''} ``rabbithole''
+\teal{``NHZJATYOGIELJLMTDFTXZNHEMLR''}
+
+
+$ decrypt \teal{``NHZJATYOGIELJLMTDFTXZNHEMLR''} ``rabbithole''
+\zaff{``WHYISARAVENLIKEAWRITINGDESK''}
+\end{Verbatim}
+\color{black}
 \end{Answer}

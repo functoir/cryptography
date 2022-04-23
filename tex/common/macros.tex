@@ -1,3 +1,8 @@
+% ENCODING
+\usepackage[utf8]{inputenc}
+\usepackage{pmboxdraw}
+% \usepackage{pmboxdraw-extras}
+
 % Sets
 \newcommand{\FF}{\mathbb{F}}
 \newcommand{\NN}{\mathbb{N}}
@@ -89,6 +94,14 @@
 \usepackage{graphicx}   % for including images
 \usepackage{enumerate}  % for enumerating lists
 % \usepackage{enumitem}
+\usepackage{tcolorbox}
+\newtcolorbox{codebox}[1]{
+  box align=top,
+  colback=white!5!white,
+  colframe=white!75!black,
+  title=#1
+}
+\usepackage{multicol}
 
 % My Problem set macros
 

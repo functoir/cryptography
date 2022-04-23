@@ -11,13 +11,234 @@ Decrypt the following message, which was encrypted using a Vigen\`ere cipher.
 \end{Verbatim}
 
 \begin{enumerate}\renewcommand{\itemsep}{3mm}
-\item Use the method of displacement coincidences to guess the key length.
-\item Use the Kasiski test to give more evidence for your guess for the key length.  
-\item Use frequency analysis with the guessed key length to decrypt the message.
+  \item Use the method of displacement coincidences to guess the key length.
+  \item Use the Kasiski test to give more evidence for your guess for the key length.  
+  \item Use frequency analysis with the guessed key length to decrypt the message.
 \end{enumerate}
 \emph{[You are encouraged to use a computer.]}
 \end{problem}
+% \newpage
 \noindent
 \begin{Answer}
+\begin{center}\textsc{Key Length Estimation}\end{center}
+\bigskip
+After counting displacement coincidences, I found $7$ has the highest number of coincidences.
 
+\color{zaffre}
+\begin{Verbatim}[commandchars=\\\{\}]
+  1: 7
+  2: 6
+  3: 11
+  4: 11
+  5: 9
+  6: 11
+  \crim{7: 15}
+  8: 4
+  9: 10
+  10: 12
+  11: 11
+  12: 9
+  13: 12
+  \crim{14: 17    -- could this be because it is a multiple of 7?}
+  15: 10
+  16: 6
+  17: 11
+  18: 11
+  19: 7
+\end{Verbatim}
+\color{black}
+% \pagebreak
+\begin{center}\textsc{Kasiski Test}\end{center}
+
+I wrote a program that analyzes the recurrences of $n$-grams in the text.
+\noindent
+\color{zaffre}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+  --- 3-grams
+  *VigenereCipher> run 3
+  awl: [26,117]       \crim{difference: 91}
+  ehr: [227,241]      \crim{difference: 14}
+  gki: [61,152]       \crim{difference: 91}
+  gls: [12,173]       \crim{difference: 161}
+  lsa: [13,174]       \crim{difference: 161}
+  psg: [10,150,185]   \crim{difference: [140, 175, 35]}
+  sgl: [11,84]        \crim{difference: 73}
+  tps: [149,191]      \crim{difference: 42}
+  uxf: [156,160]      \crim{difference: 4}
+  wlr: [27,118,181]   \crim{difference: [91, 154, 63]}
+
+  --- 4-grams
+  *VigenereCipher> run 4
+  awlr: [26,117]        \crim{difference: 91}
+  glsa: [12,173]        \crim{difference: 161}
+\end{Verbatim}
+\color{black}
+\noindent
+With a length of 3, we see that several $n$-grams recur in the encrypted message.
+\newline
+Per the \textbf{Kasiski Test}, most of the differences in position
+of repeated $n$-grams should be multiples of the key-length ($7$ in this case).
+We see that $\left\{14, 35, 42, 63, 91, 140, 154, 161, 175\right\}$ are all multiples of $7$.
+Only $\{4, 73\}$ are not multiples of $7$.
+% \pagebreak
+\begin{center}
+\textsc{Frequency Analysis}
+\end{center}
+
+\noindent
+Looking at the highest frequencies over each zeroth, first,
+second, third, fourth, fifth, and sixth letter modulo $7$:
+\begin{multicols*}{2}
+\begin{Verbatim}[commandchars=\\\{\}]
+1   [ 'i': 15.789473684210526,
+      'e': 10.526315789473685
+      's': 10.526315789473685
+      'l': 7.894736842105263
+      'r': 7.894736842105263
+      ...
+    ],
+2   [ 'r': 15.789473684210526
+      'a': 10.526315789473685
+      'y': 10.526315789473685
+      'b': 7.894736842105263
+      'e': 7.894736842105263 
+      ...
+    ],
+3   [ 'u': 18.42105263157895
+      'k': 15.789473684210526
+      'o': 13.157894736842104
+      't': 7.894736842105263
+      'z': 7.894736842105263
+      ...
+    ],
+4   [ 'p': 13.157894736842104
+      'c': 10.526315789473685
+      'e': 10.526315789473685
+      't': 10.526315789473685
+      'w': 7.894736842105263
+      ...
+    ],
+5   [ 's': 13.157894736842104
+      'a': 10.526315789473685
+      'e': 10.526315789473685
+      't': 10.526315789473685
+      'c': 7.894736842105263
+      ...
+    ],
+6   [ 'g': 16.216216216216218
+      'b': 10.81081081081081
+      'u': 10.81081081081081
+      'y': 10.81081081081081
+      'f': 8.108108108108109
+      ...
+    ],
+7   [ 'l': 13.513513513513514
+      'w': 10.81081081081081
+      'd': 8.108108108108109
+      'h': 8.108108108108109
+      'p': 8.108108108108109
+      'f': 5.405405405405405
+      ...
+    ]
+\end{Verbatim}
+\end{multicols*}
+\noindent
+\noindent
+Suppose the keyword $k$ = $k_{1}k_{2}k_{3}k_{4}k_{5}k_{6}k_{7}$
+where $k_{1}$ is the first letter of the message, etc.
+\newline
+Since we expect the most common letters to have similar recurrence across the text,
+we can pick out one recurring frequency ($15.789473684210526$) and check the values closest to that frequency.
+\newline
+We can expect that:
+
+\begin{align*}
+\exists c_{i} \in \calC, \backepsilon c_{i} \begin{cases}
+  \underset{k_{1}}{\Rightarrow} \text{`i'}\\
+  \underset{k_{2}}{\Rightarrow} \text{`r'}\\
+  \underset{k_{3}}{\Rightarrow} \text{`k'}\\
+  \underset{k_{4}}{\Rightarrow} \text{`p'}\\
+  \underset{k_{5}}{\Rightarrow} \text{`s'}\\
+  \underset{k_{6}}{\Rightarrow} \text{`g'}\\
+  \underset{k_{7}}{\Rightarrow} \text{`l'}
+\end{cases} 
+\end{align*}
+
+From the above, we can guess that:
+\begin{align*}
+  \mathbf{let\ } k_{1} &\equiv \text{`A'} \\
+  k_{2} - k_{1} = \text{`r'} - \text{`i'} = 9 \Rightarrow k_{2} &\equiv \text{`J'}\\
+  k_3 - k_1 = \text{`k'} - \text{`i'} = 2 \Rightarrow k_{3} &\equiv \text{`C'}\\
+  k_4 - k_1 = \text{`p'} - \text{`i'} = 7 \Rightarrow k_{4} &\equiv \text{`H'}\\
+  k_5 - k_1 = \text{`s'} - \text{`i'} = 22 \Rightarrow k_{5} &\equiv \text{`W'}\\
+  k_6 - k_1 = \text{`g'} - \text{`i'} = 24 \Rightarrow k_{6} &\equiv \text{`Y'}\\
+  k_7 - k_1 = \text{`l'} - \text{`i'} = 3 \Rightarrow k_{7} &\equiv \text{`D'}\\
+\end{align*}
+
+We can now run a brute-force shift cipher attack on the relations of the keyword,
+and try to look for a recurring pattern.
+\begin{multicols*}{2}
+\begin{Verbatim}[commandchars=\\\{\}]
+  *ShiftCipher> bruteforce ``AJCHWYD''
+  0: ajchwyd
+  1: zibgvxc
+  2: yhafuwb
+  3: xgzetva
+  4: wfydsuz
+  5: vexcrty
+  6: udwbqsx
+  7: tcvaprw
+  8: sbuzoqv
+  9: ratynpu
+  10: qzsxmot
+  11: pyrwlns
+  12: oxqvkmr
+  13: nwpujlq
+  14: mvotikp
+  15: lunshjo
+  16: ktmrgin
+  17: jslqfhm
+  18: irkpegl
+  19: hqjodfk
+  20: gpincej
+  21: fohmbdi
+  \crim{22: englach}
+  23: dmfkzbg
+  24: clejyaf
+  25: bkdixze
+\end{Verbatim}
+\end{multicols*}
+
+\noindent
+Much of the results doesn't make sense (as we expected), but one shift almost spells ``England''.
+
+\noindent
+Let's focus on the possibility of that being our keyword
+--- in which case the last two characters we picked are likely wrong.
+
+Using \Verb#``ENGLAND''# as the keyword, we get the following results:
+\color{zaffre}
+\begin{Verbatim}
+  ITISTOBEQUESTIONEDWHETHERINTHEWHOLELENGTHANDBREADTHOF
+  THEWORLDTHEREISAMOREADMIRABLESPOTFORAMANINLOVETOPASS
+  ADAYORTWOTHANTHETYPICALENGLISHVILLAGEITCOMBINESTHE
+  COMFORTSOFCIVILIZATIONWITHTHERESTFULNESSOFSOLITUDE
+  INAMANNEREQUALLEDBYNOOTHERSPOTEXCEPTTHENEWYORKPUBLICLIBRARY
+\end{Verbatim}
+\color{black}
+
+\noindent
+When we space out and format the text properly, it reads:
+
+\bigskip
+\noindent
+\color{teal}
+It is to be questioned whether in the whole length and breadth
+of the world there is a more admirable spot for a man in love
+to pass a day or two than the typical English village.
+It combines the comforts of civilization with the restfulness
+of solitude in a manner equalled by no other spot except
+the New York public library.
+\color{black}
 \end{Answer}

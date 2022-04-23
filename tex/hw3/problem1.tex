@@ -32,12 +32,20 @@ $x \in \calP$ is encrypted as $y \in \calC$ in this message.
 Show that Eve can decrypt the message using $O(n)$ trials.  
 \begin{Answer}
 
-Suppose we know that a letter $p \in \calP$ is encrypted as
-$c \in \calC$ in the message.
+Suppose Eve knows that a letter $x \in \calP$ is encrypted as
+$y \in \calC$ in the message.
 
 \noindent
-Then, we know that \crim{$a \cdot p + b \pmod n \equiv c \pmod n$},
+Then, Eve knows that \crim{$a \cdot x + b \pmod n \equiv y \pmod n$} for some $a, b \in \Z/n\Z$.
+
+\noindent $(a, b)$ also happen to be the keys to the Affine Cipher.
 where $(a, b)$ are the keys of the affine cipher.
+
+\begin{align*}
+  ax + b &\equiv y \pmod n\\
+  ax + b &= y + kn\\
+  ax + kn = y - b\\
+\end{align*}
 
 \noindent
 We can safely assume that $0 \le b \le n-1$ 
@@ -50,9 +58,18 @@ test for a matching value for $a$ that, when plugged into the affine cipher
 maps the known plaintext letter to the known (and correct) ciphertext letter.
 
 \end{Answer}
-\item Now suppose that (contrary to Kerckhoffs's principle) the integer $n$ is not public knowledge.  Is the affine cipher still vulnerable if Eve manages to steal a plaintext/ciphertext pair?  How might Eve break the system?
+\item Now suppose that (contrary to Kerckhoffs's principle) the integer $n$ is not public knowledge.
+Is the affine cipher still vulnerable if Eve manages to steal a plaintext/ciphertext pair?
+How might Eve break the system?
 \begin{Answer}
   
+Without knowing $n$, the problem becomes much harder to break.
+Sure, Eve can iterate up from $0$ and attempt to check integers until she finds a match,
+but not knowing the base means the correct key can be missed when taking the modulus to a wrong value of $n$.
+
+\noindent
+A possible way would be to estimate values of $n$ using 
+
 \end{Answer}
 \end{enumerate}
 \end{problem}
