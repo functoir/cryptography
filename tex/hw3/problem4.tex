@@ -11,16 +11,82 @@ What can you say about other maps $x \mapsto f(x)$ where $f(x) \in
 \Z[x]$, in particular, are any polynomial maps of higher degree invertible?
 \end{problem}
 \begin{Answer}
+An encryption function has to be invertible (for decryption),
+and invertible functions must be injections and a surjections (i.e. bijections).
+These conditions are not satisfied by the quadratic map
+$E:\Z/n\Z \to \Z/n\Z \backepsilon x \mapsto x^2+ax+b$
+unless we restrict its domain and range to $\Z/2\Z$.
+First, for a multiplicative map over $\Z/n\Z$ to be invertible, $\Z/n\Z$ must be a field --- otherwise some elements
+in $\Z/n\Z$ will not have multiplicative inverses.
 
-Let's define: 
+\noindent
+Consider some finite field $\calF_n$ formed by taking the integers modulo $n$, where $n$ is a prime number.
+As an example, we'll take $\calF_5$
 
+\noindent
+Every element in $\calF$ except $0$ has a multiplicative inverse and an additive inverse.
+For example:
+\noindent
+Let's define $\calF_5 = \{0,1,2,3,4\}$
+\noindent
+Then, we can define multiplicative inverses and additive inverses in $\calF_5$ as:
+
+% \begin{table}[h!]
+\centering
+\begin{tabular}{||c | c | c||} 
+  \hline
+  $f_i$ & $f_i^{-1}$ & $-f_i$\\ [0.5ex] 
+  \hline\hline
+  1 & 1 & 4\\ 
+  2 & 3 & 3\\
+  3 & 2 & 2\\
+  4 & 4 & 1\\[1ex] 
+  \hline
+\end{tabular}
+% \caption{Table to test captions and labels.}
+\label{table:1}
+% \end{table}
+
+\justifying
+\noindent
+As in all number systems (that I know of\ldots I'd like to know of exceptions),
+$f_i^{2} = (f_i^{-1})^{2}$.
+
+\noindent
+Similarly, $f_i + (-f_i) = 0$
+
+\noindent
+Examples in $F_5$:
 \begin{align*}
-  y &\equiv x^2+ax+b \pmod n\\
-  y - b &\equiv  x^2+ax\\
-  y - b + \frac{a^2}{4} &\equiv x^2+a + \frac{a^2}{4}\\
-  y - b + \frac{a^2}{4} &\equiv (x + \frac{a}{2})^2\\
-  \pm \sqrt{y - b + kn + \frac{a^2}{4}} &= x + \frac{a}{2}\\
-  -\frac{a}{2} \pm \sqrt{y - b + \frac{a^2}{4}} &\equiv x\\
+  3^2 &\equiv 9 \pmod 5 \equiv 4 \equiv 2^2\\
+  3 + 2 &\equiv 5 \pmod 5 \equiv 0\\
 \end{align*}
 
+\noindent
+Hence\ldots the quadratic map \zaff{$E:\Z/n\Z \to \Z/n\Z \backepsilon x \mapsto x^2+ax+b$}
+is guaranteed to not be surjective under these conditions:
+
+\begin{enumerate}
+\item If $a = 0$, then $E(x^{-1}) \equiv x^2 + b \equiv E(x)$
+\item Generally, $E(-a) \equiv a^{2} - a^{2} + b \equiv b \equiv E(0)$ 
+\end{enumerate}
+
+\bigskip
+\noindent
+\color{zaffre}
+However, if we limit the domain and range to $\calF_2$, then the only non-zero element is $1$, and:
+\begin{enumerate}
+  \item If $a = 0$, then $E(x^{-1}) \equiv x^2 + b \equiv E(x)$, \crim{but $1 \equiv 1^{-1} \pmod 2$}
+  \item \crim{$-1 \equiv 1 \pmod 2$}, and $E(-1) = E(1) = 1 + a + b \nequiv E(0)$ 
+\end{enumerate}
+\color{black}
+\bigskip
+\noindent
+In general, it is possible for higher-order polynomials to be invertible, but that property does not hold for \emph{all}
+higher-order polynomials. Careful thought should be put in choosing a polynomial as an encryption function (or, just use modern
+techniques?).
+
+\noindent
+For instance, $x \mapsto x^3$ (and any such function as $x \mapsto x^{\text{odd power}}$, it seems)
+is invertible in any finite field, but $x \mapsto x^4$ (and any other $x \mapsto x^{\text{even power}}$ function) is not.
 \end{Answer}

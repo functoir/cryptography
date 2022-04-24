@@ -68,13 +68,14 @@ the first $n$ elements out of such a sequence.
   \zaff{encrypt :: String -> String -> String}
   \zaff{encrypt text keyword = zipWith shiftChar cleanedText repeatedKeyword}
     where
-      \zaff{cleanedText = clean text}                    \crim{-- drops spaces and punctuation}
-      \zaff{repeatedKeyword = take n (repeat keyword)}   \crim{-- gets first n letters in sequence}
-      \zaff{n = length cleanedText}
+      \zaff{cleanedText = clean text}                    \crim{-- drop spaces, punctuation from text}
+      \zaff{len = length cleanedText}
+      \zaff{repeatedKeyword = take len (repeat keyword)} \crim{-- get first x letters in sequence}
 \end{Verbatim}
 \color{black}
+\newpage
 \noindent
-And we can define decryption as encryption with the inverse of the key, i.e.
+And we can define decryption as encryption with the vigen\`ere complement of the key ---
 the respective letters that undo the shifts done during encryption:
 
 \color{crimson}

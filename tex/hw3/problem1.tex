@@ -19,12 +19,16 @@ The decryption of $c=431$ is $297$
   431 &\equiv 34p + 71 \crim{\pmod{541}}\\
   360 &\equiv 34p \crim{\pmod{541}}\\
   p &= \frac{360 + 541k}{34}  \hspace{15pt}\mid p,k \in \Z^+\\
+\end{align*}
+\noindent
+We need to find a value for  $k$ such that $34 | (541k + 360)$.
+This is easily calculated to be $k=18$.
+\begin{align*}
   p &= \frac{360 + 541\cdot 18}{34}\\
   p &= 297
 \end{align*}
-
 \end{Answer}
-
+\newpage
 \item Eve intercepts a ciphertext from Alice
 and through espionage she learns that the letter
 $x \in \calP$ is encrypted as $y \in \calC$ in this message.
@@ -35,39 +39,32 @@ Suppose Eve knows that a letter $x \in \calP$ is encrypted as
 $y \in \calC$ in the message.
 
 \noindent
-Then, Eve knows that \crim{$a \cdot x + b \pmod n \equiv y \pmod n$} for some $a, b \in \Z/n\Z$.
-
-\noindent $(a, b)$ also happen to be the keys to the Affine Cipher.
-where $(a, b)$ are the keys of the affine cipher.
+Then, Eve knows that \crim{$a \cdot x + b \pmod n \equiv y \pmod n$} for some $a, b \in \Z/n\Z$,
+where $(a, b)$ are the keys of the Affine Cipher.
 
 \begin{align*}
   ax + b &\equiv y \pmod n\\
-  ax + b &= y + kn\\
-  ax + kn &= y - b\\
+  ax + b &\equiv y\\
+  ax &\equiv y - b\\
 \end{align*}
 
 \noindent
-We can safely assume that $0 \le b \le n-1$ 
+Eve can safely assume that $0 \le b \le n-1$ 
 (since adding any number $x \ge n$ is equivalent to adding
-$x \mod n$).
-
-\noindent
-We can therefore iterate through all the possible values of $b$ and
-test for a matching value for $a$ that, when plugged into the affine cipher
-maps the known plaintext letter to the known (and correct) ciphertext letter.
+$x \mod n$). Eve can therefore iterate through all the $n$ possible values of $b$ and
+test the matching value for $a$. She is guaranteed to find the real key.
 
 \end{Answer}
 \item Now suppose that (contrary to Kerckhoffs's principle) the integer $n$ is not public knowledge.
 Is the affine cipher still vulnerable if Eve manages to steal a plaintext/ciphertext pair?
 How might Eve break the system?
-\begin{Answer}
-  
-Without knowing $n$, the problem becomes much harder to break.
 
-\noindent
+\begin{Answer}
+Without knowing $n$, the problem becomes much harder to break.
 However, if Eve knows at least $3$ different plaintext/ciphertext pairs,
 she can use them to guess a value for $n$.
 
+\noindent
 Say, for instance, $p_1, p_2, p_3$ are the plaintexts and $c_1, c_2, c_3$ are the ciphertexts:
 
 \begin{align*}
@@ -102,8 +99,8 @@ Say, for instance, $p_1, p_2, p_3$ are the plaintexts and $c_1, c_2, c_3$ are th
 
 \noindent
 Since $\{c_1, c_2, c_3\}$ and the corresponding plaintexts $\{p_1, p_2, p_3\}$ are all known,
-Eve can find a value congruent to $0 \pmod n$
-and use it to find $n$, after which she can easily crack the encryption.
+Eve can find a value congruent to $0$ in $\Z/n\Z$ and use it to find $n$,
+after which she can easily crack the encryption.
 
 \end{Answer}
 \end{enumerate}

@@ -18,6 +18,7 @@ Decrypt the following message, which was encrypted using a Vigen\`ere cipher.
 \emph{[You are encouraged to use a computer.]}
 \end{problem}
 % \newpage
+\pagebreak
 \noindent
 \begin{Answer}
 \begin{center}\textsc{Key Length Estimation}\end{center}
@@ -81,7 +82,7 @@ Per the \textbf{Kasiski Test}, most of the differences in position
 of repeated $n$-grams should be multiples of the key-length ($7$ in this case).
 We see that $\left\{14, 35, 42, 63, 91, 140, 154, 161, 175\right\}$ are all multiples of $7$.
 Only $\{4, 73\}$ are not multiples of $7$.
-% \pagebreak
+\pagebreak
 \begin{center}
 \textsc{Frequency Analysis}
 \end{center}
@@ -154,14 +155,14 @@ we can pick out one recurring frequency ($15.789473684210526$) and check the val
 We can expect that:
 
 \begin{align*}
-\exists c_{i} \in \calC, \backepsilon c_{i} \begin{cases}
-  \underset{k_{1}}{\Rightarrow} \text{`i'}\\
-  \underset{k_{2}}{\Rightarrow} \text{`r'}\\
-  \underset{k_{3}}{\Rightarrow} \text{`k'}\\
-  \underset{k_{4}}{\Rightarrow} \text{`p'}\\
-  \underset{k_{5}}{\Rightarrow} \text{`s'}\\
-  \underset{k_{6}}{\Rightarrow} \text{`g'}\\
-  \underset{k_{7}}{\Rightarrow} \text{`l'}
+\exists p_{i} \in \calP \backepsilon p_{i} \begin{cases}
+  \underset{k_{1}}{\Rightarrow} \text{`i'} &\in \calC\\
+  \underset{k_{2}}{\Rightarrow} \text{`r'} &\in \calC\\
+  \underset{k_{3}}{\Rightarrow} \text{`k'} &\in \calC\\
+  \underset{k_{4}}{\Rightarrow} \text{`p'} &\in \calC\\
+  \underset{k_{5}}{\Rightarrow} \text{`s'} &\in \calC\\
+  \underset{k_{6}}{\Rightarrow} \text{`g'} &\in \calC\\
+  \underset{k_{7}}{\Rightarrow} \text{`l'} &\in \calC
 \end{cases} 
 \end{align*}
 
