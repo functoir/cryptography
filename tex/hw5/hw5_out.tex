@@ -1,0 +1,102 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,amsthm,amsmath,amstext}
+\usepackage{mathdots}
+
+\usepackage[left=1.2in,right=1.2in,top=1.5in,bottom=1.5in,nohead,nofoot]{geometry}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\pagestyle{empty}
+
+\newcounter{problem}
+\setcounter{problem}{0}
+
+\newenvironment{problem}[1][]%
+{%
+\stepcounter{problem} \vspace{.2cm} \noindent {\bf \arabic{problem}.} {\it #1}%
+}{%
+\vspace{.2cm}%
+} 
+
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\title{} 
+
+% \date{\today}
+
+\noindent \sc
+Dartmouth College Department of Mathematics \\ \bf
+Math 75 Cryptography \\ \rm
+Spring 2022\\[2ex]
+Problem Set \# 5 (upload to Canvas by Friday, May 6, 10:10 am EDT)
+
+\bigskip
+
+\noindent {\bf Problems:}
+
+\begin{problem}
+  Let $k \geq 2$ and $A=(\Z/2\Z)^k$.  Let $\vec{0}, \vec{1} \in A$ be
+  the vectors of all zeros and all ones, respectively.  Define the map
+  $g : A \to A$ by
+\[
+g(y) = 
+\begin{cases}
+\vec{0} & y \neq \vec{0} \\
+\vec{1} & y = \vec{0} \\
+\end{cases}
+\]
+Then define
+\begin{align*} 
+s,G: A \times A &\to A \times A \\
+s(x,y) &= (y,x) \\
+G(x,y) &= (x + g(y),y)
+\end{align*}
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Prove that $s^2$ and $G^2$ are the identity on $A \times A$.
+  \emph{[We actually proved this in lecture, so just make sure you
+    understand it here.]}
+\item Prove that $(sG)^4=sgsgsgsg$ moves only $3$ elements of $A \times A$, i.e. 
+\[ \#\{(x,y) \in A \times A:(sG)^4(x,y) \neq (x,y)\}=3. \]
+\item Prove that $(sG)^{12}$ is the identity.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Encrypt the message $001100001010$ using two rounds of SDES and (9 bit) key
+$111000101$, as explained in lecture.  Show all your steps! \emph{[Hint: After one round, the output is $001010010011$.]}
+\end{problem}
+
+\begin{problem}
+In the Rijndael field $F=\F_2[X]/(X^8+X^4+X^3+X+1)$, where bytes are associated to polynomials modulo $X^8+X^4+X^3+X+1$, compute the product $01010010 \cdot 10010010 \in F$.
+\end{problem}
+
+\begin{problem}
+Here you will prove something that was claimed in lecture!
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Find all monic irreducible polynomials of degree $\leq 4$ in $\F_2[X]$.
+\item Verify that the Rijndael polynomial 
+\[ f(X)=X^8+X^4+X^3+X+1 \] is irreducible in $\F_2[X]$.  
+\emph{[Hint: Any factor must have degree at most $4$.]}
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Put $f(X)=X^8+X^4+X^3+X+1 \in \F_2[X]$, and let 
+\[ a=00001100=X^3+X^2 \in F=\F_2[X]/(f). \]  
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Compute $a^5$.  
+\item Find the inverse $b^{-1} \in F$ of $b=X^2=00000100$.
+\item Compute the product $b^{-1}a$ and verify that $b^{-1}a = X+1$ in $F$.
+\end{enumerate}
+\end{problem}
+
+\vfill
+
+\end{document}
+

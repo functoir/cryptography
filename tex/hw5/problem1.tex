@@ -1,0 +1,40 @@
+\begin{problem}
+  Let $k \geq 2$ and $A=(\Z/2\Z)^k$.  Let $\vec{0}, \vec{1} \in A$ be
+  the vectors of all zeros and all ones, respectively.  Define the map
+  $g : A \to A$ by
+\[
+g(y) = 
+\begin{cases}
+\vec{0} & y \neq \vec{0} \\
+\vec{1} & y = \vec{0} \\
+\end{cases}
+\]
+Then define
+\begin{align*} 
+s,G: A \times A &\to A \times A \\
+s(x,y) &= (y,x) \\
+G(x,y) &= (x + g(y),y)
+\end{align*}
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Prove that $s^2$ and $G^2$ are the identity on $A \times A$.
+\emph{[We actually proved this in lecture, so just make sure you
+  understand it here.]}
+
+\begin{Answer}
+
+By definition:
+
+\begin{align*}
+  s(x, y) &= (y, x) \\
+  s^2(x, y) = s(s(x, y)) = s(y, x) &= (x, y) = \id \\
+
+\end{align*}
+
+\end{Answer}
+
+
+\item Prove that $(sG)^4=sgsgsgsg$ moves only $3$ elements of $A \times A$, i.e. 
+\[ \#\{(x,y) \in A \times A:(sG)^4(x,y) \neq (x,y)\}=3. \]
+\item Prove that $(sG)^{12}$ is the identity.
+\end{enumerate}
+\end{problem}

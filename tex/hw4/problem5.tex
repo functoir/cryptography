@@ -1,0 +1,39 @@
+\begin{problem}
+  Decrypt the message
+  \begin{center}
+  \texttt{CLV SSH = MMBVC RDMVE PFZII EAVYS XFTHS FNMOB RRPDH VBSQH}
+  \end{center}
+  with the following Enigma settings: 
+  \begin{Verbatim}
+  Walzenlage (Rotors): I V III
+  Ringstellung (Ring setting): 13 06 24
+  Steckerverbindungen (Plug connections): AU PB EF IQ RH ZL DT MS CG KN
+  Kenngruppen: KIJ TFR BVC ZAE
+  \end{Verbatim}
+  \emph{[Hint: The message is in German!]}
+  \end{problem}
+
+\begin{Answer}
+First, after plugging in the rotor and ring settings,
+I used the first $3$ letters of the key (\verb#CLV#)
+as the rotor starting positions to
+decrypt the second part of the key (\verb#SSH#) to 
+get \verb#PJR#.
+
+\noindent
+Using \verb#PJR# as the new starting position for the rotors, I decrypted the message
+
+\verb#RDMVE PFZII EAVYS XFTHS FNMOB RRPDH VBSQH#
+(skipping the key identification group, \verb#MMBVC#)
+
+to get \verb#wasun snich tumbr ingtm achtu nssta erker#
+
+\noindent
+I plugged this into Google translate and, after a little trial-and-error
+with spacings, got out the message 
+\color{crimson}
+\verb#what doesn't kill us makes us stronger#
+\color{black}
+
+\includegraphics*[width=120mm]{enigma_decrypt.png}
+\end{Answer}

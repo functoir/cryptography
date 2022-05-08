@@ -1,0 +1,61 @@
+\begin{problem}
+Let $n \in \Z_{>0}$.  We consider the row-reduction algorithm over
+$\Z/p\Z$ where $p$ is prime.  Recall that every nonzero element in
+$\Z/p\Z$ has a multiplicative inverse, so that $\F_p=\Z/p\Z$ is a
+\emph{field} and all the methods of linear algebra apply.
+
+Find an explicit polynomial $f(x) \in \Q[x]$ of degree $3$ such that
+no more than $f(n)$ operations in $\F_p$ are required by the
+row-reduction algorithm for computing the determinant of a matrix in
+$M_n(\F_p)$.  How many of these operations are inversions of nonzero scalars?
+\end{problem}
+
+\begin{Answer}
+Suppose we have an $n$ by $n$ matrix $A$ in $M_n(\F_p)$.
+
+\noindent
+We can find the determinant of $A$ by row-reducing $A$ into a triangular matrix 
+then finding the product of the pivot-position elements.
+
+\noindent
+We first remove the lower non-diagonal elements in the first column,
+then the second, and so on up to the $n-1$th column.
+The $n$'th column's diagonal element, being in the last row in the matrix,
+has no rows below it.
+
+\noindent
+This step involves:
+\begin{itemize}
+  \item Finding the inverse of the diagonal element. This is a total of $n-1$ inversions
+    ($1$ per column, over the $n-1$ columns).
+  \item Adding a multiple of the row to \textit{all the rows below the current element
+    that have a non-zero element in the column of interest},
+    such that we cancel out the nonzero value. This involves a multiplication and an addition.
+\end{itemize}
+
+\noindent
+This is a total of $n - 1$ inversions $+ \sum_{i=1}^{n-1} i$ row additions,
+which add up to 
+
+$n - 1 \mathbf{\;inversions}$ 
+$+2 \cdot \frac{n(n-1)}{2} = n(n-1) \mathbf{\;row \;multiplications\; and\; additions}$.
+
+\noindent
+However, each row multiplication or addition requires doing the operation
+on each of the $n$ elements of the row.
+
+\noindent
+Thus, the total comes to $n - 1 +
+n (n-1)\cdot n = \frac{n^3 - n^2}{2} + n - 1$.
+
+\noindent
+Finally, we need to multipy the $n$ diagonal elements to find the determinant,
+making a total of 
+
+\zaff{$n^3 - n^2+ 2n - 1$} integer operations.
+
+\noindent
+Of these operations, \crim{$n - 1$} are inversions of nonzero scalars, 
+and \crim{$n^3 - n^2+ n$} are integer additions and multiplications.
+
+\end{Answer}

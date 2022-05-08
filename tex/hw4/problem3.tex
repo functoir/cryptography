@@ -1,0 +1,33 @@
+\begin{problem}
+The Hill cipher succumbs to a known plaintext attack if sufficiently
+many plaintext-ciphertext pairs are known.
+It is even easier to break the cipher if Eve can trick Alice into 
+encrypting a chosen plaintext,
+a \emph{chosen plaintext attack}.
+Describe such an attack.
+\end{problem}
+
+\begin{Answer}
+
+Although the Hill cipher generates somewhat ``contextualized'' ciphertext by having
+each letter's encryption depend on a number of letters surrounding it,
+the ciphertext it generates, when broken down into appropriate block sizes,
+is always the same linear combination of the corresponding plaintext blocks.
+
+\noindent
+This is the weakness in the system---if enough plaintext and corresponding ciphertext
+is known, then attackers (Eve, in this case) can compute the 
+
+The Hill cipher produces the same linear combinations of the letter vectors it receives.
+While this is helpful in avoiding single-letter encryption and ensuring that a letter's
+encryption is, to an extent, also dependent on its surrounding letters,
+it is also a weakness --- suppose a set of vectors and the corresponding set of ciphertexts
+is known, then Eve can easily solve solve a linear system of equations to find the key.
+
+
+\noindent
+A chosen plaintext attack is a situation where an attacker (Eve, in this case)
+tries to get the encryptor (Alice) to encrypt a specific word or words.
+Using the original and encrypted forms of the words, Eve can generate the systems of equations
+she needs to figure out the encryption matrix, henceforth breaking Alice's encryption.
+\end{Answer}

@@ -1,0 +1,115 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,amsthm,amsmath,amstext}
+\usepackage{mathdots}
+
+\usepackage[left=1.2in,right=1.2in,top=1.5in,bottom=1.5in,nohead,nofoot]{geometry}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\pagestyle{empty}
+
+\newcounter{problem}
+\setcounter{problem}{0}
+
+\newenvironment{problem}[1][]%
+{%
+\stepcounter{problem} \vspace{.2cm} \noindent {\bf \arabic{problem}.} {\it #1}~ %
+}{%
+\vspace{.2cm}%
+} 
+
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\title{} 
+
+%\date{\today}
+
+\noindent\sc
+Dartmouth College Department of Mathematics \\ \bf
+Math 75 Cryptography \\ \rm
+Spring 2022\\[2ex]
+Problem Set \# 4 (upload to Canvas by Friday, April 29, 10:10 am EDT)
+
+\bigskip
+
+\noindent {\bf Problems:}
+
+\begin{problem} 
+Let 
+\[
+A=\begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 10 
+\end{pmatrix}. \]
+For which $n$ is the matrix $A$ invertible over $\Z/n\Z$?  Find its inverse if $n=100$.
+\end{problem}
+
+\begin{problem}
+Alice uses the Hill cipher, encrypting the plaintext
+\begin{center}
+\textsf{Consistency is the last refuge of the unimaginative}
+\end{center}
+to get the ciphertext
+\begin{center}
+\texttt{voqimugocogmttfkxvlvdynhawugtfrsksoizgaanlygk}
+\end{center}
+to send to Bob using blocks of size $m=3$ (and $n=26$).  Playing the
+role of Eve, hack Alice's encryption key $A \in M_3(\Z/26\Z)$.  The
+matrix key spells out a keyword: what is it?
+
+After you find the key,
+notice that Alice has not followed the protocol correctly.  Explain
+why, then find two plaintexts that encrypt to the same ciphertext
+using Alice's key.
+\end{problem}
+
+\begin{problem}
+The Hill cipher succumbs to a known plaintext attack if sufficiently many plaintext-ciphertext pairs are known.
+It is even easier to break the cipher if Eve can trick Alice into encrypting a chosen plaintext,
+a \emph{chosen plaintext attack}.
+Describe such an attack.
+\end{problem}
+
+\begin{problem}
+Let $n \in \Z_{>0}$.  We consider the row-reduction algorithm over
+$\Z/p\Z$ where $p$ is prime.  Recall that every nonzero element in
+$\Z/p\Z$ has a multiplicative inverse, so that $\F_p=\Z/p\Z$ is a
+\emph{field} and all the methods of linear algebra apply.
+
+Find an explicit polynomial $f(x) \in \Q[x]$ of degree $3$ such that
+no more than $f(n)$ operations in $\F_p$ are required by the
+row-reduction algorithm for computing the determinant of a matrix in
+$M_n(\F_p)$.  How many of these operations are inversions of nonzero scalars?
+\end{problem}
+
+\begin{problem}
+Decrypt the message
+\begin{center}
+\texttt{CLV SSH = MMBVC RDMVE PFZII EAVYS XFTHS FNMOB RRPDH VBSQH}
+\end{center}
+with the following Enigma settings: 
+\begin{verbatim}
+Walzenlage (Rotors): I V III
+Ringstellung (Ring setting): 13 06 24
+Steckerverbindungen (Plug connections): AU PB EF IQ RH ZL DT MS CG KN
+Kenngruppen: KIJ TFR BVC ZAE
+\end{verbatim}
+\emph{[Hint: The message is in German!]}
+\end{problem}
+
+\begin{problem}
+Read Section 15.1 (pages 368--376) of \emph{The Pleasures of Counting}
+by Koerner (posted on Canvas) and do Exercises 15.1.1--15.1.3.
+\end{problem}
+
+\vfill
+
+\end{document}
+

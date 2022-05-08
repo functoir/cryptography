@@ -1,0 +1,133 @@
+\begin{problem}
+Alice uses the Hill cipher, encrypting the plaintext
+\begin{center}
+\textsf{Consistency is the last refuge of the unimaginative}
+\end{center}
+to get the ciphertext
+\begin{center}
+\texttt{voqimugocogmttfkxvlvdynhawugtfrsksoizgaanlygk}
+\end{center}
+to send to Bob using blocks of size $m=3$ (and $n=26$).  Playing the
+role of Eve, hack Alice's encryption key $A \in M_3(\Z/26\Z)$.  The
+matrix key spells out a keyword: what is it?
+
+After you find the key,
+notice that Alice has not followed the protocol correctly.  Explain
+why, then find two plaintexts that encrypt to the same ciphertext
+using Alice's key.
+\end{problem}
+
+\begin{Answer}
+
+Since we know the plaintext that was encrypted, we can use it (and the corresponding ciphertext)
+to pull out equations from the encryption and find the key.
+
+\noindent
+Let $A = \big(\begin{smallmatrix}
+  a_1 & a_2 & a_3 \\
+  a_4 & a_5 & a_6 \\
+  a_7 & a_8 & a_9
+\end{smallmatrix}\big)$ be the encryption matrix.
+
+\noindent
+Then, we know that:
+
+\begin{align*}
+  \begin{bmatrix}
+    a_1 & a_2 & a_3 \\
+    a_4 & a_5 & a_6 \\
+    a_7 & a_8 & a_9
+  \end{bmatrix} \begin{bmatrix}
+      c & t & a\\
+      o & e & t\\
+      n & n & i
+    \end{bmatrix} &\equiv \begin{bmatrix}
+      v & g & a\\
+      o & o & n\\
+      c & c & l
+    \end{bmatrix} \pmod{26}\\
+  \end{align*}
+  \noindent
+  We can now focus on the equations.
+  \begin{align*}
+    \begin{bmatrix}
+      a_1 & a_2 & a_3 \\
+      a_4 & a_5 & a_6 \\
+      a_7 & a_8 & a_9
+    \end{bmatrix} \begin{bmatrix}
+        c & t & a\\
+        o & e & t\\
+        n & n & i
+      \end{bmatrix} &\equiv \begin{bmatrix}
+        v & g & a\\
+        o & o & n\\
+        c & c & l
+    \end{bmatrix} \pmod{26}\\
+    \begin{bmatrix}
+      a_1 & a_2 & a_3 \\
+      a_4 & a_5 & a_6 \\
+      a_7 & a_8 & a_9
+    \end{bmatrix} \begin{bmatrix}
+         2 & 19 &  0\\
+        14 &  4 & 19\\
+        13 & 13 &  8
+      \end{bmatrix}  &\equiv \begin{bmatrix}
+      21 &  6 &  0\\
+      14 & 14 & 13\\
+      16 &  2 & 11 
+    \end{bmatrix} \pmod{26}\\
+    \begin{bmatrix}
+      a_1 & a_2 & a_3 \\
+      a_4 & a_5 & a_6 \\
+      a_7 & a_8 & a_9
+    \end{bmatrix} &\equiv \begin{bmatrix}
+      21 &  6 &  0\\
+      14 & 14 & 13\\
+      16 &  2 & 11 
+    \end{bmatrix} \begin{bmatrix}
+       2 & 19 &  0\\
+      14 &  4 & 19\\
+      13 & 13 &  8
+   \end{bmatrix}^{-1} \pmod{26}\\
+   \begin{bmatrix}
+    a_1 & a_2 & a_3 \\
+    a_4 & a_5 & a_6 \\
+    a_7 & a_8 & a_9
+  \end{bmatrix} &\equiv \begin{bmatrix}
+    21 &  6 &  0\\
+    14 & 14 & 13\\
+    16 &  2 & 11 
+  \end{bmatrix} \begin{bmatrix}
+   15 & 10 & 25\\
+   19 & 14 & 22\\
+    0 & 13 & 18
+ \end{bmatrix} \pmod{26}\\
+ \begin{bmatrix}
+  a_1 & a_2 & a_3 \\
+  a_4 & a_5 & a_6 \\
+  a_7 & a_8 & a_9
+\end{bmatrix} &\equiv \begin{bmatrix}
+  13 &  8 &  7\\
+   8 & 11 &  8\\
+  18 & 19 & 18 
+\end{bmatrix}\\
+\begin{bmatrix}
+  a_1 & a_2 & a_3 \\
+  a_4 & a_5 & a_6 \\
+  a_7 & a_8 & a_9
+\end{bmatrix} &\equiv \begin{bmatrix}
+   N & I & H\\
+   I & L & I\\
+   S & T & S 
+\end{bmatrix}
+\end{align*}
+The matrix key spells out the word \verb#NIHILISTS#.
+\newline
+
+\noindent
+Alice's encryption matrix is faulty because its determinant, $16$, is not coprime with $26$.
+This means the matrix is not invertible since it is not injective---for
+example, it maps both ``'' and ``'' to ``''. Bob needs to be able to
+find the inverse in order to decrypt the message.
+
+\end{Answer}

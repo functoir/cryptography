@@ -82,9 +82,9 @@
 % Special math symbols
 \newcommand{\eps}{\varepsilon}
 \newcommand{\ceq}{\subseteq}
-\newcommand{\ang}[1]{\langle #1 \rangle}
-\newcommand{\ceil}[1]{\lceil #1 \rceil}
-\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ang}[1]{\langle{} #1 \rangle}
+\newcommand{\ceil}[1]{\lceil{} #1 \rceil}
+\newcommand{\floor}[1]{\lfloor{} #1 \rfloor}
 
 % Problem names and other small-caps constants
 \newcommand{\inv}{\textsc{inv}\xspace}
@@ -101,13 +101,14 @@
 \usepackage{enumerate}  % for enumerating lists
 % \usepackage{enumitem}
 \usepackage{tcolorbox}
-\newtcolorbox{codebox}[1]{
-  box align=top,
-  colback=white!5!white,
-  colframe=white!75!black,
-  title=#1
-}
+% \newtcolorbox{codebox}[1]{
+%   box align=top,
+%   colback=white!5!white,
+%   colframe=white!75!black,
+%   title=#1
+% }
 \usepackage{multicol}
+% \usepackage{accode}
 
 % My Problem set macros
 
@@ -188,3 +189,13 @@
 \newcommand{\black}{\textcolor{black}}
 \newcommand{\green}{\textcolor{green}}
 
+% matrices -- vertical separators
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols{ c}]{%
+  \hskip -\arraycolsep{}
+  \let\@ifnextchar\new@ifnextchar{}
+  \array{#1}}
+\makeatother
+
+% \usepackage{accode}
+\usepackage{tikz}
