@@ -2,8 +2,142 @@
 Put $f(X)=X^8+X^4+X^3+X+1 \in \F_2[X]$, and let 
 \[ a=00001100=X^3+X^2 \in F=\F_2[X]/(f). \]  
 \begin{enumerate}\renewcommand{\itemsep}{3mm}
-\item Compute $a^5$.  
+\item Compute $a^5$.
+
+\begin{Answer}
+  
+% \center{}
+\begin{multicols}{2}
+
+\crim{Let's begin by computing $a^2$:}
+\newline
+\color{zaffre}
+\opmul[displayshiftintermediary=all]{1 1 0 0}{1 1 0 0}
+$\equiv 1010000$
+\color{black}
+
+\noindent
+\crim{We can then compute $a^4 = {(a^2)}^2$:}
+\newline
+\color{zaffre}
+\opmul[displayshiftintermediary=all]{1 0 1 0 0 0 0}{1 0 1 0 0 0 0}
+$\equiv 1 0 0 0 1 0 0 0 0 0 0 0 0$
+\color{black}
+
+\noindent
+\crim{And, finally, $a^5 = a \cdot a^4$}
+\newline
+\color{zaffre}
+\opmul[displayshiftintermediary=all]{1 0 0 0 1 0 0 0 0 0 0 0 0}{1 1 0 0}
+\color{black}
+\end{multicols}
+
+\noindent
+We then need to find the equivalent of $1 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0$ in the Rijndael field $F$
+by finding its modulus with $X^8+X^4+X^3+X+1$.
+
+\bigskip
+\noindent
+\crim{Division by $x^8+x^4+x^3+x+1 \equiv 100011011$}.
+
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,} | c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1     & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+\hline{}
+    &   & 1 & 0 & 0 & 0 & 0 & 0 & 0     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.  &.  &.  &.  &.  &.  &.\\
+    &   &   &   &   &   &   &   &       &   & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 &.  &.  &.  &.  &.  &.\\
+    &   &   & 1 & 0 & 0 & 0 & 0 & 0     &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.  &.  &.  &.  &.  &.\\
+    &   &   &   &   &   &   &   &       &   &   &   &   &   & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 &.  &.\\
+    &   &   &   &   &   & 1 & 0 & 0     &   &   &   &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.  &.\\
+    &   &   &   &   &   &   &   &       &   &   &   &   &   &   & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 &.\\
+    &   &   &   &   &   &   & 1 & 0     &   &   &   &   &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.\\
+    &   &   &   &   &   &   &   &       &   &   &   &   &   &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 &0\\
+    &   &   &   &   &   &   &   & 1     &   &   &   &   &   &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 &1\\
+\hline{}
+    &   & 1 & 1 & 0 & 0 & 1 & 1 & 1     &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &1\\
+\\
+\\
+\end{tabular}
+\color{black}
+
+\noindent
+Thus, $a^5 \equiv 1 \in F$.
+\end{Answer}
+
+\newpage
 \item Find the inverse $b^{-1} \in F$ of $b=X^2=00000100$.
+
+\begin{Answer}
+
+For simplicity, I converted the binary-equivalent numbers to base 10 and
+calculated the inverse using the extended euclidean algorithm.
+
+\noindent
+$b=X^2=00000100 \equiv 4$
+
+\noindent
+$f(X)=X^8+X^4+X^3+X+1 = 100011011 \equiv 283$
+
+\begin{align*}
+283 &\equiv 4 \cdot 70 + 3\\
+70 &\equiv 3 \cdot 23 + 1\\
+\\
+1 &\equiv 70 - 3 \cdot 23\\
+1 &\equiv 70 - 23 (283 - 4 \cdot 70)\\
+1 &\equiv 70 - 283 \cdot 23 + 4 \cdot 23 \cdot 70\\
+1 &\equiv -283 \cdot 23 + (4 \cdot 23 + 1) \cdot 70\\
+1 &\equiv 93 \cdot 70 - 283 \cdot 23\\
+1 &\equiv -213 \cdot 23
+\end{align*}
+
+We know, by definition:
+
+\noindent
+$b \cdot b^{-1} \equiv 1$
+
+\noindent
+$b^{-1} \equiv \frac{1}{b}$
+
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,} | c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  0 & 0 & 0 & 0 & 0 & 1 & 0 & 0     & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+\hline{}
+    &   &   &   &   &   &   & 1     &   &   &   &   &   & 1 & 0 & 0\\
+\hline{}
+    &   &   &   &   &   &   & 1     &   &   &   &   &   & 1 & 0 & 1\\
+\\
+\\
+\end{tabular}
+\color{black}
+
+
+  
+\end{Answer}
+
 \item Compute the product $b^{-1}a$ and verify that $b^{-1}a = X+1$ in $F$.
+\begin{Answer}
+
+\color{zaffre}
+\opmul[displayshiftintermediary=all]{1 0 0 0 1 1 1}{1 1 0 0}
+$\equiv 1100100100$
+
+
+\bigskip
+
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,} | c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1     & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0\\
+\hline{}
+    &   &   &   &   &   &   & 1 & 0     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &. \\
+    &   &   &   &   &   &   &   &       &   & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0\\
+    &   &   &   &   &   &   &   & 1     &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+\hline{}
+    &   &   &   &   &   &   &   &       &   &   &   &   &   &   & 1 & 1 & 0 & 1\\
+\\
+\\
+\end{tabular}
+\color{black}
+\end{Answer}
 \end{enumerate}
 \end{problem}
+

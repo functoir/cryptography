@@ -26,15 +26,54 @@ By definition:
 
 \begin{align*}
   s(x, y) &= (y, x) \\
-  s^2(x, y) = s(s(x, y)) = s(y, x) &= (x, y) = \id \\
-
+  s^2(x, y) = s(s(x, y)) &= s(y, x)\\
+                         &= (x, y)
 \end{align*}
 
+\noindent
+Likewise:
+
+\begin{align*}
+  G(x,y) &= (x+g(y), y)\\
+  G^2(x,y) = G(x+g(y), y) &= (x+2g(y), y)\\
+                          &\equiv (x+0, y) \pmod 2\\
+                          &\equiv (x, y)
+\end{align*}
+\end{Answer}
+\newpage
+\item Prove that ${(sG)}^4=sgsgsgsg$ moves only $3$ elements of $A \times A$, i.e. 
+\[ \#\{(x,y) \in A \times A:{(sG)}^4(x,y) \neq (x,y)\}=3. \]
+\item Prove that ${(sG)}^{12}$ is the identity.
+\end{enumerate}
+
+\begin{Answer}
+We know that:
+\begin{align*}
+  G(x,y) &= (x + g(y), y)\\
+  s(x,y) &= (y,x)\\
+  \therefore sG(x,y) &= (y, x+g(y)) 
+\end{align*}
+
+\noindent
+Let's define $\hat{x}, \hat{y} \in A \backepsilon \hat{x} \neq \vec{0} \And \hat{x} \neq \vec{1} \And \hat{y} \neq \vec{0} \And \hat{y} \neq \vec{1}$
+to represent the general cases where $\vec{x}, \vec{y} \notin{\{0, 1\}}$.
+
+\centering
+\begin{tabular}{||c | c | c | c | c | c | c||} 
+\hline
+  $\id{}$ & $sG$ & ${(sG)}^{2}$ & ${(sG)}^{3}$ &  ${(sG)}^{4}$ & ${(sG)}^{8}$ & ${(sG)}^{12}$\\ [0.5ex] 
+\hline\hline
+  (0,0) & (0,1)     & (1,0)     & (0,0)     & \crim{(0,1)} & (1,0) & (0,0)\\ 
+  (0,y) & (y,0)     & (0,\^{y}) & (\^{y},0) & (0,y)        & (0,y) & (0,y)\\
+  (0,1) & (1,0)     & (0,0)     & (0,1)     & \crim{(1,0)} & (0,0) & (0,1)\\
+  (x,0) & (0,\^{x}) & (\^{x},0) & (0,x)     & (x,0)        & (x,0) & (x,0)\\ 
+  (x,y) & (y,x)     & (x,y)     & (y,x)     & (x,y)        & (x,y) & (x,y)\\
+  (x,1) & (1,x)     & (x,1)     & (1,x)     & (x,1)        & (x,1) & (x,1)\\
+  (1,0) & (0,0)     & (0,1)     & (1,0)     & \crim{(0,0)} & (0,1) & (1,0)\\ 
+  (1,y) & (y,1)     & (1,y)     & (y,1)     & (1,y)        & (1,y) & (1,y)\\
+  (1,1) & (1,1)     & (1,1)     & (1,1)     & (1,1)        & (1,1) & (1,1)\\[1ex]
+\hline
+\end{tabular}
 \end{Answer}
 
-
-\item Prove that $(sG)^4=sgsgsgsg$ moves only $3$ elements of $A \times A$, i.e. 
-\[ \#\{(x,y) \in A \times A:(sG)^4(x,y) \neq (x,y)\}=3. \]
-\item Prove that $(sG)^{12}$ is the identity.
-\end{enumerate}
 \end{problem}

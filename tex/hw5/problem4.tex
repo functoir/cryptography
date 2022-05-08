@@ -2,8 +2,182 @@
 Here you will prove something that was claimed in lecture!
 \begin{enumerate}\renewcommand{\itemsep}{3mm}
 \item Find all monic irreducible polynomials of degree $\leq 4$ in $\F_2[X]$.
+
+\noindent
+\begin{Answer}
+There are $2^5$ possible polynomials of degree $\leq 4$ in $\F$.
+
+\noindent
+We can eliminate half of these polynomials without a
+constant factor, since they will have $0$ as a root.
+
+\centering
+\begin{tabular}{||c | c | c ||} 
+\hline
+  $f$                   & $f(0)$  & $f(1)$\\
+\hline
+  $1$                   & 1       & 1\\
+  $x+1$                 & 1       & 0\\
+  $x^2+1$               & 1       & 0\\
+  $x^2+x+1$             & 1       & 1\\ 
+  $x^3+1$               & 1       & 0\\ 
+  $x^3+x+1$             & 1       & 1\\ 
+  $x^3+x^2+1$           & 1       & 0\\ 
+  $x^3+x^2+x+1$         & 1       & 0\\ 
+  $x^4+1$               & 1       & 0\\ 
+  $x^4+x+1$             & 1       & 1\\ 
+  $x^4+x^2+1$           & 1       & 1\\ 
+  $x^4+x^2+x+1$         & 1       & 0\\ 
+  $x^4+x^3+1$           & 1       & 1\\ 
+  $x^4+x^3+x+1$         & 1       & 0\\ 
+  $x^4+x^3+x^2+1$       & 1       & 0\\ 
+  $x^4+x^3+x^2+x+1$     & 1       & 1\\[1ex]
+\hline
+\end{tabular}
+
+\flushleft{}
+\noindent
+We also need to remove sieve out polynomials that have quadratic factors.
+Since any factor of a polynomial of degree $n$ must have a degree of \textit{at most} $\frac{n}{2}$,
+any polynomials with a quadratic factor must have a degree of at least $4$.
+
+We also know that both factors must have a degree of $2$ The only such irreducible
+polynomial is $x^2 + x + 1$.
+
+We have only identified $4$ such polynomials that don't have factors. Of the four:
+
+\begin*{}
+  \item $x^4+x+1$         -- not divisible by $x^2 + x + 1$
+  \item $x^4+x^2+1$       -- = ${(x^2 + x + 1)}^2 \pmod 2$
+  \item $x^4+x^3+1$       -- not divisible by $x^2 + x + 1$
+  \item $x^4+x^3+x^2+x+1$ -- not divisible by $x^2 + x + 1$
+\end*{}
+
+\bigskip
+\noindent
+Since $1$ is the identity, the monic irreducible polynomials are
+$\left\{ x^2+x+1, x^3+x+1, x^4+x+1, x^4+x^3+1, x^4+x^3+x^2+x+1\right\}$
+
+\end{Answer}
+
+\newpage
 \item Verify that the Rijndael polynomial 
 \[ f(X)=X^8+X^4+X^3+X+1 \] is irreducible in $\F_2[X]$.  
 \emph{[Hint: Any factor must have degree at most $4$.]}
+
+\begin{Answer}
+Any factor must be a monic polynomial in $\F_{2}[X]$
+
+\noindent
+Therefore, we can compute the remainders when $f(X)=X^8+X^4+X^3+X+1$ is divided by
+the monic polynomials. If any remainder is nonzero, then $f(X)$ is reducible.
+
+\begin{multicols}{3}
+\noindent
+\crim{Division by $x^4+x^3+x^2+x+1$}.
+\newline
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}|c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  1 & 1 & 1 & 1 & 1     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+\hline{}
+  1 & 0 & 0 & 0 & 0     & 1 & 1 & 1 & 1 & 1 &.  &.  &.  &. \\
+    &   &   &   &       &   & 1 & 1 & 1 & 0 & 1 &.  &.  &. \\
+    & 1 & 0 & 0 & 0     &   & 1 & 1 & 1 & 1 & 1 &.  &.  &. \\
+    &   &   &   &       &   &   &   &   & 1 & 0 & 0 & 0 & 1\\
+\hline{}
+  1 & 1 & 0 & 0 & 0     &   &   &   &   & 1 & 0 & 0 & 0 & 1\\
+\\
+\\
+\end{tabular}
+\color{black}
+
+\noindent
+\crim{Division by $x^4+x^3+1$}.
+\newline
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}|c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  1 & 1 & 0 & 0 & 1     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+\hline{}
+  1 & 0 & 0 & 0 & 0     & 1 & 1 & 0 & 0 & 1 &.  &.  &.  &. \\
+    &   &   &   &       &   & 1 & 0 & 0 & 0 & 1 &.  &.  &. \\
+    & 1 & 0 & 0 & 0     &   & 1 & 1 & 0 & 0 & 1 &.  &.  &. \\
+    &   &   &   &       &   &   & 1 & 0 & 0 & 0 & 0 &.  &. \\
+    &   & 1 & 0 & 0     &   &   & 1 & 1 & 0 & 0 & 1 &.  &. \\
+    &   &   &   &       &   &   &   & 1 & 0 & 0 & 1 & 1 &. \\
+    &   &   & 1 & 0     &   &   &   & 1 & 1 & 0 & 0 & 1 &. \\
+    &   &   &   &       &   &   &   &   & 1 & 0 & 1 & 0 & 1\\
+    &   &   &   & 1     &   &   &   &   & 1 & 1 & 0 & 0 & 1\\
+\hline{}
+  1 & 1 & 1 & 1 & 1     &   &   &   &   &   & 1 & 1 & 0 & 0\\
+\\
+\\
+\end{tabular}
+\color{black}
+
+
+\noindent
+\crim{Division by $x^4+x+1$}.
+\newline
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}|c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  1 & 0 & 0 & 1 & 1     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+\hline{}
+  1 & 0 & 0 & 0 & 0     & 1 & 0 & 0 & 1 & 1 &.  &.  &.  &. \\
+    &   &   &   &       &   &   &   & 1 & 0 & 1 & 0 & 1 &. \\
+    &   &   & 1 & 0     &   &   &   & 1 & 0 & 0 & 1 & 1 &. \\
+    &   &   &   &       &   &   &   &   &   & 1 & 1 & 0 & 1\\
+\hline{}
+  1 & 0 & 0 & 1 & 0     &   &   &   &   &   & 1 & 1 & 0 & 1\\
+\\
+\\
+\end{tabular}
+\color{black}
+
+\noindent
+\crim{Division by $x^3+x+1$}.
+\newline
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}|c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  &   & 1 & 0 & 1 & 1     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+\hline{}
+1 & 0 & 0 & 0 & 0 & 0     & 1 & 0 & 1 & 1 &.  &.  &.  &.  &. \\
+  &   &   &   &   &       &   &   & 1 & 1 & 1 & 1 &.  &.  &. \\
+  &   & 1 & 0 & 0 & 0     &   &   & 1 & 0 & 1 & 1 &.  &.  &. \\
+  &   &   &   &   &       &   &   &   & 1 & 0 & 0 & 0 &.  &. \\
+  &   &   & 1 & 0 & 0     &   &   &   & 1 & 0 & 1 & 1 &.  &. \\
+  &   &   &   &   &       &   &   &   &   &   & 1 & 1 & 1 & 1\\
+  &   &   &   &   & 1     &   &   &   &   &   & 1 & 0 & 1 & 1\\
+  \hline{}
+  1 & 0 & 1 & 1 & 0 & 1     &   &   &   &   &   &   & 1 & 0 & 0\\
+\\
+\\
+\end{tabular}
+\color{black}
+
+\noindent
+\crim{Division by $x^2+x+1$}.
+\newline
+\color{zaffre}
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}|c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  &   &   &   & 1 & 1 & 1     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+\hline{}
+1 & 0 & 0 & 0 & 0 & 0 & 0     & 1 & 1 & 1 &.  &.  &.  &.  &.  &. \\
+  &   &   &   &   &   &       &   & 1 & 1 & 0 &.  &.  &.  &.  &. \\
+  & 1 & 0 & 0 & 0 & 0 & 0     &   & 1 & 1 & 1 &.  &.  &.  &.  &. \\
+  &   &   &   &   &   &       &   &   &   & 1 & 1 & 1 &.  &.  &. \\
+  &   &   & 1 & 0 & 0 & 0     &   &   &   & 1 & 1 & 1 &.  &.  &. \\
+  \hline{}
+1 & 1 & 0 & 1 & 0 & 0 & 0     &   &   &   &   &   &   & 0 & 1 & 1\\
+\end{tabular}
+\color{black}
+
+\end{multicols}
+
+\noindent
+Since all the remainders are non-zero,
+none of the irreducible monic polynomials of degree $\leq 4$ divide
+$f(X)$. It therefore must be irreducible in $\F_2[X]$.
+\end{Answer}
+
 \end{enumerate}
 \end{problem}
