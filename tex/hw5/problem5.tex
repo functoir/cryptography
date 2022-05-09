@@ -69,74 +69,91 @@ Thus, $a^5 \equiv 1 \in F$.
 
 \begin{Answer}
 
-For simplicity, I converted the binary-equivalent numbers to base 10 and
-calculated the inverse using the extended euclidean algorithm.
+\noindent
+Using the extended Euclidean Algorithm:
 
 \noindent
-$b=X^2=00000100 \equiv 4$
-
-\noindent
-$f(X)=X^8+X^4+X^3+X+1 = 100011011 \equiv 283$
+$f(X)=X^8+X^4+X^3+X+1 = 100011011$
 
 \begin{align*}
-283 &\equiv 4 \cdot 70 + 3\\
-70 &\equiv 3 \cdot 23 + 1\\
-\\
-1 &\equiv 70 - 3 \cdot 23\\
-1 &\equiv 70 - 23 (283 - 4 \cdot 70)\\
-1 &\equiv 70 - 283 \cdot 23 + 4 \cdot 23 \cdot 70\\
-1 &\equiv -283 \cdot 23 + (4 \cdot 23 + 1) \cdot 70\\
-1 &\equiv 93 \cdot 70 - 283 \cdot 23\\
-1 &\equiv -213 \cdot 23
+100011011  &\equiv 100 \cdot 1000110 + 11\\
+100 &\equiv 11 \cdot 11 + 1\\
+\bigskip\\
+1 &\equiv 100 - 11 \cdot 11\\
+1 &\equiv 100 - 11 \cdot (100011011-1000110 \cdot 100)\\
+1 &\equiv 100 - 11(\crim{100011011}) + 11 \cdot 1000110 \cdot 100\\
+1 &\equiv 100 + 11 \cdot 1000110 \cdot 100\\
+1 &\equiv 100 + (100011011-1000110 \cdot 100) \cdot 1000110 \cdot 100\\
+1 &\equiv 100 + \crim{100011011} \cdot 1000110 \cdot 100 - {(1000110 \cdot 100)}^{2}\\
+1 &\equiv 100 - {(1000110 \cdot 100)}^{2}\\
+1 &\equiv 100 - 1000110 \cdot 100 \cdot 1000110 \cdot 100\\
+1 &\equiv 100 \cdot (1 - 100000001010000)\\
+1 &\equiv 100 \cdot 100000001010001\\
+1 &\equiv 100 \cdot 11001011 \text{ (see below for reduction)}\\
+\therefore b^{-1} &\equiv 11001011\\
+\
 \end{align*}
 
-We know, by definition:
-
+\bigskip
 \noindent
-$b \cdot b^{-1} \equiv 1$
+\crim{Division by $x^8+x^4+x^3+x+1 \equiv 100011011$}.
 
-\noindent
-$b^{-1} \equiv \frac{1}{b}$
-
+\bigskip
 \color{zaffre}
-\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,} | c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
-  0 & 0 & 0 & 0 & 0 & 1 & 0 & 0     & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+\begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,} | c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
+  1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1     & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 &1\\
 \hline{}
-    &   &   &   &   &   &   & 1     &   &   &   &   &   & 1 & 0 & 0\\
+    &   & 1 & 0 & 0 & 0 & 0 & 0 & 0     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.  &.  &.  &.  &.  &.\\
+    &   &   &   &   &   &   &   &       &   &   &   &   & 1 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 &.  &.\\
+    &   &   &   &   &   & 1 & 0 & 0     &   &   &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.  &.\\
+    &   &   &   &   &   &   &   &       &   &   &   &   &   & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 &.\\
+    &   &   &   &   &   &   & 1 & 0     &   &   &   &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.\\
 \hline{}
-    &   &   &   &   &   &   & 1     &   &   &   &   &   & 1 & 0 & 1\\
+    &   & 1 & 0 & 0 & 0 & 1 & 1 & 0     &   &   &   &   &   &   &   & 1 & 1 & 0 & 0 & 1 & 0 & 1 &1\\
 \\
 \\
 \end{tabular}
 \color{black}
 
-
-  
 \end{Answer}
-
+\newpage
 \item Compute the product $b^{-1}a$ and verify that $b^{-1}a = X+1$ in $F$.
 \begin{Answer}
 
-\color{zaffre}
-\opmul[displayshiftintermediary=all]{1 0 0 0 1 1 1}{1 1 0 0}
-$\equiv 1100100100$
+\noindent
+First, we need to find the product $b^{-1}a$:
 
+\bigskip
+\color{zaffre}
+\opmul[displayshiftintermediary=all]{1 1 0 0 1 0 1 1}{1 1 0 0}
+$\equiv 10101110100$
+\color{black}
 
 \bigskip
 
+\noindent
+We then find the equivalent of this product in $F$ by finding its modulus with
+
+\noindent
+$f(X)=X^8+X^4+X^3+X+1$
+
+\bigskip
 \color{zaffre}
 \begin{tabular}{c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,} | c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}}
-  1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1     & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0\\
+  1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1     & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 0\\
 \hline{}
-    &   &   &   &   &   &   & 1 & 0     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &. \\
-    &   &   &   &   &   &   &   &       &   & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0\\
-    &   &   &   &   &   &   &   & 1     &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\\
+    &   &   &   &   &   & 1 & 0 & 0     & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 &.  &.\\
+    &   &   &   &   &   &   &   &       &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 &0\\
+    &   &   &   &   &   &   & 1 & 0     &   &   & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 &1\\
 \hline{}
-    &   &   &   &   &   &   &   &       &   &   &   &   &   &   & 1 & 1 & 0 & 1\\
+    &   &   &   &   &   & 1 & 1 & 0     &   &   &   &   &   &   &   &   &   & 1 &1\\
 \\
 \\
 \end{tabular}
 \color{black}
+
+\noindent
+The modulus is $11$, equivalent to $X+1$.
 \end{Answer}
 \end{enumerate}
 \end{problem}

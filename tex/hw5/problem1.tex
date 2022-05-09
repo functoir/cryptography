@@ -55,8 +55,14 @@ We know that:
 \end{align*}
 
 \noindent
-Let's define $\hat{x}, \hat{y} \in A \backepsilon \hat{x} \neq \vec{0} \And \hat{x} \neq \vec{1} \And \hat{y} \neq \vec{0} \And \hat{y} \neq \vec{1}$
-to represent the general cases where $\vec{x}, \vec{y} \notin{\{0, 1\}}$.
+For the case of simplicity,
+let's substitute $0$ and $1$ for $x, y$ where necessary
+and retain $x$, $y$ where the values of $x$ and $y$ are not $\vec{0}$ or $\vec{1}$.
+
+\noindent
+Then, each vriable can assume any of three general values:
+$\vec{0}$, $\vec{1}$, or an intermediate value (such as the vector $\left<1, 0, 0, 1\right>$),
+which will be represented as just $x$ or $y$.
 
 \centering
 \begin{tabular}{||c | c | c | c | c | c | c||} 
@@ -74,6 +80,32 @@ to represent the general cases where $\vec{x}, \vec{y} \notin{\{0, 1\}}$.
   (1,1) & (1,1)     & (1,1)     & (1,1)     & (1,1)        & (1,1) & (1,1)\\[1ex]
 \hline
 \end{tabular}
+
+\flushleft{}
+\bigskip
+From the table, we can infer that:
+
+\begin{enumerate}
+  \item $sG(x)$ is the identity for $x \in \left\{ (1,1) \right\}$.
+  \item $sG(x)$ repeats values with a period of $2$ for $x \in \left\{ (x,1), (1,y), (x,y)\right\}$.
+  \item $sG(x)$ repeats values with a period of $3$ for $x \in \left\{ (0,0), (0,1) (1,0) \right\}$.
+  \item $sG(x)$ repeats values with a period of $4$ for $x \in \left\{ (x,0), (0,y) \right\}$.
+\end{enumerate}
+
+\bigskip
+\color{zaffre}
+\noindent
+Thus, $sG^{4}$ will be the identity for all values where
+  the sequence has a period that is a divisor of $4$.
+  These are all values \textbf{except} $\left\{ (0,0), (0,1), (1,0) \right\}$,
+  which have a period of $3$ and $3 \nmid 4$.
+  Indeed, as we can see from the table, ${(sG)}^{4}$ is fixed for all except these.
+
+\bigskip
+On the other hand, $(1 \mid 12) \wedge (2 \mid 12) \wedge (3 \mid 12) \wedge (4 \mid 12)$.
+  Therefore, ${(sG)}^{12}(x,y)$ will be the identity for all $(x,y)$. 
+
+\color{black}
 \end{Answer}
 
 \end{problem}
