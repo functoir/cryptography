@@ -1,0 +1,130 @@
+
+\begin{problem}
+Pollard's $p-1$ factorizing algorithm uses the following idea.  Let
+$p$ be a prime divisor of an integer $n$ and let $d$ be a divisor of
+$p-1$.  Suppose that an integer $a$ has multiplicative order $d$ in
+$\Z/p\Z$, i.e., that $a^d \equiv 1 \bmod p$.  If
+$a^d \not\equiv 1 \bmod n$ then $\gcd(a^d-1,n)$ is a proper divisor of
+$n$.  This can be turned into an algorithm: choose a random $1 < a
+< n$ and inductively set $a_1=a$ and $a_i \equiv a_{i-1}^i \bmod n$ for
+$i > 1$, and check whether $\gcd(a_i-1,n) \neq 1,n$.  If you ever
+get $\gcd(a_i-1,n)=n$, then halt, choose a different $a$, and start over.
+\begin{enumerate} \renewcommand{\itemsep}{3mm}
+\item Find a nontrivial factor of $n=47371$ using this algorithm,
+starting with $a=2$.  Show what happens at each step.
+\end{enumerate}
+
+\begin{Answer}
+  I wrote a simple implementation of this algorithm.
+  \color{zaffre}
+  \begin{Verbatim}[commandchars=\\\{\}]
+pollard' :: Integer -> IO (Integer, Integer)
+pollard' n = iter n 2 1
+  where
+    iter n a i = do
+      let g = gcd (a - 1) n
+      printf "n = %5d   a_%d = %5d   gcd = %5d" n i a g
+
+      \crim{if g /= 1 && g /= n then}
+      \crim{  return (g, n div g)}
+      \crim{else if g == n then}
+      \crim{  iter n (randomInt 2 n) 1}
+      \crim{else}
+      \crim{  iter n ((a ^ i) mod n) (i + 1)}
+      \color{black}
+  \end{Verbatim}
+  \color{black}
+
+  \noindent
+  Results:
+
+  \begin{Verbatim}
+    ghci> pollard' 47371
+    n = 47371       a_1 =     2     gcd =     1
+    n = 47371       a_2 =     4     gcd =     1
+    n = 47371       a_3 =    64     gcd =     1
+    n = 47371       a_4 =  7882     gcd =     1
+    n = 47371       a_5 = 34800     gcd =     1
+    n = 47371       a_6 = 31941     gcd =     1
+    n = 47371       a_7 = 15368     gcd =   127
+    (127,373)
+  \end{Verbatim}
+
+  Thus, we can see that $127$ and $373$ are non-trivial factors of $47371$.
+
+
+\end{Answer}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item Show that $a_i \equiv a^{i!} \bmod n$ for all $i \geq 1$.
+
+\begin{Answer}
+  We can prove this by induction on $i$:
+
+  \noindent
+  For the base case, we have the definition of $a_1$:
+    \[a_{1} \equiv a \equiv a^{1!} \bmod n\]
+
+  \noindent
+  In the inductive step, we have the definition that, for all $1 < i < n$,
+  $a_i \equiv a_{i-1}^i \bmod n$.
+
+  \noindent
+  Thus, we have the base-case that $a_{1} = a^{1!} \pmod n$,
+  and, for every next $i$,
+  
+  \noindent
+  $a_i \equiv a_{i-1}^{i} \pmod n = a^{{i \cdot (i-1)}!} \equiv a^{i!} \pmod n$.
+
+\end{Answer}
+
+\newpage
+\item If $p-1 | N$ for some integer $N$, show that $p | a^N-1$ for any
+integer $a$ relatively prime to $n$.
+
+\begin{Answer}
+    \begin{align*}
+      p - 1 | N &\Rightarrow \exists k \in Z_{+} \backepsilon N = k \cdot (p -1) \\
+      a^N = a^{k \cdot (p -1)} &\equiv {(a^{p-1})}^{k} \pmod p \\
+      \However a ^N = a^{p-1} &\equiv 1 \pmod p \text{ per Fermat's Little Theorem} \\
+      \Therefore a^N = {(a^{p-1})}^{k} &\equiv 1^k \equiv 1 \pmod p \\
+      \Therefore a^N - 1 &\equiv 0 \pmod p \\
+      \Therefore p &\;|\; (a^N - 1)
+    \end{align*}
+\end{Answer}
+
+\item Explain why this algorithm runs quickly if there is a reasonably
+small $i \geq 1$ such that $(p-1) | {i!}$, and  deduce that in this case,
+$p-1$ must be quite smooth. 
+
+\begin{Answer}
+  The algorithm works because of Fermat's Little Theorem and the property
+  it induces---that if $(p-1) | {i!}$ then $p | (a^{i!} - 1)$ for any $a$.
+
+\end{Answer}
+
+\item A prime number $p$ is called a \textbf{safe prime} if $p-1 =
+2p'$ for a prime number $p'$.  Explain why the existence of Pollard's
+$p-1$ algorithm implies that for the modulus $n=pq$ in RSA, both $p$
+and $q$ should be chosen to be safe primes.
+\end{enumerate}
+
+\medskip
+
+A prime number $p'$ such that $2p'+1$ is also prime is called a
+\textbf{Sophie Germain prime}.  So $p$ is safe if and only if
+$(p-1)/2$ is a Sophie Germain prime.  Sophie Germain was a late
+18th/early 19th century French mathematician who, due to prejudices of
+the time, was not allowed to attend lectures at the \'Ecole
+Polytechnique in Paris.  So she obtained the lecture notes and started
+corresponding with famous mathematicians Lagrance and Gauss about her
+ideas under a male pseudonym.  She did fantastic research work in
+number theory, most famously, she presented a strategy to prove
+Fermat's Last Theorem for prime exponents related to Sophie Germain
+primes, which is how her primes were named.  She also did important
+work in philosophy and in the theory of elasticity, for which she was
+the first woman to win a prize from the Paris Academy of Sciences, in
+1816.  You can read more about her history and mathematics in
+Wikipedia.
+\end{problem}

@@ -1,0 +1,72 @@
+\begin{problem}
+Alice publishes her RSA public key: modulus $n=2038667$ and exponent $e=103$.
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+  \item Bob wants to send Alice the message $m=892383$.  What ciphertext does Bob send to Alice?
+
+  \begin{Answer}
+    Bob sends:
+    \begin{align*}
+      m^e \pmod n &= 892383^{103} \pmod{2038667} \\
+      &= 455638
+    \end{align*}
+  \end{Answer}
+
+\item Alice knows that her modulus factors into a product of two primes,
+one of which is $p=1301$.  Find a decryption exponent $d$ for Alice.
+  \begin{Answer}
+    We know that $d \cdot e \equiv 1 \pmod {\lcm{p-1}{q-1}}$ 
+    Alice finds $d$ by solving the equation:
+    \begin{multicols*}{2}
+      \begin{align*}
+        n &= 2038667 \\
+        p &= 1301 \\
+        q = \frac{n}{p} &= 1567 \\
+        \lcm{1300}{1566} &= 1017900 \\
+        \Downarrow\\
+        d \cdot e &\equiv 1 \pmod {1017900} \\
+        103 \cdot e &\equiv 1 \pmod {1017900} \\
+      \end{align*}
+
+      \noindent
+      We can use the extended euclidean algorithm to find $103^{-1} \pmod {1017900}$
+
+      \begin{align*}
+        1017900 &\equiv 9882 \cdot 103 + 54 \\
+        103 &\equiv 1 \cdot  54 + 49 \\
+        54 &\equiv 1 \cdot  49 + 5 \\
+        49 &\equiv 9 \cdot  5 + 4 \\
+        5 &\equiv 1 \cdot  4 + 1\\
+      \end{align*}
+
+      \begin{align*}
+        1 &\equiv 5 - 4 \\
+        1 &\equiv 5 - (49 - 9 \cdot 5) \\
+        1 &\equiv 10 \cdot 5 - 49 \\
+        1 &\equiv 10 (54 - 49) - 49 \\
+        1 &\equiv 10 \cdot 54 - 11 \cdot 49\\
+        1 &\equiv 10 \cdot 54 - 11 (103 - 54) \\
+        1 &\equiv 21 \cdot 54 - 11 \cdot 103 \\
+        1 &\equiv 21 (\crim{1017900} - 9882 \cdot 103) - 11 \cdot 103 \\
+        1 &\equiv -(21 \cdot 9882 + 11) \cdot 103 \\
+        1 &\equiv -207533 \cdot 103 \\
+        1 &\equiv 810367 \cdot 103 \\
+        103^{-1} &\equiv 810367  \pmod {1017900} \\
+        &\Downarrow\\
+        d &= 810367
+      \end{align*}
+
+    \end{multicols*}
+  \end{Answer}
+\pagebreak
+\item Alice receives the ciphertext $c=317730$ from Bob.
+Decrypt the message.
+  \begin{Answer}
+    Alice decrypts as follows:
+    \begin{align*}
+      p &= c^d \pmod{n}\\
+        &= 317730^{810367} \pmod{2038667} \\
+        &= 514407
+    \end{align*}
+  \end{Answer}
+\end{enumerate}
+\end{problem}

@@ -1,0 +1,20 @@
+\begin{problem}
+Suppose that Alice and Bob have the same RSA modulus $n$ and suppose that their encryption exponents $e$ and $f$ are relatively prime.  Charles wants to send the message $a$ to Alice and Bob, so he encrypts to get $b=a^e \pmod{n}$ and $c=a^f \pmod{n}$.  Show how Eve can find $a$ if she intercepts $b$ and $c$.
+\end{problem}
+
+\begin{Answer}
+  Since $e$ and $f$ are relatively prime,
+  Eve can find $x, y$ such that $e \cdot x + f \cdot y \equiv 1 \pmod n$.
+
+  \noindent
+  Then:
+
+  \begin{align*}
+    b^x + c^y = a^{e \cdot x + f \cdot y} &\equiv a^{1} \pmod{n} \\
+  \end{align*}
+
+  \noindent
+  Thus, if Eve Eve intercepts both $b$ and $c$,
+  and finds the corresponding values for $x$ and $y$ such that $e \cdot x + f \cdot y \equiv 1 \pmod n$,
+  she can recover $a$ as the equivalent of $b^x + c^y \pmod{n}$.
+\end{Answer}

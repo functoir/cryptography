@@ -1,0 +1,23 @@
+\begin{problem}
+Alice uses the RSA public key modulus $n=pq=172205490419$.
+Through espionage, Eve discovers that $(p-1)(q-1)=172204660344$.  Determine $p,q$.
+\end{problem}
+
+\begin{Answer}
+  \begin{multicols*}{2}
+    \begin{align*}
+      (p-1)(q-1) &= 172204660344 \\
+      p(q-1) - 1(q-1) &= 172204660344 \\
+      p \cdot q - p - q + 1 &= 172204660344 \\
+      \However p \cdot q &= 172205490419 \\
+      \Therefore p + q - 1 = 1722&05490419 - 172204660344 \\
+      p + q &= 830076 \\
+      q &= 830076 - p \\
+      p \cdot q = p \;(830076 - p) &= 830076p - p^2 \\
+      p^2 - 830076p &+ 172205490419 = 0 \\
+      p &= 422183\\
+      q &= 407893
+    \end{align*}
+
+  \end{multicols*}
+\end{Answer}

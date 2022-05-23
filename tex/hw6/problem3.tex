@@ -1,0 +1,27 @@
+\begin{problem}
+Bob uses RSA to receive a single ciphertext $b$ corresponding to the
+message $a$.  Suppose that Eve can trick Bob into decrypting a single
+chosen ciphertext $c$ which is not equal to $b$, and showing her the
+resulting plaintext.  Show how Eve can recover $a$.
+\end{problem}
+
+\begin{Answer}
+  Eve can trick Bob into decrypting the ciphertext $c = 2^{e}b$.
+
+  \noindent
+  Let $x$ be the decryption of this ciphertext, $2^{e}b$.
+
+  Then:
+  \begin{align*}
+    2^{e}b &= x^{e} \pmod{n} \\
+    b &\equiv {(x \cdot 2^{-1})}^{e} \pmod n \\
+    \However b &\equiv a^{e} \pmod{n} \\
+    \Therefore a^{e} &\equiv {(x \cdot 2^{-1})}^{e} \pmod{n} \\
+    a &\equiv x \cdot 2^{-1} \pmod{n} \\ 
+  \end{align*}
+
+  \noindent
+  To recover $a$, Eve can simply find $2^{-1} \pmod{n}$
+  and multiply that by the decryption she got from Bob. 
+
+\end{Answer}
