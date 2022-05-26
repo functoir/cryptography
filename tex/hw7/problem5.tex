@@ -1,0 +1,100 @@
+\begin{problem}
+  Discrete logarithms.
+  \begin{enumerate}\renewcommand{\itemsep}{3mm}
+    \item Let $p=101$.  Compute $\log_2 11$ (using complete enumeration by hand).
+      \begin{Answer}
+        \begin{align*}
+          {2}^{-1} \pmod{101} &= 51
+        \end{align*}
+        \begin{align}
+          11\\
+          \nonumber \Downarrow\\
+          \frac{11}{2} \equiv 11 \cdot 51 = 561 &\equiv 56 \pmod{101} \\
+          \frac{56}{2} &= 28 \pmod{101} \\
+          \frac{28}{2} &= 14 \pmod{101} \\
+          \frac{14}{2} &= 7 \pmod{101} \\
+          \frac{7}{2} \equiv 7 \cdot 51 = 357 &\equiv 54 \pmod{101} \\
+          \frac{54}{2} &= 27 \pmod{101} \\
+          \frac{27}{2} \equiv 27 \cdot 51 = 1377 &\equiv 64 \pmod{101} \\
+          \frac{64}{2} &= 32 \pmod{101} \\
+          \frac{32}{2} &= 16 \pmod{101} \\
+          \frac{16}{2} &= 8 \pmod{101} \\
+          \frac{8}{2} &= 4 \pmod{101} \\
+          \frac{4}{2} &= 2 \pmod{101}
+        \end{align}
+
+        \noindent
+        Thus, $\log_2 11 = 561 \pmod{101}$.
+      \end{Answer}
+    
+    \item Let $p=27781703927$ and $g=5$.  Suppose Alice and Bob engage in
+    a Diffie-Hellman key exhange; Alice chooses the secret key
+    $a=1002883876$ and Bob chooses $b=21790753397$.  Describe the key
+    exchange: what do Alice and Bob exchange, and what is their common
+    (secret) key?  \emph{[You may want to use a computer!]}
+    
+    \item Let $p = 1021$.  Compute $\log_{10} 228$ using the baby step-giant
+    step algorithm. Show the output of, and explain all steps in, your computation.
+    \begin{Answer}
+      \begin{multicols*}{2}
+        \begin{align*}
+          p &= 1021 \\
+          h &= 228 \\
+          g &= 10 \\
+          m = \ceil{\sqrt{p}} &= 32 \\
+        \end{align*}
+        \noindent
+        \zaff{babysteps = $[h, hg, hg^{2}, hg^{3}, \ldots, hg^{m-1}]$}
+
+        \noindent
+        \zaff{giantsteps = $[g^m, g^{2m}, g^{3m}, \ldots, g^{m^{2}}]$}
+        
+        \noindent
+        Common: $hg^{31} \equiv 921 \equiv g^{16m} \pmod{1021}$
+
+        \noindent
+        Thus:
+        \begin{align*}
+          hg^{31} &= g^{16m} \\
+          h &= \frac{g^{16m}}{g^{31}} = g^{16m - 31} \\
+          \log h &= (16m - 31) \cdot \log g \\
+          \log_{g}{h} &= 16m - 31 \\
+        \end{align*}
+        Thus, $\log_{10} 228 \pmod {1021} = 16 \cdot{32} - 31 = 481$
+
+        \noindent
+        Which we can confirm by computing $10^{481} \pmod{1021}$, which is (and should be) equivalent to $228$
+      \end{multicols*}
+    \end{Answer}
+    
+    \item Let $p = 1801$.  Compute $\log_{11} 249$ using the
+    Pohlig--Hellman algorithm.  Show the output of, and explain all steps
+    in, your computation.  You'll want to remind yourself of how to solve
+    systems of congruence equations using Sunzi's theorem: To find $x \in
+    \Z$ satisfying $x \equiv a_i \pmod {n_i}$ for $i=1,\dotsc,k$, first
+    define integers $N_i = \prod_{j\neq i} n_i$ and $M_i \equiv N_i^{-1}
+    \pmod {n_i}$ for all $i = 1,\dotsc,k$, and then $x = \sum_{i=1}^k a_i
+    N_i M_i$ works.
+    \begin{Answer}
+      Let $x = \log_{11} 249 \pmod{1801}$.
+
+      \noindent
+      Then, $11^x \equiv 249 \pmod{1801}$.
+      \begin{align*}
+        p &= 1801 \text{      (This is a prime number)}\\
+        \phi(p) = p - 1 &= 1800\\
+        \phi(p) &= 2^3 \cdot 3^2 \cdot 5^2\\
+        a &= \{ 7, 7, 6 \}\\
+        N &= \{\ 3^2 \cdot 5^2, 2^3 \cdot 5^2, 2^3 \cdot 3^2\} = \{225, 200, 72\}\\
+        M &= \{ 1, 5, 8 \}\\
+        x &= \sum_{i=1}^k a_i N_i M_i \\
+        x &= 7 \cdot 225 + 7 \cdot 200 \cdot 5 + 6 \cdot 72 \cdot 8\\
+        x &= 12031\\
+        x &\equiv 1231 \pmod{1800}\\
+      \end{align*}
+      
+      \noindent
+      Thus, $\log_{11} 249 \pmod{1801} = 1231$.
+    \end{Answer}
+  \end{enumerate}
+\end{problem}

@@ -1,0 +1,57 @@
+\documentclass{amsart}
+
+% Include the macros file from `../common'
+\input{../common/macros.tex}
+
+\pagestyle{fancy}                       % fancy (allow headers, footers)
+\fancyhf{}                              % clear all header/footer settings.
+\cfoot{\thepage}                        % set page-numbers in footer.
+\lhead{\textit{\textbf{ Amittai, S}}}   % set name in header, left.
+\rhead{\textsc{Math 75: Cryptography}}  % set class name in header, right.
+
+\newcounter{problem}
+\setcounter{problem}{0}
+
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\begin{document}
+\setlength{\headheight}{12.0pt}     % suppress fancyhdr warnings
+\setlength{\footskip}{12.0pt}       % suppress fancyhdr warnings
+\input{cover.tex}
+\bigskip
+
+\noindent 
+\begin{center} {\bf Problems} \end{center}
+
+% \newpage
+% PROBLEM 1
+\input{problem1.tex}
+
+% \newpage
+\bigskip
+% \vspace{.3cm}
+
+% PROBLEM 2
+\input{problem2.tex}
+
+% \newpage
+\bigskip
+
+% PROBLEM 3
+\input{problem3.tex}
+
+\newpage
+
+% PROBLEM 4
+\input{problem4.tex}
+
+% \pagebreak[3.5]
+% \newpage
+\bigskip
+
+% PROBLEM 5
+\input{problem5.tex}
+
+\vfill
+
+\end{document}

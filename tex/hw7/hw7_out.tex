@@ -1,0 +1,143 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,amsthm,amsmath,amstext}
+\usepackage{mathdots}
+
+\usepackage[left=1.2in,right=1.2in,top=1.0in,bottom=1.2in,nohead,nofoot]{geometry}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\pagestyle{empty}
+
+\newcounter{problem}
+\setcounter{problem}{0}
+
+\newenvironment{problem}[1][]%
+{%
+\stepcounter{problem} \vspace{.2cm} \noindent {\bf \arabic{problem}.} {\it #1}~ %
+}{%
+\vspace{.2cm}%
+} 
+
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\title{} 
+
+%\date{\today}
+
+\noindent{} \sc
+Dartmouth College Department of Mathematics \\ \bf
+Math 75 Cryptography \\ \rm
+Spring 2022\\[2ex]
+Problem Set \# 7 (upload to Canvas by Tuesday, May 24, 12:00 pm EDT)
+
+\bigskip
+
+\noindent {\bf Problems:}
+
+\begin{problem}
+For the following integers either provide a witness for the
+compositeness of $n$ or conclude that $n$ is probably prime by
+providing $5$ numbers that are not witnesses.  Recall that a witness
+for the compositeness of $n$ is an integer $a \in \Z$ such that, if we
+write $n-1 = 2^k u$, where $u$ is odd, then $a$ satisfies $a
+\not\equiv 0 \pmod n$ and  $a^{u} \not\equiv 1 \pmod n$
+ and $a^{2^i u} \not\equiv -1 \pmod n$ for all $i = 1, \dotsc, k-1$.
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item $n=1009$.
+\item $n=2009$.
+\end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+Using big-$O$ notation, estimate the number of bit operations required to perform the witness test on $n \in \Z_{>0}$ enough times so that, if $n$ passes all of the tests, it has less than a $10^{-m}$ chance of being composite.
+\end{problem}
+
+
+\begin{problem}
+Factor $53477$ using the Pollard rho algorithm.
+\end{problem}
+
+
+% \begin{problem}
+% Suppose that $n$ balls are randomly thrown into $m$ bins.
+% \begin{enumerate}\renewcommand{\itemsep}{3mm}
+% \item Approximately what is the probability that there is a bin with two balls in it, assuming $m$ is much larger than $n$?
+% \item What is the probability that there is a bin with no balls in it?  If $m$ is large, and $n$ is large in comparison to $m$, show that this probability is approximately $me^{-n/m}$.  \emph{[Hint: Use $\lim_{x \to \infty} (1+1/x)^x = e$.]}  
+
+% \item In terms of $m$, what is the smallest value of $n$ so that there is a $\geq 1/2$ chance that no bin is empty?  
+
+% \item Suppose you are asked to fill an auditorium with people so that every day is a birthday for some person in the auditorium.  What is the smallest number of people which gives you better than an even chance?
+% \end{enumerate}
+% \end{problem}
+
+
+\begin{problem}
+Fermat and sieving.
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Find three nontrivial factors of
+$n=999999999999999999999999999999999919$ by hand.
+
+\item Let $n=2^{29}-1$.  Given that
+\begin{align*} 
+258883717^2 &\equiv -2\cdot 3 \cdot 5 \cdot 29^2  {} \pmod n \\
+301036180^2 &\equiv -3\cdot 5 \cdot 11 \cdot 79   {} \pmod{n} \\
+126641959^2 &\equiv 2 \cdot 3^2 \cdot 11 \cdot 79 {~} \pmod n
+\end{align*}
+discover a factor of $n$.
+\end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+Discrete logarithms.
+\begin{enumerate}\renewcommand{\itemsep}{3mm}
+\item Let $p=101$.  Compute $\log_2 11$ (using complete enumeration by hand).
+
+\item Let $p=27781703927$ and $g=5$.  Suppose Alice and Bob engage in
+a Diffie-Hellman key exhange; Alice chooses the secret key
+$a=1002883876$ and Bob chooses $b=21790753397$.  Describe the key
+exchange: what do Alice and Bob exchange, and what is their common
+(secret) key?  \emph{[You may want to use a computer!]}
+
+\item Let $p = 1021$.  Compute $\log_{10} 228$ using the baby step-giant
+step algorithm. Show the output of, and explain all steps in, your computation.
+
+\item Let $p = 1801$.  Compute $\log_{11} 249$ using the
+Pohlig--Hellman algorithm.  Show the output of, and explain all steps
+in, your computation.  You'll want to remind yourself of how to solve
+systems of congruence equations using Sunzi's theorem: To find $x \in
+\Z$ satisfying $x \equiv a_i \pmod {n_i}$ for $i=1,\dotsc,k$, first
+define integers $N_i = \prod_{j\neq i} n_i$ and $M_i \equiv N_i^{-1}
+\pmod {n_i}$ for all $i = 1,\dotsc,k$, and then $x = \sum_{i=1}^k a_i
+N_i M_i$ works.
+\end{enumerate}
+\end{problem}
+
+
+% \begin{problem}
+% \end{problem}
+
+
+% \begin{problem}
+% \end{problem}
+
+% \begin{problem}
+% In a modified Diffie-Hellman key exchange protocol, Alice and Bob choose a large prime $p$ which they make public, but when they choose a primitive root $g$ for $p$ they decide for safety to keep it secret.  Alice sends $x \equiv g^a \pmod{p}$ to Bob and Bob sends $y \equiv g^b \pmod{p}$ to Alice.  Suppose Eve bribes Bob to tell her the values of $b$ and $y$.  Suppose that $\gcd(b,p-1)=1$.  Show how Eve can determine $g$ from the knowledge of $p,y$ and $b$.
+% \end{problem}
+
+
+\vfill
+
+\end{document}
+
+
+
+
+

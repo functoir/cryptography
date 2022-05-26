@@ -1,0 +1,75 @@
+\documentclass[12pt,oneside]{article}
+\RequirePackage{rotating}
+
+
+\title{Cipherwheel for use with\\
+\textit{An Introduction to Mathematical Cryptography}}
+\author{Jeffrey Hoffstein, Jill Pipher, Joseph H. Silverman}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \cipherwheel{rot}, where
+%% rot = # of letters to rotate inner wheel counterclockwise (may be negative)
+
+\newcount\ciphwhangle
+\newcount\ciphwhanglethou  % angle times 1000
+\newcount\letternum
+\newcount\letternumplus
+
+\def\alphabet#1{\ifcase#1 \or a\or b\or c\or d\or e\or f\or g\or h\or i\or j%
+\or k\or l\or m\or n\or o\or p\or q\or r\or s\or t\or u\or v\or w\or x%
+\or y\or z\or a\or b\or c\or d\or e\or f\or g\or h\or i\or j\or k\or l\fi}
+
+\def\ALPHABET#1{\ifcase#1 \or A\or B\or C\or D\or E\or F\or G\or H\or I\or J%
+\or K\or L\or M\or N\or O\or P\or Q\or R\or S\or T\or U\or V\or W\or X%
+\or Y\or Z\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L\fi}
+
+
+\def\cipherwheel#1{%
+\parbox[t][6cm][c]{\hsize}{%
+\centerline{%
+\ciphwhangle=90
+\ciphwhanglethou=90000
+\letternum=1
+\loop\ifnum\letternum<27
+  \ciphwhangle=\ciphwhanglethou
+  \divide\ciphwhangle by1000
+  \letternumplus = \letternum
+  \advance\letternumplus by#1
+  \ifnum\letternumplus<1\advance\letternumplus by26\fi
+  \rlap{
+    \begin{rotate}{\the\ciphwhangle}%
+%%      \rule{1.75cm}{0pt}
+      \rule{2.75cm}{0pt}
+      {\ttfamily\ALPHABET{\the\letternumplus}}
+      --
+      {\ttfamily\alphabet{\the\letternum}}
+    \end{rotate}%
+  }%
+  \advance\ciphwhanglethou by -13846  % 360/26 = 13.846
+  \advance\letternum by 1
+  \repeat
+  }
+}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{1in}
+\begin{center}
+\huge
+
+\cipherwheel{1}
+
+\end{center}
+
+%% \cipherwheel{0}
+
+
+
+\end{document}

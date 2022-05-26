@@ -1,0 +1,32 @@
+\begin{problem}
+  Factor $53477$ using the Pollard rho algorithm.
+\end{problem}
+
+\begin{Answer}
+
+Running pollard's rho algorithm on $53477$:
+\bigskip
+
+\centering
+\begin{tabular}{||c | c | c || c ||} 
+\hline
+  iteration & $x$ & $y$ & $\gcd (\| x-y \|, n)$\\
+\hline
+  $1$ & $5$ & $26$ & $1$\\
+\hline
+  $2$ & $26$ & $30514$ & $1$\\
+\hline
+  $3$ & $677$ & $15172$ & $1$\\
+\hline
+  $4$ & $30514$ & $6215$ & $1$\\
+\hline
+  $5$ & $16150$ & $5526$ & $1$\\
+\hline
+  $6$ & $15172$ & $4837$ & $53$\\[1ex]
+\hline
+\end{tabular}
+
+\flushleft{}
+
+Thus, two non-trivial factors of $53477$ are \crim{$53$} and \crim{$\frac{53477}{53} = 1009$}.
+\end{Answer}

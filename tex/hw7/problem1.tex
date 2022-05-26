@@ -1,0 +1,43 @@
+\begin{problem}
+  For the following integers either provide a witness for the
+  compositeness of $n$ or conclude that $n$ is probably prime by
+  providing $5$ numbers that are not witnesses.  Recall that a witness
+  for the compositeness of $n$ is an integer $a \in \Z$ such that, if we
+  write $n-1 = 2^k u$, where $u$ is odd, then $a$ satisfies $a
+  \not\equiv 0 \pmod n$ and  $a^{u} \not\equiv 1 \pmod n$
+  and $a^{2^i u} \not\equiv -1 \pmod n$ for all $i = 1, \dotsc, k-1$.
+  \begin{enumerate}\renewcommand{\itemsep}{3mm}
+    \item $n=1009$.
+      \begin{Answer}
+        \begin{align*}
+          2^{1008} &\equiv 1 \pmod{1009} \\
+          3^{1008} &\equiv 1 \pmod{1009} \\
+          5^{1008} &\equiv 1 \pmod{1009} \\
+          7^{1008} &\equiv 1 \pmod{1009} \\
+          11^{1008} &\equiv 1 \pmod{1009} \\
+          13^{1008} &\equiv 1 \pmod{1009} \\
+          17^{1008} &\equiv 1 \pmod{1009} \\
+        \end{align*}
+        \noindent
+        Thus, $1009$ is probably prime. 
+        
+        \noindent
+        (It actually is! I computedthe values
+        all the way to $1008^{1008} \pmod {1009}$ and they  are all equivalent to $1$)
+      \end{Answer}
+    \item $n=2009$.
+    \begin{Answer}
+      \begin{align*}
+        2^{2008} &\equiv 1773 \pmod{2009} \\
+        3^{2008} &\equiv 1313 \pmod{2009} \\
+        5^{2008} &\equiv 1535 \pmod{2009} \\
+        7^{2008} &\equiv 980 \pmod{2009} \\
+        11^{2008} &\equiv 221 \pmod{2009} \\
+        13^{2008} &\equiv 1240 \pmod{2009} \\
+        17^{2008} &\equiv 1082 \pmod{2009} \\
+      \end{align*}
+      \noindent
+      Thus, $2009$ is \zaff{NOT} prime.
+    \end{Answer}
+  \end{enumerate}
+\end{problem}
