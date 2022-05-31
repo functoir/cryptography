@@ -3,6 +3,36 @@
   \begin{enumerate}\renewcommand{\itemsep}{3mm}
     \item Find three nontrivial factors of
     $n=999999999999999999999999999999999919$ by hand.
+
+    \begin{Answer}
+      We know that every odd composite is a difference of squares.
+      Let's find these two squares.
+
+      \noindent
+      Starting at $a_{0} = \ceil{\sqrt{n}} = 1000000000000000000$
+
+      \begin{align*}
+        999999999999999999999999999999999919 &\mod 1000000000000000000 = 999999999999999919\\
+        999999999999999999999999999999999919 &\mod 1000000000000000001 = 999999999999999921\\
+        999999999999999999999999999999999919 &\mod 1000000000000000004 = 999999999999999939\\
+        999999999999999999999999999999999919 &\mod 1000000000000000009 = 0\\
+      \end{align*}
+
+      \noindent
+      Thus, we see that $1000000000000000009$ is a factor,
+      \newline
+      as is $\frac{999999999999999999999999999999999919}{1000000000000000009}
+      = 999999999999999991$.
+
+      \noindent
+      Further iteration doesn't yield interesting factors.
+      However, we have not checked for small factors! When we check small integers for factors,
+      we see that \newline $23 \cdot 43478260869565217391304347826086953 = 999999999999999999999999999999999919$
+
+      \bigskip
+      \noindent
+      Thus, $\{23, 1000000000000000009, 999999999999999991, 43478260869565217391304347826086953\}$ are factors of $n$.
+    \end{Answer}
     
     \item Let $n=2^{29}-1$.  Given that
     \begin{align*} 
@@ -11,5 +41,33 @@
       126641959^2 &\equiv 2 \cdot 3^2 \cdot 11 \cdot 79 {~} \pmod n
     \end{align*}
     discover a factor of $n$.
+    \bigskip
+    \begin{Answer}
+      \begin{align*}
+        258883717^2 &\equiv -2\cdot 3 \cdot 5 \cdot 29^2  {} \pmod n \\
+        301036180^2 &\equiv -3\cdot 5 \cdot 11 \cdot 79   {} \pmod{n} \\
+        126641959^2 &\equiv 2 \cdot 3^2 \cdot 11 \cdot 79 {~} \pmod n\\
+        258883717^2 \cdot 301036180^2 \cdot 126641959^2 &\equiv 2^2 \cdot 3^4 \cdot 11^2 \cdot 29^2 \cdot 79^2 \pmod n\\
+        {(258883717 \cdot 301036180 \cdot 126641959)}^2 &\equiv {(2 \cdot 3^2 \cdot 11 \cdot 29 \cdot 79)}^2 \pmod n
+      \end{align*}
+      $a^2 \equiv b^2 \pmod n$ implies that $n\; |\; (a+b)(a-b)$ (since $a^2 - b^2 \equiv 0 \pmod n$).
+
+      \noindent
+      If $n$ does not divide one of the two factors, then $\gcd(a-b, n)$ is a factor of $n$.
+
+      \noindent
+      More precisely, $\gcd(a-b, n) \cdot \gcd(a+b, n) = n$
+
+      \begin{align*}
+        a &= 258883717 \cdot 301036180 \cdot 126641959 = 9869634044174622775396540\\
+        b &= 2 \cdot 3^2 \cdot 5\cdot 11 \cdot 29 \cdot 79 = 2268090\\
+        \gcd(a-b, n) &= 1103\\
+        \gcd(a+b, n) &= 486737\\
+        1100 \cdot 486737 &= n
+      \end{align*}
+
+      \noindent
+      Thus, $a_1 = 1103$ and $a_2 = 486737$ are factors of $n$.  
+    \end{Answer}
   \end{enumerate}
 \end{problem}

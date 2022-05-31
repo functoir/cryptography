@@ -27,11 +27,31 @@
         Thus, $\log_2 11 = 561 \pmod{101}$.
       \end{Answer}
     
+      \newpage
     \item Let $p=27781703927$ and $g=5$.  Suppose Alice and Bob engage in
-    a Diffie-Hellman key exhange; Alice chooses the secret key
+    a Diffie-Hellman key exchange; Alice chooses the secret key
     $a=1002883876$ and Bob chooses $b=21790753397$.  Describe the key
     exchange: what do Alice and Bob exchange, and what is their common
     (secret) key?  \emph{[You may want to use a computer!]}
+    \begin{Answer}
+      Alice sends Bob $a^* = g^{a} \pmod{p} \equiv 5281680355$.
+
+      \noindent
+      Bob sends Alice $b^* = g^{b} \pmod{p} \equiv 22361055346$.
+
+      \noindent
+      Their shared key is $g^{ab} \pmod{p} \equiv 17849372203$.
+
+      \noindent
+      Alice computes $g^{ab} = {(b^*)}^{a} \pmod{p}$.
+
+      \noindent
+      Bob computes $g^{ab} = {(a^*)}^{b} \pmod{p}$.
+
+      \noindent
+      Thus, they can both find their shared key, and share information,
+      without either knowihng the other's secret key.
+    \end{Answer}
     
     \item Let $p = 1021$.  Compute $\log_{10} 228$ using the baby step-giant
     step algorithm. Show the output of, and explain all steps in, your computation.
@@ -67,6 +87,7 @@
       \end{multicols*}
     \end{Answer}
     
+    \newpage
     \item Let $p = 1801$.  Compute $\log_{11} 249$ using the
     Pohlig--Hellman algorithm.  Show the output of, and explain all steps
     in, your computation.  You'll want to remind yourself of how to solve
@@ -75,6 +96,7 @@
     define integers $N_i = \prod_{j\neq i} n_i$ and $M_i \equiv N_i^{-1}
     \pmod {n_i}$ for all $i = 1,\dotsc,k$, and then $x = \sum_{i=1}^k a_i
     N_i M_i$ works.
+    \newline
     \begin{Answer}
       Let $x = \log_{11} 249 \pmod{1801}$.
 
