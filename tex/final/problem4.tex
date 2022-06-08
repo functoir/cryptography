@@ -1,0 +1,75 @@
+\begin{problem}
+Enigma
+
+\noindent
+Captain! We managed to get partial information about the daily settings.
+
+\begin{Verbatim}
+  Walzenlage: I II IV
+  Ringstellung: ?? ?? ??
+  Steckerverbindungen: ST AX UV FQ BM OP WY CD ?? ??
+  Kenngruppen: QZE TRF IOU TGB
+
+  SOP HIE = IOUTO XLIVE QVUAN MMGNC OMOUU GIHWR UKVIZ KBRQK IPIJU
+            BWBTO ZHFNT BBZEU KCFRT IXOHJ AMKOE POYFV UFUQF ZTNGO
+            LWAQK DQTVG INUFT NPZQH VMHCQ DVIDV GVLZA SNSOK FQD
+\end{Verbatim}
+          If we could get the ring settings, the next tent over says we should be able figure out the
+          rest of the plugboard.
+\end{problem}
+
+\begin{Answer}
+  Use first half of key (SOP) as starting position to decrypt second part (EJF) to get (KEH)
+
+  \noindent
+  Use decryption of second part (KEH) as new starting position to decrypt message.
+
+  \noindent
+  We get:
+
+  \begin{Verbatim}
+    bytho wcani descl ibemy astot ishmw ntfnd admcl
+    ation bnsee inumy estye medcx llesp onden tmons reulr
+    kbran cmeta molph ospdi ntoth iscer ebrbt edpel son
+  \end{Verbatim}
+
+  \noindent
+  Looking at our decryption, we have ``desclibe'' which should be ``describe''. Thus, we can guess
+  the plugboard setting `LR'.
+
+  We now have:
+  \begin{Verbatim}
+    butho wcani descr ibemy aston ishmw ntand admcr
+    ation bnsee inumy estee medcx rresp onden tmons leurl
+    eblan cmeta morph ospdi ntoth iscel ebrbt edper son
+  \end{Verbatim}
+
+  \noindent
+  Looking at our plaintext again, the first error is ``astonishmwnt'' which should be ``astonishment''.
+  Thus, we need a way of mapping `w' to `e'.
+
+  \noindent
+  However, we have already used `w' on the plugboard. Let's find a way of mapping the encrypted form of `W',
+  in this specific position, which is `Z', to a letter that routes it to `E'.
+
+  \noindent
+  After a little trial-and-error, we see that mapping `ZJ' fixes the message.
+
+  We now have:
+  \begin{Verbatim}
+    butho wcani descr ibemy aston ishme ntand admir
+    ation onsee ingmy estee medco rresp onden tmons ieurl
+    eblan cmeta morph osedi ntoth iscel ebrat edper son
+  \end{Verbatim}
+
+  \noindent
+  Which, when spaced out properly, reads:
+
+  \color{crimson}
+  \begin{Verbatim}
+    but how can i describe my astonishment and admiration
+    on seeing my esteemed correspondent monsieur leblanc
+    metamorphosed into this celebrated person
+  \end{Verbatim}
+  \color{black}
+\end{Answer}

@@ -1,0 +1,53 @@
+\begin{problem}
+  RSA
+
+  \begin{Verbatim}
+    alice> heya bob, how ar u
+    bob> im gr8
+    bob> you reT?
+    bob> n = 24907363464921047217297225673350762575281464933167781569819743
+    73631622149367708642633012928856521206471732646282243373960731
+    alice> soo kewl that we hav the same modulus, soo much more secure
+    alice> i usu just ask sophie to make some more primes for me <33
+    bob> no prob alie
+    alice> e = 65537 for me
+    bob> f = 1000003 for me
+    charlie> hi y’all, just came outa meeting! stuff is going down, so act fast
+    charlie> alice: 117593034210606527105028325031030941931648
+                    815630540152029044354860203580828326210173
+                    4292122005367394797217259116903341956086
+    charlie> bob: 179930614739269660678231086701062190445253
+                  840132173573802352450775824950968612040118
+                  6634973441137240046185785005515614987681
+    charlie> btw i just strtoint’ed the whole thing, no blocks or anything fancy pantsy
+    eve> lolh smh
+  \end{Verbatim}
+\end{problem}
+
+\begin{Answer}
+
+  \begin{align*}
+    e &= 65537\\
+    f &= 1000003\\
+    n &= 24907363464921047217297225673350762575281464933167781569819743\\
+      & \;\;\;\;\;\;  73631622149367708642633012928856521206471732646282243373960731\\
+    m_{a} = m^{e} &= 11759303421060652710502832503103094193164881563054015202904435\\
+      & \;\;\;\;\;\;  48602035808283262101734292122005367394797217259116903341956086\\
+    m_{b} = m^{f} &= 17993061473926966067823108670106219044525384013217357380235245077582495\\
+      & \;\;\;\;\;\;  09686120401186634973441137240046185785005515614987681\\
+    \gcd(e,f) &= 1\\
+    e \cdot x + f \cdot y &\equiv 1 \pmod{n}\\
+    x &\equiv 295788 \pmod n\\
+    y &\equiv -19385 \pmod n\\
+    m_{a}^x \cdot m_{b}^y &\equiv m^{e \cdot x + f \cdot y} = m^{1} = m \pmod{n}\\
+    m &= 14828785683814134410939542259258741866993330360997967146259825639136508\\
+      & \;\;\;\;\;\;3697606202170869585351243553\\
+  \end{align*}
+
+  Running it through strtoint gives:
+  \begin{Verbatim}
+    Elona Musk is pulling out, sell TWTR now!
+  \end{Verbatim}
+\end{Answer}
+
+

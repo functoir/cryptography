@@ -1,0 +1,422 @@
+\begin{problem}
+  Substitution cipher.
+
+  \color{zaffre}
+  \begin{Verbatim}
+    OVDKLJOODKBPLABZGUFVDKLACVQLKBZVWLJJVGVLYBZVZUJJQLKBZVJLYVSUYVDTL
+    FVZVKDYOBZVJLRDJLYVCIZLJLFVZVKGUFVDKLACVGUFVDKLACVIUBZDIUJJQLKBZV
+    CLYCLQLJOODKBPLABZQLKBZVODAGZBVKCLQODKBPLABZBZLAGZKLAYOBZVGUKOJVO
+    VDKBZBZVRKLDPZVKCSVJJLYBZVPKVPDUYCBZVRZDFVBZVCBUJJYLKBZUYBZVUKZVD
+    KBCBZVZUJJIUYOCUYBZVUKFVUYCDYOBZVGKDYUBVLQYVIZDPSCZUKVUYBZVUKPACW
+    JVCDYOBZVUKTKDUYCDZUYBQLKWUSZVKCUHUCBZVLKOVKLQQUFVPLOAJLSUCCPDJJ
+  \end{Verbatim}
+  \color{black}
+\end{problem}
+
+\begin{Answer}
+
+  O --- d
+
+  V --- e
+
+  D --- a
+
+  K --- r
+
+  L --- o
+
+  J --- l
+
+
+  \noindent
+  I used this website to check word and letter frequencies:
+
+  \noindent
+  \color{crimson}
+  \url{https://www3.nd.edu/~busiforc/handouts/cryptography/Letter%20Frequencies.html}
+  \color{black}
+
+  \noindent
+  For a start, we can analyze the frequencies of different letters in the ciphertext.
+
+  \begin{multicols*}{2}
+    Standard English frequencies:
+    \centering
+    \begin{tabular}{||c | c ||}
+      \hline
+      letter & percentage frequency\\
+      \hline
+      \crim{e} & $12.702$\\
+      \hline
+      \crim{t} & $9.056$\\
+      \hline
+      a & $8.087$\\
+      \hline
+      o & $7.507$\\
+      \hline
+      i & $6.966$\\
+      \hline
+      n & $6.749$\\
+      \hline
+      s & $6.234$\\
+      \hline
+      \crim{h} & $6.094$\\
+      \hline
+      r & $5.987$\\
+      \hline
+      d & $4.253$\\
+      \hline
+      l & $4.094$\\
+      \hline
+      c & $2.781$\\
+      \hline
+      u & $2.758$\\
+      \hline
+      m & $2.587$\\
+      \hline
+      w & $2.36$\\
+      \hline
+      f & $2.228$\\
+      \hline
+      g & $2.015$\\
+      \hline
+      y & $1.974$\\
+      \hline
+      p & $1.929$\\
+      \hline
+      b & $1.493$\\
+      \hline
+      v & $0.978$\\
+      \hline
+      k & $0.772$\\
+      \hline
+      j & $0.153$\\
+      \hline
+      x & $0.15$\\
+      \hline
+      q & $9.6e-2$\\
+      \hline
+      z & $7.4e-2$\\
+      \hline
+        \hline
+    \end{tabular}
+    \flushleft{}
+
+    Ciphertext frequencies:
+    \centering
+    \begin{tabular}{||c | c | c ||} 
+    \hline
+      letter & percentage frequency & plaintext\\
+      \hline
+      \crim{v} & $12.853470437017995$ & e\\
+      \hline
+      \crim{z} & $10.025706940874036$ & h\\
+      \hline
+      l & $8.740359897172237$ & a\\
+      \hline
+      \crim{b} & $8.483290488431876$ & t\\
+      \hline
+      k & $8.483290488431876$ & i\\
+      \hline
+      u & $7.455012853470437$ & \\
+      \hline
+      d & $6.169665809768637$ & \\
+      \hline
+      j & $5.912596401028278$ & \\
+      \hline
+      c & $5.3984575835475574$ & \\
+      \hline
+      y & $5.3984575835475574$ & \\
+      \hline
+      o & $4.113110539845758$ & \\
+      \hline
+      a & $2.827763496143959$ & \\
+      \hline
+      p & $2.570694087403599$ & \\
+      \hline
+      q & $2.570694087403599$ & \\
+      \hline
+      f & $2.056555269922879$ & \\
+      \hline
+      g & $2.056555269922879$ & \\
+      \hline
+      i & $1.2853470437017995$ & \\
+      \hline
+      s & $1.2853470437017995$ & \\
+      \hline
+      r & $0.7712082262210797$ & \\
+      \hline
+      w & $0.7712082262210797$ & \\
+      \hline
+      t & $0.5141388174807198$ & \\
+      \hline
+      h & $0.2570694087403599$ & \\
+      \hline
+    \end{tabular}
+    \flushleft{}
+  \end{multicols*}
+
+  \noindent
+  We expect similarities in the frequencies.
+  
+  \noindent
+  For a sure start, we know the most-common $3$-letter word in English is `the'.
+  We can use this to find the most-common 3-gram in the ciphertext,
+  substitute it with `the', and check how it matches up to our table above.
+
+  \begin{Verbatim}[commandchars=\\\{\}]
+    \zaff{ghci> frequencies $ ngrams 3 ciphertext}
+      BZV: 4.651162790697675
+      KBZ: 1.550387596899225
+      VDK: 1.550387596899225
+  \end{Verbatim}
+
+  \noindent
+  The highest frequency is `BZV', matching to the English word `the'.
+  We would expect `B' to match to `t', `Z' to match to `h', and `V' to match to `e'.
+  This appears a bit off from the single-letter frequencies, but all letters matched are
+  still in the top letters in the frequency tables.
+
+  \noindent
+  After substitution:
+
+  \begin{Verbatim}[commandchars=\\\{\}]
+    OeDKLJOODKtPLAthGUFeDKLACeQLKtheWLJJeGeLYthehUJJQLKtheJLYeSUYeDTL
+    FeheKDYOtheJLRDJLYeCIhLJLFeheKGUFeDKLACeGUFeDKLACeIUthDIUJJQLKthe
+    CLYCLQLJOODKtPLAthQLKtheODAGhteKCLQODKtPLAththLAGhKLAYOtheGUKOJeO
+    eDKththeRKLDPheKCSeJJLYthePKePDUYCtheRhDFetheCtUJJYLKthUYtheUKheD
+    KtCthehUJJIUYOCUYtheUKFeUYCDYOtheGKDYUteLQYeIhDPSChUKeUYtheUKPACW
+    JeCDYOtheUKTKDUYCDhUYtQLKWUSheKCUHUCtheLKOeKLQQUFePLOAJLSUCCPDJJ
+  \end{Verbatim}
+
+  \noindent
+  We can expect L to map to either `a' or `o', depending on frequencies.
+
+  \noindent
+  Next, if we print the 4-grams we see
+  \begin{Verbatim}
+    "Ythe": 1.2953367875647668
+    "oKth": 1.2953367875647668
+    "Kthe": 1.0362694300518134
+    "Othe": 1.0362694300518134
+    "QoKt": 1.0362694300518134
+    "YOth": 1.0362694300518134
+    "eDKo": 1.0362694300518134
+    "heUK": 1.0362694300518134
+    "theU": 1.0362694300518134
+    "Cthe": 0.7772020725388601
+  \end{Verbatim}
+
+  \noindent
+  ``aKth'' or ``oKth'' occurs frequently. We would expect this to be
+  `r', as in the sequence "arth" or `orth", which is common in English. 
+
+  \noindent
+  Thus, we can replace `K' $\rightarrow$ `r'
+
+  \begin{Verbatim}
+    OeDroJOODrtPoAthGUFeDroACeQortheWoJJeGeoYthehUJJQortheJoYeSUYeDTo
+    FeherDYOtheJoRDJoYeCIhoJoFeherGUFeDroACeGUFeDroACeIUthDIUJJQorthe
+    CoYCoQoJOODrtPoAthQortheODAGhterCoQODrtPoAththoAGhroAYOtheGUrOJeO
+    eDrththeRroDPherCSeJJoYthePrePDUYCtheRhDFetheCtUJJYorthUYtheUrheD
+    rtCthehUJJIUYOCUYtheUrFeUYCDYOtheGrDYUteoQYeIhDPSChUreUYtheUrPACW
+    JeCDYOtheUrTrDUYCDhUYtQorWUSherCUHUCtheorOeroQQUFePoOAJoSUCCPDJJ
+  \end{Verbatim}
+
+  \noindent
+  Looking at the tri-grams again:
+  
+  \begin{Verbatim}
+    "the": 4.651162790697675
+    "eDr": 1.550387596899225
+    "rth": 1.550387596899225
+    "Drt": 1.2919896640826873
+    "Qor": 1.2919896640826873
+    "Yth": 1.2919896640826873
+    "ort": 1.2919896640826873
+    "Dro": 1.0335917312661498
+    "Oth": 1.0335917312661498
+    "UFe": 1.0335917312661498
+  \end{Verbatim}
+
+  \noindent
+  We see `D' occurs in ``eDr'', ``Drt'', and ``Dro''.
+  One letter unused that makes sense in all these contexts is `a'.
+  Thus, we can swap `D' $\rightarrow$ `a'.
+
+  \begin{Verbatim}
+    OearoJOOartPoAthGUFearoACeQortheWoJJeGeoYthehUJJQortheJoYeSUYeaTo
+    FeheraYOtheJoRaJoYeCIhoJoFeherGUFearoACeGUFearoACeIUthaIUJJQorthe
+    CoYCoQoJOOartPoAthQortheOaAGhterCoQOartPoAththoAGhroAYOtheGUrOJeO
+    earththeRroaPherCSeJJoYthePrePaUYCtheRhaFetheCtUJJYorthUYtheUrhea
+    rtCthehUJJIUYOCUYtheUrFeUYCaYOtheGraYUteoQYeIhaPSChUreUYtheUrPACW
+    JeCaYOtheUrTraUYCahUYtQorWUSherCUHUCtheorOeroQQUFePoOAJoSUCCPaJJ
+  \end{Verbatim}
+
+  \noindent
+  We now see the sequence ``Oear''.
+  This should be either ``bear'', ``dear'', ``hear'', ``fear'', ``near'', ``pear'', or ``wear''.
+  Of those, ``dear'' tends to occur more often at the beginning of letters or addressed messeges.
+  Thus, we can swap `O' $\rightarrow$ `d'. 
+
+  \begin{Verbatim}
+    dearoJddartPoAthGUFearoACeQortheWoJJeGeoYthehUJJQortheJoYeSUYeaTo
+    FeheraYdtheJoRaJoYeCIhoJoFeherGUFearoACeGUFearoACeIUthaIUJJQorthe
+    CoYCoQoJddartPoAthQorthedaAGhterCoQdartPoAththoAGhroAYdtheGUrdJed
+    earththeRroaPherCSeJJoYthePrePaUYCtheRhaFetheCtUJJYorthUYtheUrhea
+    rtCthehUJJIUYdCUYtheUrFeUYCaYdtheGraYUteoQYeIhaPSChUreUYtheUrPACW
+    JeCaYdtheUrTraUYCahUYtQorWUSherCUHUCtheorderoQQUFePodAJoSUCCPaJJ
+  \end{Verbatim}
+
+  \noindent
+  We have ``dearoJd''. This should probably be ``dear old'',
+  So we can replace `J' $\rightarrow$ `l'.
+
+  \noindent
+  Looking at the ciphertext,
+  We have the sequence ``the order oQ''.
+  This is most-likely ``the order of'',
+  so we can replace `Q' $\rightarrow$ `f'.
+
+
+  \begin{Verbatim}
+    dearolddartPoAthGUFearoACefortheWolleGeoYthehUllfortheloYeSUYeaTo
+    FeheraYdtheloRaloYeCIholoFeherGUFearoACeGUFearoACeIUthaIUllforthe
+    CoYCofolddartPoAthforthedaAGhterCofdartPoAththoAGhroAYdtheGUrdled
+    earththeRroaPherCSelloYthePrePaUYCtheRhaFetheCtUllYorthUYtheUrhea
+    rtCthehUllIUYdCUYtheUrFeUYCaYdtheGraYUteofYeIhaPSChUreUYtheUrPACW
+    leCaYdtheUrTraUYCahUYtforWUSherCUHUCtheorderoffUFePodAloSUCCPall
+  \end{Verbatim}
+
+  \noindent
+  Looking at the five-grams:
+
+  \begin{Verbatim}
+    "Ydthe": 1.0389610389610389
+    "forth": 1.0389610389610389
+    "orthe": 1.0389610389610389
+    "theUr": 1.0389610389610389
+    "Fearo": 0.7792207792207793
+    "GUFea": 0.7792207792207793
+    "PoAth": 0.7792207792207793
+    "UFear": 0.7792207792207793
+    "UYthe": 0.7792207792207793
+    "YtheU": 0.7792207792207793
+  \end{Verbatim}
+
+  \noindent
+  We see ``theUr'' occur frequently. This is most likely ``their''.
+  Thus, we can replace `U' $\rightarrow$ `i'.
+
+  \noindent
+  Looking at the tri-grams
+
+  \begin{Verbatim}
+    "the": 4.651162790697675
+    "ear": 1.550387596899225
+    "rth": 1.550387596899225
+    "Qor": 1.2919896640826873
+    "Yth": 1.2919896640826873
+    "art": 1.2919896640826873
+    "ort": 1.2919896640826873
+    "Ydt": 1.0335917312661498
+    "aro": 1.0335917312661498
+    "dth": 1.0335917312661498
+  \end{Verbatim}
+
+  We see ``Qor'' as one of the most-common 3-letter sequences.
+  This is most-likely ``for''.
+
+  \noindent
+  Thus, we can swap `Q' $\rightarrow$ `f'.
+
+  \begin{Verbatim}
+    dearolddartPoAthGiFearoACefortheWolleGeoYthehillfortheloYeSiYeaTo
+    FeheraYdtheloRaloYeCIholoFeherGiFearoACeGiFearoACeIithaIillforthe
+    CoYCofolddartPoAthforthedaAGhterCofdartPoAththoAGhroAYdtheGirdled
+    earththeRroaPherCSelloYthePrePaiYCtheRhaFetheCtillYorthiYtheirhea
+    rtCthehillIiYdCiYtheirFeiYCaYdtheGraYiteofYeIhaPSChireiYtheirPACW
+    leCaYdtheirTraiYCahiYtforWiSherCiHiCtheorderoffiFePodAloSiCCPall
+  \end{Verbatim}
+
+  \noindent
+  We have the sequence ``WolleGe'', which could correspond to
+  ``college''
+
+  \noindent
+  Thus, we can replace `W' $\rightarrow$ `c' and `G' $\rightarrow$ `g'.
+
+  \begin{Verbatim}
+    dearolddartPoAthgiFearoACeforthecollegeoYthehillfortheloYeSiYeaTo
+    FeheraYdtheloRaloYeCIholoFehergiFearoACegiFearoACeIithaIillforthe
+    CoYCofolddartPoAthforthedaAghterCofdartPoAththoAghroAYdthegirdled
+    earththeRroaPherCSelloYthePrePaiYCtheRhaFetheCtillYorthiYtheirhea
+    rtCthehillIiYdCiYtheirFeiYCaYdthegraYiteofYeIhaPSChireiYtheirPACc
+    leCaYdtheirTraiYCahiYtforciSherCiHiCtheorderoffiFePodAloSiCCPall
+  \end{Verbatim}
+
+  \noindent
+  We have `the college oY the hill'.
+  `Y' is most likely `n'.
+
+  \noindent
+  We can also guess that, since we are talking about a college,
+  ``dartPoAth'' should be ``dartmouth''.
+
+  Thus, we can replace `Y' $rightarrow$ `n', `P' $\rightarrow$ `m', and `A' $rightarrow$ `u'.
+  \begin{Verbatim}
+    dearolddartmouthgiFearouCeforthecollegeonthehillfortheloneSineaTo
+    FeherandtheloRaloneCIholoFehergiFearouCegiFearouCeIithaIillforthe
+    ConCofolddartmouthforthedaughterCofdartmouththoughroundthegirdled
+    earththeRroamherCSellonthemremainCtheRhaFetheCtillnorthintheirhea
+    rtCthehillIindCintheirFeinCandthegraniteofneIhamSChireintheirmuCc
+    leCandtheirTrainCahintforciSherCiHiCtheorderoffiFemoduloSiCCmall
+  \end{Verbatim}
+
+  \noindent
+  We have the sequence ``dear old dartmouth giFe arouCe for the college on the hill...''
+
+  \noindent
+  We can guess that `F' should be `v' and `C' should be `s',
+  so that we have ``dear old dartmouth give a rouse for the college on the hill''.
+
+  \noindent
+  We also have ``neI hamSshire'', which should likely be ``new hampshire''.
+  We can replace `I' $\rightarrow$ `w' and `S' $\rightarrow$ `p'.
+
+  \noindent
+  We can also guess that ``aTove'' should be ``above'',
+  and ``the loRal ones'' should be ``the loyal ones''.
+
+  \noindent
+  Finally, a number ``siH'' is probably ``six''.
+
+  \begin{Verbatim}
+    dearolddartmouthgivearouseforthecollegeonthehillforthelonepineabo
+    veherandtheloyaloneswholovehergivearousegivearousewithawillforthe
+    sonsofolddartmouthforthedaughtersofdartmouththoughroundthegirdled
+    earththeyroamherspellonthemremainstheyhavethestillnorthintheirhea
+    rtsthehillwindsintheirveinsandthegraniteofnewhampshireintheirmusc
+    lesandtheirbrainsahintforciphersixistheorderoffivemodulopissmall
+  \end{Verbatim}
+
+  \newpage
+  \noindent
+  When spaced out, the above reads:
+
+  \begin{Verbatim}
+    dear old dartmouth, give a rouse
+    for the college on the hill
+    for the lone pine above her
+    and the loyal ones who love her
+    give a rouse, give a rouse with a will
+    for the sons of old dartmouth
+    for the daughters of dartmouth
+    though round the girdled earth they roam
+    her spell on them remains
+    they have the still north in their hearts
+    the hill winds in their veins
+    and the granite of new hampshire in their muscles and their brains
+    a hint for cipher six is the order of five modulo p is small.
+  \end{Verbatim}
+\end{Answer}

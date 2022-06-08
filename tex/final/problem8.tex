@@ -1,0 +1,47 @@
+\begin{problem}
+  Elliptic curve ElGamel
+  
+  lliptic curve ElGamal is used with the following parameters:
+  
+  \begin{align*}
+    p &= 2^{31} - 1 = 2147483647\\
+    E &: y2 = x3 + x + 1 \text{ over } \F_{p}\\
+    G &= (2120200592, 1037835596) \in E(\F_{p})\\
+  \end{align*}
+  
+  Bob sends the point
+  $(502702028, 397327625) \in E(\F_{p})$.
+  Alice takes her message, encodes it as the x-coordinate of a point on $E$ using strtoint,
+  and she sends the pair of points
+  
+  \noindent
+  $(1271659322, 1653304), (86041769, 166781836)$.
+  Use baby step–giant step to solve the discrete logarithm problem on $E$ and discover the
+  message.
+  
+  \end{problem}
+  \begin{Answer}
+    Bob picks secret $b$ and sends $bG  = (502702028, 397327625)$ to Alice.
+
+    \noindent
+    Alice returns $(aG, x + abG) = ((1271659322, 1653304), (86041769, 166781836))$.
+
+    \noindent
+    Bob recomputes $x = (x + abG) - (b \cdot aG)$.
+
+    $x = (86041769, 166781836) - b(1271659322, 1653304)$
+
+    If we find $b$, we can recover $x$.
+
+    Let $m = \sqrt{p} = 46341$
+
+    Computing the discrete log, we using the baby-step giant-step,
+    we find the common element (2120200592 : 1037835596 : 1)
+
+    \noindent
+    Thus, $g^{1} \equiv $
+
+    I know the common element should be used to find the discrete log,
+    but I'm not sure how the SAGE elliptic curve works. 
+  
+  \end{Answer}

@@ -1,0 +1,255 @@
+\begin{problem}
+  Vig\`enere cipher.
+
+  \color{zaffre}
+  \begin{Verbatim}
+    hcbxpcjlemyzlgjwagtfjhtnvvriarrqzvuqbipjrqhggrzwtfnahgkqfesrqszvo
+    dyabgcwafvvrotsotdreoaqnbnfzgcbqetqloafvvnpapnqvzrzvyarnrpzgoashy
+    cwzvvwaphmbssvvhyammusjhnsfwnbbhbshhuwtkjylhrangemwsjnvprdatnrpsh
+    seanrumabcbbphcacygjogiainojnvvbsdmhcbqgtvjeyloavjoianmrrln  \end{Verbatim}
+  \color{black}
+\end{problem}
+
+\begin{Answer}
+  First, we can analyze coincidences when the message is shifted to try
+  and guess the key length.
+
+    \begin{tabular}{|l|l|}
+      \hline
+      \textbf{Key Length} & \textbf{Coincidences} \\
+      \hline
+      1 & 14 \\
+      2 & 9 \\
+      3 & 10 \\
+      4 & 12 \\
+      5 & 11 \\
+      6 & 6 \\
+      7 & 11 \\
+      8 & 15 \\
+      9 & 9 \\
+      10 & 15 \\
+      \hline
+    \end{tabular}
+
+    \noindent
+    The highest coincidences are with key lengths $8$ and $10$.
+
+    \noindent
+    Next, let's consider the recurrence of 3-grams and 4-grams, whose difference
+    of occurrence should generally be a multiple of the key-length.
+
+    \begin{tabular}{||r|r|r||}
+      \hline
+      n-gram & Occurrence & Difference \\
+      \hline
+      afv & 72, 102 & 30\\
+      cbq & 94, 231 & 137\\
+      fvv & 73, 103 & 30\\
+      hcb & 0, 230 & 230\\
+      jnv & 182, 222 & 40\\
+      loa & 100, 240 & 140\\
+      nrp & 120, 190 & 70\\
+      nvv & 23, 223 & 200\\
+      vvr & 24, 74 & 50\\
+      afvv & 72, 102 & 30\\
+    \hline
+  \end{tabular}
+
+  \noindent
+  Thus, we can guess the key length to be $10$, since most of the n-grams
+  recur at multiples of $10$.
+
+  \noindent
+  Next, let's divide the ciphertext into blocks corresponding to
+  the first, second, on to the tenth letter of the ciphertext.
+
+  \begin{Verbatim}
+    hyjrrnqconlnncbubjwnuanhlr
+    czhqqaswtfoqrwsshysrmcocor
+    bltzhhzadzavpzsjbljpayjbal
+    xgnvggvfrgfzzvvhshnsbgnqvn
+    pjvugkovecvrgvvnhrvhcjvgj
+    cwvqrqdvobvzowhshapsbovto
+    jarbzfyraqnvaayfunrebgbvi
+    lgiiweaoqepyspawwgdapisja
+    etaptsbtntaahhmnteanhaden
+    mfrjfrgsbqprymmbkmtrcimym
+  \end{Verbatim}
+
+  \newpage
+  \bigskip
+
+  \begin{multicols*}{3}
+  \begin{Verbatim}
+1.
+    'n': 23.076923076923077
+    'r': 11.538461538461538
+    'b': 7.6923076923076925
+    'c': 7.6923076923076925
+    'h': 7.6923076923076925
+    'j': 7.6923076923076925
+    'l': 7.6923076923076925
+    'u': 7.6923076923076925
+    'a': 3.8461538461538463
+    'o': 3.8461538461538463
+    'q': 3.8461538461538463
+    'w': 3.8461538461538463
+    'y': 3.8461538461538463
+2.
+    's': 15.384615384615385
+    'c': 11.538461538461538
+    'o': 11.538461538461538
+    'q': 11.538461538461538
+    'r': 11.538461538461538
+    'h': 7.6923076923076925
+    'w': 7.6923076923076925
+    'a': 3.8461538461538463
+    'f': 3.8461538461538463
+    'm': 3.8461538461538463
+    't': 3.8461538461538463
+    'y': 3.8461538461538463
+    'z': 3.8461538461538463
+3.
+    'a': 15.384615384615385
+    'z': 15.384615384615385
+    'b': 11.538461538461538
+    'j': 11.538461538461538
+    'l': 11.538461538461538
+    'h': 7.6923076923076925
+    'p': 7.6923076923076925
+    'd': 3.8461538461538463
+    's': 3.8461538461538463
+    't': 3.8461538461538463
+    'v': 3.8461538461538463
+    'y': 3.8461538461538463
+4.
+    'g': 19.23076923076923
+    'v': 19.23076923076923
+    'n': 15.384615384615385
+    'f': 7.6923076923076925
+    'h': 7.6923076923076925
+    's': 7.6923076923076925
+    'z': 7.6923076923076925
+    'b': 3.8461538461538463
+    'q': 3.8461538461538463
+    'r': 3.8461538461538463
+    'x': 3.8461538461538463
+5.
+    'v': 28.0
+    'g': 12.0
+    'j': 12.0
+    'c': 8.0
+    'h': 8.0
+    'r': 8.0
+    'e': 4.0
+    'k': 4.0
+    'n': 4.0
+    'o': 4.0
+    'p': 4.0
+    'u': 4.0
+6.
+    'o': 16.0
+    'v': 16.0
+    'b': 8.0
+    'h': 8.0
+    'q': 8.0
+    's': 8.0
+    'w': 8.0
+    'a': 4.0
+    'c': 4.0
+    'd': 4.0
+    'p': 4.0
+    'r': 4.0
+    't': 4.0
+    'z': 4.0
+7.
+    'a': 16.0
+    'b': 12.0
+    'r': 12.0
+    'f': 8.0
+    'n': 8.0
+    'v': 8.0
+    'y': 8.0
+    'e': 4.0
+    'g': 4.0
+    'i': 4.0
+    'j': 4.0
+    'q': 4.0
+    'u': 4.0
+    'z': 4.0
+8.
+    'a': 16.0
+    'i': 12.0
+    'p': 12.0
+    'w': 12.0
+    'e': 8.0
+    'g': 8.0
+    's': 8.0
+    'd': 4.0
+    'j': 4.0
+    'l': 4.0
+    'o': 4.0
+    'q': 4.0
+    'y': 4.0
+9.
+    'a': 20.0
+    't': 20.0
+    'n': 16.0
+    'e': 12.0
+    'h': 12.0
+    'b': 4.0
+    'd': 4.0
+    'm': 4.0
+    'p': 4.0
+    's': 4.0
+10.
+    `m': 24.0
+    'r': 16.0
+    'b': 8.0
+    'f': 8.0
+    'y': 8.0
+    'c': 4.0
+    'g': 4.0
+    'i': 4.0
+    'j': 4.0
+    'k': 4.0
+    'p': 4.0
+    'q': 4.0
+    's': 4.0
+    't': 4.0
+  \end{Verbatim}
+\end{multicols*}
+
+\noindent
+Looking at the highest frequencies (which we would expect to map to the same letters), we see that:
+
+\noindent
+In the first position, `e' likely shifted to `n', so the shift would be by $9$ corresponding to `j'.
+
+\noindent
+in the second position, `e' shifted to `s', so the shift would be by $14$ corresponding to `o'.
+
+\noindent
+Continuing this way, we find the key `JOHNCONWAY', which decrypts the message to give:
+
+\begin{Verbatim}
+  YOUKNOWPEOPLETHINKTHATMATHEMATICSISCOMPLICATEDMATHEMATICSISTHESIMPLEBITITSTHESTUFFWE
+  CANUNDERSTANDITSCATSTHATARECOMPLICATEDIMEANWHATISITINTHOSELITTLEMOLECULESANDSTUFF
+  THATMAKEUPMAKEONECATBEHAVEDIFFERENTLYTOANOTHERORTHATMAKEACATHOWDOYOUDEFINEACATIHAVE
+  NOIDEA
+\end{Verbatim}
+
+\noindent
+hHen spaced out, the above reads:
+\begin{Verbatim}
+  YOU KNOW PEOPLE THINK THAT MATHEMATICS IS COMPLICATED
+  MATHEMATICS IS THE SIMPLE BIT
+  ITS THE STUFF WE CAN UNDERSTAND
+  ITS CATS THAT ARE COMPLICATED
+  I MEAN WHAT IS IT IN THOSE LITTLE MOLECULES AND STUFF
+  THAT MAKE UP MAKE ONE CAT BEHAVE DIFFERENTLY TO ANOTHER
+  OR THAT MAKE A CAT
+  HOW DO YOU DEFINE A CAT
+  I HAVE NO IDEA
+\end{Verbatim}
+\end{Answer}

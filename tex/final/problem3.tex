@@ -1,0 +1,150 @@
+\begin{problem}
+  Affine cipher
+  \begin{Verbatim}
+    6917141364293641, 5044493105177484, 10208794241351887, 16394322558427148,
+    11758121930809893, 15571898457877977, 7672722015089403, 13661070158473411,
+    17999297470735005, 12313955920676335, 5960590266677512, 1613421779734456,
+    1750819096862416, 3118598423638319, 14816640742963862, 4952241931583899,
+    12257144082730227, 7862771476786858, 5006500927265261, 11323114722137903,
+    22833602100630408, 8963415721169565, 15595638667025459, 8028339051359388,
+    3385708046121353, 12190779082257523, 8983375210790796, 15571898457877977,
+    15147654701575566, 16361132341028484, 5962327355151718, 8901193427034701,
+    5179568152435730, 3672045789372412, 23610469115026974, 1577294047287513,
+    15642317927380556, 15571898457877977, 10282634434851196, 10749617216933305,
+    17838746455253440, 21499666401460178, 1037344909841996, 17413814796435480,
+    16269186929768054, 10449344135634668, 24087490685235750, 10768725190149571,
+    6484888204271905, 22185358129776042, 19377417029468988, 16267449841293848,
+    16555381474675390, 21520574190817628, 14140526597210259, 19733309797334806,
+    16283129124025650, 16538093542757166, 24098448719654436, 16798515250649044,
+    13879801264995293, 10264930014031131, 7946076055449771, 18258106201941864,
+    423054714981679, 17458353983971638, 9294184051519018, 19030921054252445
+  \end{Verbatim}
+
+
+  \noindent
+  Using enhanced mind-reading techniques, Eve was able to able to extract the following
+  information: Alice uses a general affine cipher, and the plaintext alphabet consists of blocks
+  of five letters written as ASCII bytes (extended ASCII) and then interpreted as an integer
+  modulo n. Apparently, even the coefficients of the affine cipher transformation are ASCII
+  byte encodings of important codewords. (See strtoint and inttostr in final.sage for
+  the precise encoding used.) The first part of the corresponding plaintext was also recovered:
+  314077111660, 464400513312, 495875089509
+  Unfortunately, Bob’s mind went dark and he could not disclose n.
+\end{problem}
+
+\begin{Answer}
+  Since this an affine cipher, we know that $\exists$ $x, y \in \Z$ such that $c = p \cdot x + y$.
+
+  \noindent
+  First, we need to recover the base of the affine cipher, $n$.
+
+  We know from the structure of the affine cipher that:
+
+  \begin{align*}
+    c_{i} &= p \cdot x_{i} + y \pmod n\\
+    c_{i} &= p \cdot x_{i} + y - n_{i} \cdot n\\
+    c_{1} &= p \cdot x_{1} + y - n_{1} \cdot n\\
+    c_{2} &= p \cdot x_{2} + y - n_{2} \cdot n\\
+    c_{3} &= p \cdot x_{3} + y - n_{3} \cdot n\\
+    \\
+    c_{1} - c_{2} &= p (x_{1} - x_{2}) - (n_{1} - n_{2}) \cdot n\\
+    c_{2} - c_{3} &= p (x_{2} - x_{3}) - (n_{2} - n_{3}) \cdot n\\
+    \\
+    \text{To get rid of $p$ we calculate:}&&\\
+    &(x_{2} - x_{3})(c_{1} - c_{2}) - (x_{1} - x_{2})(c_{2} - c_{3})&\\
+  \end{align*}
+  Giving:
+  \begin{align*}
+    ((x_{2} - x_{3})(n_{1}-n_{2}) - (m_{1}-m_{2})(n_{2}-n_{3}))p&= (x_{2} - x_{3})(c_{1} - c_{2}) - (x_{1} - x_{2})(c_{2} - c_{3})\\
+  \end{align*}
+
+  \noindent
+  Meaning, $n$ is a factor of $(x_{2} - x_{3})(c_{1} - c_{2}) - (x_{1} - x_{2})(c_{2} - c_{3}) = -835256124266755612260628685$
+
+  \noindent
+  Taking the factors of the absolute value, we have:
+
+  \noindent
+  $835256124266755612260628685 = 5 \cdot 167051224853351122452125737$
+
+  \noindent
+  We can use $24610808569754243$ as out $n$, since it's the smallest value
+  that is greater than all the ciphertext.
+
+  \noindent
+  Using the recovered plaintext, we can recover the coefficients of the affine cipher.
+
+  \begin{align*}
+    6917141364293641 &= 314077111660 \cdot x + y \pmod n \\
+    5044493105177484 &= 464400513312 \cdot x + y \pmod n \\
+    10208794241351887 &= 495875089509 \cdot x + y \pmod n
+  \end{align*}
+
+  \bigskip
+  \centering
+  \begin{tabular}{c | c | c |}
+    & $6917141364293641$ & $= 314077111660 \cdot x + y \pmod n$ \\
+    $-$ & $5044493105177484$ & $= 464400513312 \cdot x + y \pmod n$ \\
+    \hline
+    & $1872648259116157$ & $= -150323401652 \cdot x$\\
+    \hline
+    \hline
+    & $1872648259116157$ & $\equiv 24610658246352591 \cdot x \pmod n$\\
+    \hline
+  \end{tabular}
+
+  \flushleft{}
+  Thus:
+  \begin{align*}
+    x &\equiv 1872648259116157 \cdot 24610658246352591^{-1} \pmod{24610808569754243} \\
+    x &\equiv 1872648259116157 \cdot 2956863623047174 \pmod{24610808569754243} \\
+    x &\equiv 289514745701 \pmod {24610808569754243} \\
+    \\
+    6917141364293641 &= 314077111660 \cdot 289514745701 + y \pmod n \\
+    y &\equiv 5044493105177484 \cdot 289514745701 + y \pmod n \\
+    y &\equiv 24610808569754212 \pmod n \\
+    \\
+    c &= 289514745701 \cdot p + 24610808569754212 \pmod{24610808569754243}\\
+    p &= (c - 24610808569754212) \cdot 6618130068783420 \pmod{24610808569754243}\\
+  \end{align*}
+
+  \noindent
+  Finally, we can decrypt the entire message:
+
+  \begin{Verbatim}
+    314077111660, 464400513312, 495875089509, 474400107552,
+    147495347566,139476301088,444083740788,448378660128,
+    457135256352,499967423520,521560989800,418598166626,
+    435493412979,477284692585,465675313518,500036083828,
+    491260571237,430040313714,189522408819,498760574317,
+    435626861938,139391951220,139476301170,139358200172,
+    139224637984,452903072872,418560108902,139476301088,
+    418531057766,491327400992,521560989806,435492757620,
+    477284954725,434336132973,435443164281,139140559717,
+    198107482470,139476301088,448311747872,495790679328,
+    482906432882,189523060837,472991231861,490170117986,
+    139208106100,477284887920,478744506912,495790679394,
+    478427029605,465792478752,138855082355,139208106094,
+    478689651317,495869518112,444300616237,422540943459,
+    418463906080,444016190766,146567877736,434333118057,
+    444216713330,452823839604,435610744174,442925215602,
+    139106807912,435706410016,452903062867,305716535328
+  \end{Verbatim}
+
+  by converting back to text, we get:
+  \begin{Verbatim}
+    I tell my students, ``When you get these jobs that 
+    you have been so brilliantly trained for, just remember
+    that your real job is that if you are free, you need to
+    free somebody else. If you have some power, then your job
+    is to empower somebody else. This is not just a grab-bag candy  game.''
+    The Enigma ringstellung for cipher 4 is MSG.
+  \end{Verbatim}
+
+  \noindent
+  When we decrypt the key, we get:
+  \begin{Verbatim}
+    Chloe Wofford
+  \end{Verbatim}
+  
+\end{Answer}
